@@ -10,7 +10,8 @@ The first line of the input contains an integer n. The next line contains n non-
 
 * Constraints
 
-2≤n≤2⋅105; 0≤a0,…,an−1≤105.
+    - `2 ≤ n ≤ 2 x 10^5`
+    - `0 ≤ a0,…,an−1 ≤ 10^5`
 
 * Output format
 
