@@ -1,0 +1,17 @@
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:5:57: error: type-id cannot have a name
+    std::vector< std::pair<double, std::pair<int,int> > v_pair;
+                                                        ^~~~~~
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:5:63: error: expected '>'
+    std::vector< std::pair<double, std::pair<int,int> > v_pair;
+                                                              ^
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:5:63: warning: declaration does not declare anything [-Wmissing-declarations]
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:6:5: error: use of undeclared identifier 'v_pair'
+    v_pair.push_back(10.0, (1, 2));
+    ^
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:6:29: warning: expression result unused [-Wunused-value]
+    v_pair.push_back(10.0, (1, 2));
+                            ^
+/Users/01014477/Dropbox/Study/coursera/Algorithmic Toolbox/practice/stl_tips.cc:8:18: error: use of undeclared identifier 'v_pair'
+    std::cout << v_pair[0].first << std::endl;
+                 ^
+2 warnings and 4 errors generated.
