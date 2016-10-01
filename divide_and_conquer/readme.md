@@ -1,4 +1,6 @@
 * [Binary Search](https://github.com/byam/algorithms/blob/master/divide_and_conquer/binary_search)
+* [Sort](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort)
+
 
 # Divide and Conquer
 ![pic1](https://github.com/byam/algorithms/blob/master/divide_and_conquer/pic/pic1.png)
