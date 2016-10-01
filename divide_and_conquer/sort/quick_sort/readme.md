@@ -1,4 +1,3 @@
----
 # Quick Sort: Example
 ![pic1](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic1.png)
 
@@ -11,13 +10,13 @@
 ![pic4](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic4.png)
 ---
 
-## Unbalanced:
+## Runtime: Unbalanced Partitions:
 ![pic6](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic6.png)
 
-## Balanced:
+## Runtime: Balanced Partitions:
 ![pic7](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic7.png)
 
-## Pseudocode: Randomized Quick Sort(Parition2)
+## Pseudocode: Randomized Quick Sort (Parition2)
 ![pic5](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic5.png)
 
 ## Runtime
@@ -31,7 +30,7 @@
 
 ![pic11](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic11.png)
 
-## Pseudocode: Randomized Quick Sort(Parition3)
+## Pseudocode: Randomized Quick Sort (Parition3)
 ![pic12](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/quick_sort/pic/pic12.png)
 ---
 
