@@ -29,7 +29,7 @@ int binary_search(const vector<int> &a, int left, int right, int key){
     if (left > right)
         return -1;
 
-    int mid = left + (right - left) / 2;
+    size_t mid = left + (right - left) / 2;
     if (a[mid] == key) {
         return mid;
     }
