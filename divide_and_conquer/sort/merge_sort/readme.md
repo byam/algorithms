@@ -11,7 +11,7 @@
 ![pic4](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/merge_sort/pic/pic4.png)
 
 ## Runtime
-![pic4](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/merge_sort/pic/pic4.png)
+![pic5](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/merge_sort/pic/pic5.png)
 
 ## Proof
-![pic4](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/merge_sort/pic/pic4.png)
+![pic6](https://github.com/byam/algorithms/blob/master/divide_and_conquer/sort/merge_sort/pic/pic6.png)
