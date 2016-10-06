@@ -1,12 +1,13 @@
-* [Knapsack with repetitions problem](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions)
+## Knapsack with repetitions problem
+![pic1](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions/pic/pic1.png)
 
-* [Knapsack without repetitions problem](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_without_repetitions)
+## Subproblems
+![pic2](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions/pic/pic2.png)
 
-## Problem Knapsack
-![pic1](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/pic/pic1.png)
+![pic3](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions/pic/pic3.png)
 
-## Problem Variations
-![pic1](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/pic/pic2.png)
+## Pseudocode
+![pic4](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions/pic/pic4.png)
 
 ## Example
-![pic1](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/pic/pic3.png)
+![pic5](https://github.com/byam/algorithms/blob/master/dynamic_programming/knapsack/knapsack_with_repetitions/pic/pic5.png)
