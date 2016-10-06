@@ -5,6 +5,7 @@
 
 ## Subproblem
 ![pic2](https://github.com/byam/algorithms/blob/master/dynamic_programming/edit_distance/pic/pic2.png)
+---
 ![pic3](https://github.com/byam/algorithms/blob/master/dynamic_programming/edit_distance/pic/pic3.png)
 ![pic4](https://github.com/byam/algorithms/blob/master/dynamic_programming/edit_distance/pic/pic4.png)
 
