@@ -1,4 +1,4 @@
-* [Walking a Tree](https://github.com/byam/algorithms/blob/master/data_structures/tree/walking_tree)
+- [Walking a Tree](https://github.com/byam/algorithms/blob/master/data_structures/tree/walking_tree)
 ---
 
 
