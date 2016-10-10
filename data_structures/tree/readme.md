@@ -1,3 +1,7 @@
+* [Walking a Tree](https://github.com/byam/algorithms/blob/master/data_structures/tree/walking_tree)
+---
+
+
 # Tree Definition
 ![pic1](https://github.com/byam/algorithms/blob/master/data_structures/tree/pic/pic1.png)
 ---
