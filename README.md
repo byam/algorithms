@@ -6,7 +6,7 @@ Some very useful algorithms of programming.
 
 * Primes
     - [Is Prime ?](handy/src/IsPrime.java) : `O(srqrt(n))`
-    - 
+    - [All Primes 1 to n](handy/src/AllPrime.java): `O(n log log n)`
 
 
 ---

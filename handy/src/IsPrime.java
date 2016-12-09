@@ -1,6 +1,7 @@
 
 public class IsPrime {
 
+    // return number is prime or not
     private static boolean isPrime(int p) {
         if (p <= 1)
             return false;
@@ -15,7 +16,6 @@ public class IsPrime {
         }
 
         return true;
-
     }
 
     public static void main (String[] args){
