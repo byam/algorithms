@@ -27,3 +27,18 @@ For each problem we might encounter, do the following.
 | Hash Tables |  |  |
 
 ### Powers of 2 Table
+
+|Power of 2| Exact Value(X) | Approx.Value | X bytes in MB, GC etc|
+|:---|:---|:---|:---|
+| 7 | 128 | | |
+| 8 | 256 | | |
+| 10| 1,024 | 1 thousand | 1KB
+| 16| 65,536 | | 64 KB
+| 20| 1,048,536 | 1 million | 1MB
+| 30| 1,073,741,824| 1 billion | 1GB
+| 32| 4,294,967,296| | 5GB
+| 40| 1,099,511,627,776| 1 trillion | 1TB
+
+## Walking Through a Problem
+
+![main](https://github.com/byam/algorithms/blob/master/cracking_the_codinginterview/pic/pic2.png)
