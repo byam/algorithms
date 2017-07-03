@@ -41,4 +41,4 @@ For each problem we might encounter, do the following.
 
 ## Walking Through a Problem
 
-![main](https://github.com/byam/algorithms/blob/master/cracking_the_codinginterview/pic/pic2.png)
+![main](https://github.com/byam/algorithms/blob/master/cracking_the_codinginterview/pic/flow-chart.png)
