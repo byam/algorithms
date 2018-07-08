@@ -1,9 +1,10 @@
 # Cracking the Coding Interview
 
 References:
-- Book website: http://www.crackingthecodinginterview.com/
-- Answers: https://github.com/careercup/CtCI-6th-Edition
-- Amazon: https://www.amazon.co.jp/Cracking-Coding-Interview-Programming-Questions/dp/0984782850
+- [Book website](http://www.crackingthecodinginterview.com/)
+- [Answers](https://github.com/careercup/CtCI-6th-Edition)
+- [Amazon](https://www.amazon.co.jp/Cracking-Coding-Interview-Programming-Questions/dp/0984782850)
+- [Hackerrank](https://www.hackerrank.com/domains/tutorials/cracking-the-coding-interview)
 
 ## How to prepare
 For each problem we might encounter, do the following.
