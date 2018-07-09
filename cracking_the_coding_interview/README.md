@@ -7,6 +7,10 @@ References:
 - [Amazon](https://www.amazon.co.jp/Cracking-Coding-Interview-Programming-Questions/dp/0984782850)
 - [Hackerrank](https://www.hackerrank.com/domains/tutorials/cracking-the-coding-interview)
 
+## Chapters
+
+- [Chapter 1: Arrays and Lists](chapter1/README.md)
+
 ## How to prepare
 
 For each problem we might encounter, do the following.
