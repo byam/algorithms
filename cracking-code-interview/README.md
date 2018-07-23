@@ -9,7 +9,7 @@ References:
 
 ## Chapters
 
-- [Chapter 1: Arrays and Lists](chapter1/README.md)
+- [Chapter 1: Arrays and Lists](../cracking_the_coding_interview/chapter1/README.md)
 
 ## How to prepare
 
