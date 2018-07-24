@@ -2,6 +2,9 @@ package com.byam.cracking_code_interview.app.chapter1.q_01_is_unique;
 
 public class QuestionA {
 
+    /**
+     * Speed: O(n), Memory: O(1)
+    */
     private static boolean isUnique(String str){
         if (str.length() > 128)
             return false;
