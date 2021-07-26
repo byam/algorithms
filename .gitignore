@@ -1,7 +1,1 @@
-
-.idea/
-*.pyc
-out
-*.iml
-
-cracking-code-interview/target/
+*.o
