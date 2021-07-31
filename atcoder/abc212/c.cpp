@@ -11,13 +11,14 @@ using namespace std;
     cout << endl;
 
 #define ckmin(x, y) x = min(x, y)
+#define ll long long
 
-long long n, m, x, ans = INT_MAX;
+ll n, m, x, ans = INT_MAX;
 
 void solve() {
     // in
     cin >> n >> m;
-    vector<long long> va(n), vb(m);
+    vector<ll> va(n), vb(m);
 
     for (int i = 0; i < n; i++) {
         cin >> va[i];

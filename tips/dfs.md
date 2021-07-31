@@ -7,13 +7,14 @@
 - [DFS](#dfs)
   - [問題](#問題)
     - [Lake Counting](#lake-counting)
-    - [A - 深さ優先探索](#a---深さ優先探索)
-    - [B - 埋め立て](#b---埋め立て)
+    - [深さ優先探索で S -> G を判定](#深さ優先探索で-s---g-を判定)
 
 
 ## 問題
 
 ### [Lake Counting](http://poj.org/problem?id=2386)
+
+- 8 方向に遷移して、みずみ（クラスター）を探す
 
 ```cpp
 void dfs(int x, int y) {
@@ -33,8 +34,9 @@ void dfs(int x, int y) {
     }
 }
 ```
-### [A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a)
+### [深さ優先探索で S -> G を判定](https://atcoder.jp/contests/atc001/tasks/dfs_a)
 
+- 4 方向に遷移して、スタートからゴールまで行けるかを調べる
 - [code](https://atcoder.jp/contests/atc001/submissions/24640179)
 
 ```cpp
@@ -54,10 +56,4 @@ void dfs(int x, int y) {
     dfs(x, y - 1);
     dfs(x, y + 1);
 }
-```
-
-### [B - 埋め立て](https://atcoder.jp/contests/arc031/tasks/arc031_2)
-
-```cpp
-
 ```

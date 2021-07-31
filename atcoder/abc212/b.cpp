@@ -1,40 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define rep(n) for (int i = 0; i < (n); i++)
 #define printv(v)         \
     for (auto x : v) {    \
         cout << x << " "; \
     }                     \
     cout << endl;
 
+#define rep(i, n) for (int i = 0; i < (n); i++)
 #define ckmin(x, y) x = min(x, y)
+#define ll long long
 
 void solve() {
-    // in
     string s;
     cin >> s;
 
-    int x[4];
-    for (int i = 0; i < s.length(); i++) {
-        x[i] = s[i] + '0' - 96;
-    }
-    // printv(x);
+    bool same = true;
+    bool step = true;
 
-    bool weak = true;
-
-    if (x[0] == x[1] and x[1] == x[2] and x[2] == x[3]) {
-        weak = true;
-    } else {
-        for (int i = 0; i <= 2; i++) {
-            if (x[i + 1] != (x[i] + 1) % 10) {
-                // cout << i << endl;
-                // cout << "Weak" << endl;
-                weak = false;
-            }
-        }
+    rep(i, 3) {
+        if (s[i] != s[i + 1]) same = false;
+        int a = s[i] - '0';
+        int b = s[i + 1] - '0';
+        if ((a + 1) % 10 != b) step = false;
     }
 
-    if (weak)
+    if (same or step)
         cout << "Weak" << endl;
     else
         cout << "Strong" << endl;
