@@ -6,11 +6,15 @@
 
 - [DFS](#dfs)
   - [問題](#問題)
+    - [Lake Counting](#lake-counting)
+    - [A - 深さ優先探索](#a---深さ優先探索)
+    - [B - 埋め立て](#b---埋め立て)
 
 
 ## 問題
 
-- [Lake Counting](http://poj.org/problem?id=2386)
+### [Lake Counting](http://poj.org/problem?id=2386)
+
 ```cpp
 void dfs(int x, int y) {
     // 到達したところを変える
@@ -29,7 +33,10 @@ void dfs(int x, int y) {
     }
 }
 ```
-- [A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a):[code](https://atcoder.jp/contests/atc001/submissions/24640179)
+### [A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a)
+
+- [code](https://atcoder.jp/contests/atc001/submissions/24640179)
+
 ```cpp
 void dfs(int x, int y) {
     // 範囲以外 or 壁なら何もしない
@@ -47,4 +54,10 @@ void dfs(int x, int y) {
     dfs(x, y - 1);
     dfs(x, y + 1);
 }
+```
+
+### [B - 埋め立て](https://atcoder.jp/contests/arc031/tasks/arc031_2)
+
+```cpp
+
 ```
