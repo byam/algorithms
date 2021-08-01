@@ -13,6 +13,7 @@
     - [連結成分の個数](#連結成分の個数)
       - [連結成分の個数 (閉路なし)](#連結成分の個数-閉路なし)
   - [Ref](#ref)
+  - [練習問題](#練習問題)
 
 ## ポイント
 
@@ -308,3 +309,14 @@ void dfs(int v, int prev_v) {
 
 - [DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【前編】](https://qiita.com/drken/items/4a7869c5e304883f539b)
 - [DFS (深さ優先探索) 超入門！ 〜 グラフ・アルゴリズムの世界への入口 〜【後編】](https://qiita.com/drken/items/a803d4fc4a727e02f7ba)
+
+## 練習問題
+
+- [(AOJ 1160) Problem B: 島はいくつある？](https://onlinejudge.u-aizu.ac.jp/problems/1160)
+  - 2d array DFS
+- [(ATC 001) A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a)
+  - 2d array DFS
+- [(ARC 031) B - 埋め立て](https://atcoder.jp/contests/arc031/tasks/arc031_2)
+  - 2d array DFS + change one grid
+- [(ARC 037) B - バウムテスト](https://atcoder.jp/contests/arc037/tasks/arc037_b)
+  - Graph DFS + 閉路
