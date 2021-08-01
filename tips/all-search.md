@@ -48,3 +48,8 @@
   - 探索通り数を頑張って減らします。
 - [(ABC 095) C - Half and Half](https://atcoder.jp/contests/abc095/tasks/arc096_a)
   - 探索通り数を頑張って減らします。
+- [三井住友信託銀行プログラミングコンテスト2019 D - Lucky PIN](https://atcoder.jp/contests/sumitrust2019/tasks/sumitb2019_d)
+  - 探索通り数を頑張って減らします。
+- [(ABC 128) C - Switches](https://atcoder.jp/contests/abc128/tasks/abc128_c)
+  - ビット全探索の基本です。
+-
