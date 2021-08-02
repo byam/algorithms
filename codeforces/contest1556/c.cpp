@@ -1,86 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
-
-// debug
-#define printv(v)         \
-    for (auto x : v) {    \
-        cout << x << " "; \
-    }                     \
-    cout << endl;
-
-// func
-#define rep(i, n) for (int i = 0; i < (n); i++)
-#define ckmin(x, y) x = min(x, y)
-
-// type
-#define vi vector<int>
-#define ll long long
-#define Graph vector<priority_queue<int, vector<int>, greater<int>>>
-
-int ans;
-
-void solve() {
-    // in
-    int N, M;
-    cin >> N >> M;
-
-    vector<bool> seen(N);
-
-    Graph G(N), C(N);
-    rep(i, M) {
-        int u, v;
-        cin >> u >> v;
-        u--;
-        v--;
-        G[u].push(v);
-        G[v].push(u);
-
-        C[u].push(v);
-        C[v].push(u);
-    }
-
-    int Q;
-    rep(i, Q) {
-        int ans = 0;
-
-        int q;
-        cin >> q;
-
-        // add friendship
-        if (q == 1) {
-            int u, v;
-            cin >> u >> v;
-            u--;
-            v--;
-            // G[u].push(v);
-            // G[v].push(u);
-        }
-
-        // remove friendship
-        if (q == 2) {
-            int u, v;
-            cin >> u >> v;
-            u--;
-            v--;
-
-            // remove friendship
-            // G[u].erase(G[u].begin() + v);
-            // G[v].erase(G[v].begin() + u);
-        }
-
-        // find group
-        if (q == 3) {
-            // check vul nodes;
-            rep(ni, N) {
-                if (C[ni].size() > 0 and ni < C[ni].top()) {
-                    seen[ni] = true;
-                }
-            }
-        }
-    }
-}
-
+const int N = 200050;
+int cnt[N], ans;
 int main() {
-    solve();
+    int n, m;
+    scanf("%i %i", &n, &m);
+    for (int i = 1; i <= m; i++) {
+        int u, v;
+        scanf("%i %i", &u, &v);
+        if (u > v) swap(u, v);
+        cnt[u]++;
+        if (cnt[u] == 1) ans++;
+    }
+    int q;
+    scanf("%i", &q);
+    while (q--) {
+        int t;
+        scanf("%i", &t);
+        if (t == 1) {
+            int u, v;
+            scanf("%i %i", &u, &v);
+            if (u > v) swap(u, v);
+            cnt[u]++;
+            if (cnt[u] == 1) ans++;
+        } else if (t == 2) {
+            int u, v;
+            scanf("%i %i", &u, &v);
+            if (u > v) swap(u, v);
+            cnt[u]--;
+            if (cnt[u] == 0) ans--;
+        } else
+            printf("%i\n", n - ans);
+    }
     return 0;
 }
