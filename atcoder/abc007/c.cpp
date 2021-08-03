@@ -46,13 +46,6 @@ int main() {
     }
 
     // 最短距離を出力する
-    // for (int i = 1; i <= R; i++) {
-    //     for (int j = 1; j <= C; j++) {
-    //         if (j >= 2) cout << " ";
-    //         cout << dist[i][j];
-    //     }
-    //     cout << endl;
-    // }
 
     cout << dist[gy][gx] << endl;
 
