@@ -11,6 +11,7 @@ void chmin(T& a, T b) {
 
 const long long INF = 1LL << 60;
 
+// https://atcoder.jp/contests/dp/tasks/dp_a
 int main() {
     // 入力
     int N;
@@ -21,9 +22,9 @@ int main() {
     vector<long long> dp(N, INF);
     dp[0] = 0;
 
-    for (int i = 0; i < N; i++) {
-        if (i + 1 < N) chmin(dp[i + 1], dp[i] + abs(h[i + 1] - h[i]));
-        if (i + 2 < N) chmin(dp[i + 2], dp[i] + abs(h[i + 2] - h[i]));
+    for (int i = 1; i < N; i++) {
+        chmin(dp[i], dp[i - 1] + abs(h[i] - h[i - 1]));
+        if (i > 1) chmin(dp[i], dp[i - 2] + abs(h[i] - h[i - 2]));
     }
 
     cout << dp[N - 1] << endl;
