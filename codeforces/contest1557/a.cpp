@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
-#include <atcoder/all>
+// #include <atcoder/all>
 using namespace std;
-using namespace atcoder;
+// using namespace atcoder;
 
 // debug
 #define printv(v)         \
@@ -40,6 +40,7 @@ void chmax(T& a, T b) {
 typedef long long ll;
 typedef vector<int> vi;
 typedef vector<bool> vb;
+typedef vector<long long> vll;
 
 /*-----------------------------------
         Coding Starts Here
@@ -47,51 +48,21 @@ typedef vector<bool> vb;
 
 void solve() {
     // in
-    int N, M, K;
-    cin >> N >> M >> K;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vll A(n);
+        rep(i, 0, n) cin >> A[i];
 
-    dsu D(N);
-    vector<map<int, bool>> F(N);
-    vector<vector<int>> B(N);
-
-    for (int i = 0; i < M; i++) {
-        int a, b;
-        cin >> a >> b;
-        a--;
-        b--;
-
-        if (!D.same(a, b)) D.merge(a, b);
-
-        F[a][b] = true;
-        F[b][a] = true;
+        sort(A.begin(), A.end());
+        ll a = A[n - 1];
+        ll sum = 0;
+        rep(i, 0, n - 1) sum += A[i];
+        double ans = a + (1.0 * sum) / (n - 1);
+        printf("%.6f\n", ans);
     }
-    for (int i = 0; i < K; i++) {
-        int c, d;
-        cin >> c >> d;
-        c--;
-        d--;
-
-        B[c].push_back(d);
-        B[d].push_back(c);
-    }
-
-    vector<int> ans(N, 0);
-
-    for (auto g : D.groups()) {
-        for (auto v : g) {
-            ans[v] = g.size() - 1 - F[v].size();
-        }
-    }
-
-    // printv(ans);
-
-    for (int v = 0; v < N; v++) {
-        for (auto b : B[v]) {
-            if (D.same(v, b)) ans[v]--;
-        }
-    }
-
-    printv(ans);
 }
 
 int main() {

@@ -1,8 +1,6 @@
 #include <bits/stdc++.h>
 
-#include <atcoder/all>
 using namespace std;
-using namespace atcoder;
 
 // debug
 #define printv(v)         \
@@ -40,58 +38,48 @@ void chmax(T& a, T b) {
 typedef long long ll;
 typedef vector<int> vi;
 typedef vector<bool> vb;
+typedef vector<long long> vll;
 
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
 
+// const ll INF = 1 << 60;
+
 void solve() {
     // in
-    int N, M, K;
-    cin >> N >> M >> K;
+    int t;
+    cin >> t;
+    while (t--) {
+        int n, k;
+        cin >> n >> k;
+        vll A(n), C(n);
+        rep(i, 0, n) cin >> A[i];
 
-    dsu D(N);
-    vector<map<int, bool>> F(N);
-    vector<vector<int>> B(N);
+        auto B = A;
 
-    for (int i = 0; i < M; i++) {
-        int a, b;
-        cin >> a >> b;
-        a--;
-        b--;
+        sort(B.begin(), B.end());
 
-        if (!D.same(a, b)) D.merge(a, b);
+        int cnt = 1;
 
-        F[a][b] = true;
-        F[b][a] = true;
-    }
-    for (int i = 0; i < K; i++) {
-        int c, d;
-        cin >> c >> d;
-        c--;
-        d--;
+        for (int i = 0; i < n - 1; i++) {
+            ll cur = A[i];
+            ll cur_n = A[i + 1];
 
-        B[c].push_back(d);
-        B[d].push_back(c);
-    }
+            int idx_cur = lower_bound(B.begin(), B.end(), cur) - B.begin();
+            int idx_cur_n = lower_bound(B.begin(), B.end(), cur_n) - B.begin();
 
-    vector<int> ans(N, 0);
-
-    for (auto g : D.groups()) {
-        for (auto v : g) {
-            ans[v] = g.size() - 1 - F[v].size();
+            if (idx_cur + 1 != idx_cur_n) cnt++;
         }
+
+        // cout << cnt << endl;
+        if (n == k)
+            cout << "Yes" << endl;
+        else if (k < cnt)
+            cout << "No" << endl;
+        else
+            cout << "Yes" << endl;
     }
-
-    // printv(ans);
-
-    for (int v = 0; v < N; v++) {
-        for (auto b : B[v]) {
-            if (D.same(v, b)) ans[v]--;
-        }
-    }
-
-    printv(ans);
 }
 
 int main() {
