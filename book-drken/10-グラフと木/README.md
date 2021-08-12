@@ -1,0 +1,25 @@
+## ポイント
+
+- 対象ものの関係性を表す
+- サイクル持たないものを木
+  - 根付き木（rooted tree）
+    - 特定の1つの頂点を特別扱いとして、根(root)と呼ぶ
+  - 根無し木（unrooted tree）
+  - 順序木（ordered tree）
+    - 兄弟に区別がある
+  - 二分木（binary tree）
+    - 頂点が k = 2 子供があるグラフ
+    - 強平衡二分木（strongly balanced binary tree）
+      - すべての「葉（leaf）」の高さが 1 しか違わない木
+    - 完全二分木（completely binary tree）
+      - すべての「葉（leaf）」の高さが等しい
+- ヒープ（heap）
+  - 強平衡二分木（strongly balanced binary tree）
+  - 値を挿入：O(log n)
+  - 最大値を取得：O(1)
+  - 最大値を削除：O(1)
+- 二分探索木（binary search tree）
+  - 挿入・削除・検索
+  - 左部分木：key より小さい値
+  - 右部分木：key より大きい値
+  - 平衡二分探索木（self-balancing binary search）
