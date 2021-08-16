@@ -1,5 +1,6 @@
 - [ARC107 C - Shuffle Permutation](#arc107-c---shuffle-permutation)
 - [ARC097 D - Equals](#arc097-d---equals)
+- [ABC137 D - Summer Vacation](#abc137-d---summer-vacation)
 
 [DS-1](https://kenkoooo.com/atcoder/#/contest/show/d39b7676-26a5-41fd-b0a1-d51962723eb9)
 
@@ -37,3 +38,21 @@ tags
 - dsu
 - permutation
 - set_intersection
+
+## [ABC137 D - Summer Vacation](https://atcoder.jp/contests/abc137/tasks/abc137_d)
+
+point
+- 後ろから求めていくタイプな問題。つまり貪欲法
+- 最終日から見ていくと、どんどん選択できる候補が増えていく
+- priority_que を利用すれば O(log N) 選択できる
+
+solution
+- `a = 1` とは最終日にしかできない仕事なので、日ごとにできるバイトのリストを作成
+  - `M <= 10^5` なので、全ての人に初期化をする
+- 最終日から M 日まで前にをみていく、priority_que で選択していく
+- [code](https://atcoder.jp/contests/abc137/submissions/25102171)
+- 計算時間：`O(M log N)`
+
+tags
+- greedy (貪欲法)
+- priority_que (ヒープ)
