@@ -59,19 +59,16 @@ void solve() {
         int N;
         cin >> N;
         vll A(N);
-
-        bool even = false;
-        bool odd = false;
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
+        {
             cin >> A[i];
-            if (A[i] % 2 == 0) even = true;
-            if (A[i] % 2 == 1) odd = true;
         }
 
-        sort(A.begin(), A.end());
-
         ll ans = A[0];
-        if (even and odd) ans = 0;
+        for (int i = 1; i < N; i++)
+        {
+            ans &= A[i];
+        }
 
         cout << ans << endl;
     }
