@@ -3,13 +3,38 @@
 Atcoder Problems Virtual Contest: [DS-1](https://kenkoooo.com/atcoder/#/contest/show/d39b7676-26a5-41fd-b0a1-d51962723eb9)
 
 - [Data Structure Atcoder Problems 1](#data-structure-atcoder-problems-1)
-  - [ARC107 C - Shuffle Permutation](#arc107-c---shuffle-permutation)
-  - [ARC097 D - Equals](#arc097-d---equals)
-  - [ABC137 D - Summer Vacation](#abc137-d---summer-vacation)
-  - [ABC126 E - 1 or 2](#abc126-e---1-or-2)
+  - [Prerequisite](#prerequisite)
+    - [Union-Find 木](#union-find-木)
+  - [Problems](#problems)
+    - [ARC107 C - Shuffle Permutation](#arc107-c---shuffle-permutation)
+    - [ARC097 D - Equals](#arc097-d---equals)
+    - [ABC137 D - Summer Vacation](#abc137-d---summer-vacation)
+    - [ABC126 E - 1 or 2](#abc126-e---1-or-2)
 
+## Prerequisite
 
-## [ARC107 C - Shuffle Permutation](https://atcoder.jp/contests/arc107/tasks/arc107_c)
+ref
+- [プログラミングコンテストでのデータ構造](https://www.slideshare.net/iwiwi/ss-3578491)
+
+### Union-Find 木
+- 機能
+  - グループ分けを管理する
+  - はじめ、n 個の物は全て別々グループ
+  - 2 種類のクエリに対応する
+    - 「まとめる」：２つのグループを１つに
+    - 「判定」：２つの要素が同じグループに所属するか判定する
+- 実装工夫
+  - 経路圧縮：root を調べる途中で見たノードにも root 値を設定する
+  - ランク：低い方を高い方に繋げる
+- 計算量
+  - 2つの工夫： `O(alpha(n))` （ほぼ定数）
+  - 片方の工夫：`O(log n)`
+- 補足
+  - Union-Find 木は、グループまとめることができるが、分割することはできない
+  - Union-Find 木を改造して機能を付加することが必要になるような問題もある
+
+## Problems
+### [ARC107 C - Shuffle Permutation](https://atcoder.jp/contests/arc107/tasks/arc107_c)
 
 point
 - 行と列を交換しても、互いに影響ないので、それぞれ計算さいて掛け算すると答えになる
@@ -27,7 +52,7 @@ tags
 - permutation N! (順列)
 - matrix transpose (行列転置)
 
-## [ARC097 D - Equals](https://atcoder.jp/contests/arc097/tasks/arc097_b)
+### [ARC097 D - Equals](https://atcoder.jp/contests/arc097/tasks/arc097_b)
 
 point
 - 連結成分の中では swap して、どんな順列にでもすることができる
@@ -44,7 +69,7 @@ tags
 - permutation
 - set_intersection
 
-## [ABC137 D - Summer Vacation](https://atcoder.jp/contests/abc137/tasks/abc137_d)
+### [ABC137 D - Summer Vacation](https://atcoder.jp/contests/abc137/tasks/abc137_d)
 
 point
 - 後ろから求めていくタイプな問題。つまり貪欲法
@@ -62,7 +87,7 @@ tags
 - greedy (貪欲法)
 - priority_que (ヒープ)
 
-## [ABC126 E - 1 or 2](https://atcoder.jp/contests/abc126/tasks/abc126_e)
+### [ABC126 E - 1 or 2](https://atcoder.jp/contests/abc126/tasks/abc126_e)
 
 point
 - 片方が分かれば、片方がわかる
