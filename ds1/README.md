@@ -1,6 +1,7 @@
 - [ARC107 C - Shuffle Permutation](#arc107-c---shuffle-permutation)
 - [ARC097 D - Equals](#arc097-d---equals)
 - [ABC137 D - Summer Vacation](#abc137-d---summer-vacation)
+- [ABC126 E - 1 or 2](#abc126-e---1-or-2)
 
 [DS-1](https://kenkoooo.com/atcoder/#/contest/show/d39b7676-26a5-41fd-b0a1-d51962723eb9)
 
@@ -56,3 +57,19 @@ solution
 tags
 - greedy (貪欲法)
 - priority_que (ヒープ)
+
+## [ABC126 E - 1 or 2](https://atcoder.jp/contests/abc126/tasks/abc126_e)
+
+point
+- 片方が分かれば、片方がわかる
+- 連結成分の中の一個が分かれば、全部わかる
+
+solution
+- dsu を利用して、(x, y) を merge していく
+- z は無視できる
+- 連結成分の個数分魔法使う
+- [code](https://atcoder.jp/contests/abc126/submissions/25102803)
+- 計算時間：`O(N)`
+
+tags
+- dsu
