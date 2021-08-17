@@ -5,6 +5,7 @@ Atcoder Problems Virtual Contest: [DS-1](https://kenkoooo.com/atcoder/#/contest/
 - [Data Structure Atcoder Problems 1](#data-structure-atcoder-problems-1)
   - [Prerequisite](#prerequisite)
     - [Union-Find 木](#union-find-木)
+    - [Segment 木](#segment-木)
   - [Problems](#problems)
     - [ARC107 C - Shuffle Permutation](#arc107-c---shuffle-permutation)
     - [ARC097 D - Equals](#arc097-d---equals)
@@ -15,6 +16,7 @@ Atcoder Problems Virtual Contest: [DS-1](https://kenkoooo.com/atcoder/#/contest/
 
 ref
 - [プログラミングコンテストでのデータ構造](https://www.slideshare.net/iwiwi/ss-3578491)
+- [セグメント木を徹底解説！0から遅延評価やモノイドまで](https://algo-logic.info/segment-tree/)
 
 ### Union-Find 木
 - 機能
@@ -32,6 +34,25 @@ ref
 - 補足
   - Union-Find 木は、グループまとめることができるが、分割することはできない
   - Union-Find 木を改造して機能を付加することが必要になるような問題もある
+
+### Segment 木
+
+- セグメント木
+  - 完全二分木（全ての葉の深さが等しい木）
+  - 区間を扱うのに適したデータ構造
+- 機能(クエリ)
+  - 区間上の値を更新する
+  - 任意の区間上の最小値や合計値などを取得する
+- 計算量
+  - `O(log N)`
+- 種類
+  - 区間上の最小値 Range Minimam Query(RMQ) を扱うセグメント木
+  - 区間更新を行う Range Updated Query(RUQ) 遅延評価セグメント木
+    - 区間更新：[a, b) の値を x に更新する
+    - 区間加算：[a, b) の値に x を加算する
+- 様々なバリエーション
+  - `update` 方法：一点更新・一点加算・区間更新・区間加算など
+  - `query` 内容：区間の最小値・区間の最大値・区間の合計値など
 
 ## Problems
 ### [ARC107 C - Shuffle Permutation](https://atcoder.jp/contests/arc107/tasks/arc107_c)
