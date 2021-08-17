@@ -1,29 +1,26 @@
-## DSL
+# DSL
 
 データセットとクエリに関するテクニックを体得します。
 - [データの集合とクエリ処理](https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all)
 
 - [DSL](#dsl)
-- [Prerequisite](#prerequisite)
-  - [(RMQ) Range Minimum Query](#rmq-range-minimum-query)
-    - [実装](#実装)
-  - [(RUQ) Range Update Query](#ruq-range-update-query)
-    - [実装](#実装-1)
-  - [(RSQ) Range Sum Query](#rsq-range-sum-query)
-    - [実装](#実装-2)
-  - [(RAQ) Range Add Query](#raq-range-add-query)
-    - [実装](#実装-3)
-  - [RMQ & RUQ](#rmq--ruq)
-    - [実装](#実装-4)
-  - [RSQ & RAQ](#rsq--raq)
-    - [実装](#実装-5)
-  - [RMQ & RAQ](#rmq--raq)
-    - [実装](#実装-6)
+  - [Segment 木](#segment-木)
+    - [(RMQ) Range Minimum Query](#rmq-range-minimum-query)
+      - [実装](#実装)
+    - [(RUQ) Range Update Query](#ruq-range-update-query)
+      - [実装](#実装-1)
+    - [(RSQ) Range Sum Query](#rsq-range-sum-query)
+      - [実装](#実装-2)
+    - [(RAQ) Range Add Query](#raq-range-add-query)
+      - [実装](#実装-3)
+    - [RMQ & RUQ](#rmq--ruq)
+      - [実装](#実装-4)
+    - [RSQ & RAQ](#rsq--raq)
+      - [実装](#実装-5)
+    - [RMQ & RAQ](#rmq--raq)
+      - [実装](#実装-6)
 
-## Prerequisite
-
-- Segment 木
-  - Rang Minimum Query
+## Segment 木
 
 ### (RMQ) Range Minimum Query
 
