@@ -1,37 +1,5 @@
-/* segment_tree_lazy.cpp
-    任意の作用つきモノイドに対して遅延評価セグメント木を構築する。
-
-    モノイドX、作用モノイドMに対するセグメント木を構築するために、
-        ・X上の二項演算 fx
-        ・XとMの二項演算 fa
-        ・M上の二項演算 fm
-        ・Xの単位元 ex
-        ・Mの単位元 em
-    を与える
-
-    RMQ・RUQ：
-        using X = int;
-        using M = int;
-        auto fx = [](X x1, X x2) -> X { return min(x1, x2); };
-        auto fa = [](X x, M m) -> X { return m; };
-        auto fm = [](M m1, M m2) -> M { return m2; };
-        int ex = numeric_limits<int>::max();
-        int em = numeric_limits<int>::max();
-        SegTreeLazy<X, M> rmq(n, fx, fa, fm, ex, em);
-
-    RMQ・RAQ：
-        using X = int;
-        using M = int;
-        auto fx = [](X x1, X x2) -> X { return min(x1, x2); };
-        auto fa = [](X x, M m) -> X { return x + m; };
-        auto fm = [](M m1, M m2) -> M { return m1 + m2; };
-        int ex = numeric_limits<int>::max();
-        int em = 0;
-        SegTreeLazy<X, M> rmq(n, fx, fa, fm, ex, em);
-
-    verified: AOJ DSL_2_F RMQ and RUQ
-        http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja
- */
+#include <bits/stdc++.h>
+using namespace std;
 
 /* SegTreeLazy<X,M>(n,fx,fa,fm,ex,em): モノイド(集合X, 二項演算fx,fa,fm,
    単位元ex,em)についてサイズnで構築 set(int i, X x), build():
@@ -111,3 +79,38 @@ struct SegTreeLazy {
     }
     X query(int a, int b) { return query_sub(a, b, 0, 0, n); }
 };
+
+void solve() {
+    // in
+    int n, q;
+    cin >> n >> q;
+
+    using X = int;
+    using M = int;
+    auto fx = [](X x1, X x2) -> X { return min(x1, x2); };
+    auto fa = [](X x, M m) -> X { return m; };
+    auto fm = [](M m1, M m2) -> M { return m2; };
+    int ex = numeric_limits<int>::max();
+    int em = numeric_limits<int>::max();
+    SegTreeLazy<X, M> rmq(n, fx, fa, fm, ex, em);
+
+    for (int i = 0; i < q; i++) {
+        int com;
+        cin >> com;
+
+        if (com == 0) {
+            int s, t, x;
+            cin >> s >> t >> x;
+            rmq.update(s, t + 1, x);
+        } else if (com == 1) {
+            int s, t;
+            cin >> s >> t;
+            cout << rmq.query(s, t + 1) << endl;
+        }
+    }
+}
+
+int main() {
+    solve();
+    return 0;
+}

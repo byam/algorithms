@@ -33,6 +33,9 @@
         http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja
  */
 
+#include <bits/stdc++.h>
+using namespace std;
+
 /* SegTreeLazy<X,M>(n,fx,fa,fm,ex,em): モノイド(集合X, 二項演算fx,fa,fm,
    単位元ex,em)についてサイズnで構築 set(int i, X x), build():
    i番目の要素をxにセット。まとめてセグ木を構築する。O(n) update(i,x): i
@@ -110,4 +113,53 @@ struct SegTreeLazy {
         }
     }
     X query(int a, int b) { return query_sub(a, b, 0, 0, n); }
+
+    /* debug */
+    inline X operator[](int a) { return query(a, a + 1); }
+    void print() {
+        for (int i = 0; i < n; ++i) {
+            cout << (*this)[i];
+            if (i != n) cout << ",";
+        }
+        cout << endl;
+    }
 };
+
+int main() {
+    int n, q;
+    cin >> n >> q;
+
+    using X = int;
+    using M = int;
+    auto fx = [](X x1, X x2) -> X { return min(x1, x2); };
+    auto fa = [](X x, M m) -> X { return x + m; };
+    auto fm = [](M m1, M m2) -> M { return m1 + m2; };
+    int ex = numeric_limits<int>::max();
+    int em = 0;
+    SegTreeLazy<X, M> rmq(n, fx, fa, fm, ex, em);
+
+    for (int i = 0; i < n; i++) {
+        rmq.set(i, 0);
+    }
+    rmq.build();
+
+    vector<int> ans;
+    for (int i = 0; i < q; i++) {
+        int c;
+        cin >> c;
+        if (c == 0) {
+            int s, t, x;
+            cin >> s >> t >> x;
+            rmq.update(s, t + 1, x);
+        } else if (c == 1) {
+            int s, t;
+            cin >> s >> t;
+            ans.push_back(rmq.query(s, t + 1));
+        }
+    }
+    for (auto i : ans) {
+        cout << i << endl;
+    }
+
+    return 0;
+}
