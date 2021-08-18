@@ -1,124 +1,98 @@
 #include <bits/stdc++.h>
+#define rep(i, a, b) for (int i = a; i < b; i++)
+#define rrep(i, a, b) for (int i = a; i >= b; i--)
+#define fore(i, a) for (auto& i : a)
+#define all(x) (x).begin(), (x).end()
 
-#include <atcoder/all>
 using namespace std;
-using namespace atcoder;
-
-// debug
-#define printv(v)         \
-    for (auto x : v) {    \
-        cout << x << " "; \
-    }                     \
-    cout << endl;
-
-#define print2d(v, n, m)                \
-    for (int i = 0; i < (n); i++) {     \
-        for (int j = 0; j < (m); j++) { \
-            cout << v[i][j] << " ";     \
-        }                               \
-        cout << endl;                   \
-    }
-
-// func
-#define rep(i, first, last) for (int i = (first); i < (last); i++)
-#define srtv(v) sort((v).begin(), (v).end())
-
-// template
-template <class T>
-void chmin(T& a, T b) {
-    if (a > b) {
-        a = b;
-    }
+void _main();
+int main() {
+    cin.tie(0);
+    ios::sync_with_stdio(false);
+    _main();
 }
+typedef long long ll;
+const int inf = INT_MAX / 2;
+const ll infl = 1LL << 60;
 template <class T>
-void chmax(T& a, T b) {
+bool chmax(T& a, const T& b) {
     if (a < b) {
         a = b;
+        return 1;
     }
-}
-
-// Driver function to sort the vector elements
-// by second element of pairs
-bool sort_by_fir_desc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second > b.second);
-}
-bool sort_by_sec_asc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second < b.second);
-}
-bool sort_by_sec_desc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second > b.second);
-}
-
-// type
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<bool> vb;
-typedef vector<long long> vll;
-typedef pair<int, int> pii;
-typedef pair<long long, long long> pll;
-typedef priority_queue<int> pqi;                              // greater
-typedef priority_queue<int, vector<int>, greater<int>> pqli;  // less
-typedef priority_queue<long long, vector<long long>, greater<long long>> pqlll;
-typedef vector<pii> vpii;
-typedef vector<vi> vvi;
-typedef vector<vll> vvll;
-
-// const
-const long long INF_9 = 1001002009;
-
-/*-----------------------------------
-        Coding Starts Here
-------------------------------------*/
-
-void solve() {
-    int N, Q;
-    cin >> N >> Q;
-
-    // multset
-    map<ll, multiset<ll>> M;
-    map<ll, pll> C;
-
-    for (int i = 0; i < N; i++) {
-        int a, b;
-        cin >> a >> b;
-
-        M[b].insert(a);
-
-        C[i + 1] = make_pair(a, b);
-    }
-
-    // show all maxs
-    map<ll, ll> BMAX;
-    ll ans = INF_9;
-    for (auto [b, s] : M) {
-        if (s.size()) {
-            BMAX[b] = *(--s.end());
-            chmin(ans, BMAX[b]);
-        }
-    }
-
-    // query
-    for (int i = 0; i < Q; i++) {
-        int c, next_b;
-        cin >> c >> next_b;
-
-        // find c's B
-        ll pre_r = C[c].first;
-        ll pre_b = C[c].second;
-        C[c].second = next_b;
-
-        // erase pre_r from pre_b
-        auto it = M[pre_b].find(pre_r);
-        if (it != M[pre_b].end()) M[pre_b].erase(it);
-
-        // update pre_r to next_b
-        M[next_b].insert(pre_r);
-
-        // cout << ma << endl;
-    }
-}
-
-int main() {
-    solve();
     return 0;
 }
+template <class T>
+bool chmin(T& a, const T& b) {
+    if (b < a) {
+        a = b;
+        return 1;
+    }
+    return 0;
+}
+//---------------------------------------------------------------------------------------------------
+#define def inf
+template <class V, int NV>
+struct SegTree {  //[l,r)
+    V comp(V& l, V& r) { return min(l, r); };
+
+    vector<V> val;
+    SegTree() { val = vector<V>(NV * 2, def); }
+    V get(int x, int y, int l = 0, int r = NV, int k = 1) {
+        if (r <= x || y <= l) return def;
+        if (x <= l && r <= y) return val[k];
+        auto a = get(x, y, l, (l + r) / 2, k * 2);
+        auto b = get(x, y, (l + r) / 2, r, k * 2 + 1);
+        return comp(a, b);
+    }
+    void update(int i, V v) {
+        i += NV;
+        val[i] = v;
+        while (i > 1) i >>= 1, val[i] = comp(val[i * 2], val[i * 2 + 1]);
+    }
+    void add(int i, V v) { update(i, val[i + NV] + v); }
+    V operator[](int x) { return get(x, x + 1); }
+};
+//---------------------------------------------------------------------------------------------------
+
+int N, Q, A[201010], B[201010];
+SegTree<int, 1 << 18> st;
+multiset<int> rates[201010];
+int cnt[201010];
+void add(int child, int to) {
+    cnt[to]++;
+    rates[to].insert(A[child]);
+    st.update(to, *rates[to].rbegin());
+}
+void erase(int child, int from) {
+    cnt[from]--;
+    auto ite = rates[from].find(A[child]);
+    rates[from].erase(ite);
+
+    if (cnt[from] == 0)
+        st.update(from, inf);
+    else
+        st.update(from, *rates[from].rbegin());
+}
+//---------------------------------------------------------------------------------------------------
+void _main() {
+    cin >> N >> Q;
+    rep(i, 1, N + 1) {
+        cin >> A[i] >> B[i];
+        add(i, B[i]);
+    }
+
+    rep(_, 0, Q) {
+        int C, D;
+        cin >> C >> D;
+        erase(C, B[C]);
+        B[C] = D;
+        add(C, B[C]);
+
+        int ans = st.get(0, 201010);
+        printf("%d\n", ans);
+    }
+}
+
+
+
