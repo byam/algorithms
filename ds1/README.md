@@ -11,6 +11,7 @@ Atcoder Problems Virtual Contest: [DS-1](https://kenkoooo.com/atcoder/#/contest/
     - [ARC097 D - Equals](#arc097-d---equals)
     - [ABC137 D - Summer Vacation](#abc137-d---summer-vacation)
     - [ABC126 E - 1 or 2](#abc126-e---1-or-2)
+    - [ABC170 E - Smart Infants](#abc170-e---smart-infants)
 
 ## Prerequisite
 
@@ -123,3 +124,18 @@ solution
 
 tags
 - dsu
+
+### [ABC170 E - Smart Infants](https://atcoder.jp/contests/abc170/tasks/abc170_e)
+
+point
+- 集合から高い値のものを抽出して、また削除も行うので、`priority que` より `multiset` のデータ構造
+- またランク高い集合から最小値を求める & その中のデータを更新するので、そういうデータ構造である Segment Tree が有効
+
+solution
+- B ごとに multiset を定義して、幼児のランク値を入れておく
+- 幼稚園の高いランクを配列に保存しておく、RSQで答え出す
+- 移動があった場合は、multsetとsegtreeの性質の利用できる
+
+tags
+- multiset
+- segtree
