@@ -72,7 +72,16 @@ const long long INF_9 = 1001002009;
 
 void solve() {
     // in
-    
+    int H, W;
+    cin >> H >> W;
+    vector<vector<char>> C(H);
+    for (int i = 0; i < H; i++) {
+        for (int j = 0; j < W; j++) {
+            char c;
+            cin >> c;
+            C[i].push_back(c);
+        }
+    }
 }
 
 int main() {
