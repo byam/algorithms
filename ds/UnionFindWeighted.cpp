@@ -1,14 +1,13 @@
-#include <iostream>
-#include <vector>
-using namespace std;
-
+/*
+    重み付き Union Find Tree
+ */
 template <class Abel>
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
     vector<Abel> diff_weight;
 
-    UnionFind(int n = 1, Abel SUM_UNITY = 0) { init(n, SUM_UNITY); }
+    UnionFindWeighted(int n = 1, Abel SUM_UNITY = 0) { init(n, SUM_UNITY); }
 
     void init(int n = 1, Abel SUM_UNITY = 0) {
         par.resize(n);
