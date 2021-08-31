@@ -80,21 +80,17 @@ void solve() {
         cin >> a[i];
         s += a[i];
     }
+
     srtv(a);
-    printv(a);
-    ll base = s / n;
-    ll cnt = n - s % n;
-    // cout << s << " " << base << " " << cnt << endl;
+
+    ll avg = s / n;
+    ll upper_cnt = s % n;
+    vll b(n, avg);
+    rep(i, upper_cnt) b[n - i - 1]++;
 
     ll ans = 0;
     for (int i = 0; i < n; i++) {
-        if (base == a[i]) cnt--;
-        if (cnt == 0 and s % n > 0) base++;
-
-        if (base != a[i]) {
-            ans += abs(base - a[i]);
-            cnt--;
-        }
+        ans += abs(b[i] - a[i]);
     }
 
     cout << ans / 2 << endl;
