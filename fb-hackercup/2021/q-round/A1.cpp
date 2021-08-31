@@ -121,11 +121,6 @@ int solve() {
         }
     }
 
-    printv(S);
-    cerr << vow << " " << con << endl;
-    cerr << vow_cnt << " " << con_cnt << endl;
-    cerr << maxRepeating(vow) << " " << maxRepeating(con) << endl;
-
     int max_vow = maxRepeating(vow);
     int max_con = maxRepeating(con);
 
