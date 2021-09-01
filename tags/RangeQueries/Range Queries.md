@@ -1,17 +1,21 @@
 # Range Queries
 
-| RMQ | Sparse Table |
-|-|-|
+| RMQ | Sparse Table | Fenwick Tree <br> Binary Indexed Tree |
+|-|-|-|
 
 - [Range Queries](#range-queries)
   - [Preview](#preview)
   - [Prefix Sum Array (RSQ)](#prefix-sum-array-rsq)
-    - [Implement](#implement)
+    - [Implementation](#implementation)
   - [Sparse Table Algorithm](#sparse-table-algorithm)
     - [Ref](#ref)
-    - [Implement](#implement-1)
+    - [Implementation](#implementation-1)
       - [RMQ](#rmq)
       - [RSQ](#rsq)
+  - [Binary Indexed Tree (Fenwick Tree)](#binary-indexed-tree-fenwick-tree)
+    - [ref](#ref-1)
+    - [Implementation](#implementation-2)
+      - [Range Query & Point Update](#range-query--point-update)
 
 ## Preview
 
@@ -38,7 +42,7 @@ Point
 - High Dimension (2D):
   - `S(lower right) - S(lower left) - S(upper right) + S(upper left)`
 
-### Implement
+### Implementation
 
 ```cpp
 template <class T>
@@ -108,7 +112,7 @@ Idea
 - https://cp-algorithms.com/data_structures/sparse-table.html
 - https://www.youtube.com/watch?v=uUatD9AudXo&ab_channel=WilliamFiset
 
-### Implement
+### Implementation
 
 #### RMQ
 
@@ -204,6 +208,89 @@ int main() {
     cout << rsq.query(0, 4) << endl;
     cout << rsq.query(4, 7) << endl;
     cout << rsq.query(7, 8) << endl;
+
+    return 0;
+}
+```
+
+## Binary Indexed Tree (Fenwick Tree)
+
+Pros
+- Range Queries & Updating values in static array, efficiently.
+  - Construction: `O(n)`
+  - Point Update: `O(log n)`
+  - Range Update: `O(log n)`
+  - Rage Sum: `O(log n)`
+- Supports
+  1. Range Query & Point Update
+  1. Point Query & Range Update
+  1. Range Query & Range Update
+
+Idea
+- Each cells in Fenwick Tree is responsible for `power of 2` belowing elements.
+  - Calculating Power: `pos(LSB) - 1`. (Least Significant Bit)
+    - ex: `8 = (01000)` -> `pos(LSB) = 4`. Means 8th element is responsible for `2^(4-1) = 8` elements.
+- Range Query: Cascade downwards through array
+  - ex: sum `[11, 15]` = `[1, 15] - [1, 11)`
+    - `[1, 15] = FT[15] + FT[14] + FT[12] + FT[8]`
+    - `[1, 11) = FT[10] + FT[8]`
+    - sum `[11, 15]` = `(FT[15] + FT[14] + FT[12] + FT[8]) - (FT[10] + FT[8])`
+
+![](.img/../img/fenwick-tree.png)
+
+### ref
+
+- https://www.youtube.com/watch?v=RgITNht_f4Q&ab_channel=WilliamFiset
+- https://cp-algorithms.com/data_structures/fenwick.html
+
+### Implementation
+
+#### Range Query & Point Update
+
+```cpp
+#include <bits/stdc++.h>
+
+using namespace std;
+
+template <class T>
+struct FenwickTreeRQPU {
+    vector<int> bit;  // binary indexed tree
+    int n;
+
+    FenwickTreeRQPU(int n) {
+        this->n = n + 1;
+        bit.assign(n + 1, 0);  // one base indexing
+    }
+
+    FenwickTreeRQPU(vector<int> a) : FenwickTreeRQPU(a.size()) {
+        for (size_t i = 0; i < a.size(); i++) add(i, a[i]);
+    }
+
+    T sum(int idx) {
+        int ret = 0;
+        for (++idx; idx > 0; idx -= idx & -idx) ret += bit[idx];
+        return ret;
+    }
+
+    // RQ: Range Query
+    T sum(int l, int r) { return sum(r) - sum(l - 1); }
+
+    // PU: Point Update
+    void add(int idx, T delta) {
+        for (++idx; idx < n; idx += idx & -idx) bit[idx] += delta;
+    }
+};
+
+int main() {
+    vector<int> a = {7, 2, 3, 0, 5, 10, 3, 12, 18};
+    FenwickTreeRQPU<int> bit(a);
+    cout << bit.sum(0, 4) << endl;
+    cout << bit.sum(4, 7) << endl;
+    cout << bit.sum(7, 8) << endl;
+
+    bit.add(7, 1);
+    cout << bit.sum(4, 7) << endl;
+    cout << bit.sum(7, 8) << endl;
 
     return 0;
 }
