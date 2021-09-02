@@ -6,6 +6,7 @@
   - [アルゴリズム](#アルゴリズム)
     - [1次元](#1次元)
     - [2次元](#2次元)
+  - [座標圧縮](#座標圧縮)
   - [Problems](#problems)
 
 ## Point
@@ -49,6 +50,24 @@ for (int i = 0; i < T; i++) {
 ### 2次元
 
 TBD: https://imoz.jp/algorithms/imos_method.html
+
+
+## 座標圧縮
+
+```cpp
+map<int, int> zip;
+map<int, int> unzip;
+
+int compress(vector<ll>& x) {
+    sort(x.begin(), x.end());
+    x.erase(unique(x.begin(), x.end()), x.end());
+    for (int i = 0; i < x.size(); i++) {
+        zip[x[i]] = i;
+        unzip[i] = x[i];
+    }
+    return x.size();
+}
+```
 
 ## Problems
 

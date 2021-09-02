@@ -1,7 +1,7 @@
 # Range Queries
 
-| RMQ | Sparse Table | Fenwick Tree <br> Binary Indexed Tree |
-|-|-|-|
+| RMQ | Sparse Table | Fenwick Tree <br> Binary Indexed Tree | Segment Tree |
+|-|-|-|-|
 
 - [Range Queries](#range-queries)
   - [Preview](#preview)
@@ -16,6 +16,9 @@
     - [ref](#ref-1)
     - [Implementation](#implementation-2)
       - [Range Query & Point Update](#range-query--point-update)
+  - [Segment Trees](#segment-trees)
+  - [ref](#ref-2)
+    - [Implementation](#implementation-3)
 
 ## Preview
 
@@ -294,4 +297,26 @@ int main() {
 
     return 0;
 }
+```
+
+## Segment Trees
+
+Pros
+- Range Query & Updating an array value in `O(log n)`
+- Supports
+  - Any range queries where we can divide a range into two parts.
+    - ex: Min/Max, Sum, gcd, bit operations AND, OR and XOR
+Idea
+  - Each internal tree node corresponds to an array range whose size is power of two.
+    - ex: RSQ, each internal node sum of left and right node.
+  - Any range `[a, b]` divided into `O(log n)` subranges whose values are stored in tree nodes.
+
+## ref
+
+- https://cp-algorithms.com/data_structures/segment_tree.html
+
+### Implementation
+
+```cpp
+
 ```
