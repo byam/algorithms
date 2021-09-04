@@ -317,6 +317,11 @@ Idea
 
 ### Implementation
 
+- array: `1 base indexed`
+- root at index `1`
+  - left : `2i`
+  - right: `2i + 1`
+
 ```cpp
 
 ```
