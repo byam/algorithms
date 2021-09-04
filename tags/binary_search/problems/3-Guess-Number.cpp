@@ -35,6 +35,8 @@ void solve() {
     cout << binarySearchGuess(10) << endl;
 }
 
+// https://leetcode.com/problems/guess-number-higher-or-lower/
+// binary search
 int main() {
     solve();
     return 0;
