@@ -6,6 +6,7 @@
   - [Implementation](#implementation)
     - [Template 1](#template-1)
     - [Template 2](#template-2)
+    - [Template 3](#template-3)
 
 ## Preview
 
@@ -69,16 +70,68 @@ int main() {
 
 ### Template 2
 
-- Search current index and its left and right index
-- Size at least 3
-- Post-processing required
+Point
+- Search Condition:
+  - Needs to access element's **immediate right neighbor**
+- Left or Right:
+  - right neighbor to determine
+- Search Space:
+  - **at least 2** in size at each step
+- Post-processing:
+  - Loop/Recursion ends : **1 element left**.
+  - Need to assess if the remaining element meets the condition.
+
 
 ```cpp
-int binarySearch(vector<int>& nums, int target) {
-    if (nums.size() == 0) return -1;
+// Initial Condition: left = 0, right = length
+// Termination: left == right
+// Searching Left: right = mid
+// Searching Right: left = mid+1
+
+int binarySearch(vector<int>& nums, int target){
+  if(nums.size() == 0)
+    return -1;
+
+  int left = 0, right = nums.size();
+  while(left < right){
+    // Prevent (left + right) overflow
+    int mid = left + (right - left) / 2;
+    if(nums[mid] == target){ return mid; }
+    else if(nums[mid] < target) { left = mid + 1; }
+    else { right = mid; }
+  }
+
+  // Post-processing:
+  // End Condition: left == right
+  if(left != nums.size() && nums[left] == target) return left;
+  return -1;
+}
+```
+
+### Template 3
+
+Point
+- Search Condition:
+  - needs to access element's immediate **left and right neighbors**
+- Left or Right:
+  - Use element's neighbors
+- Search Space:
+  - **at least 3** in size at each step
+- Post-processing:
+  - Loop/Recursion ends when you have **2 elements left**.
+  - Need to assess if the remaining elements meet the condition.
+
+```cpp
+// Initial Condition: left = 0, right = length-1
+// Termination: left + 1 == right
+// Searching Left: right = mid
+// Searching Right: left = mid
+int binarySearch(vector<int>& nums, int target){
+    if (nums.size() == 0)
+        return -1;
 
     int left = 0, right = nums.size() - 1;
-    while (left + 1 < right) {
+    while (left + 1 < right){
         // Prevent (left + right) overflow
         int mid = left + (right - left) / 2;
         if (nums[mid] == target) {
@@ -92,8 +145,8 @@ int binarySearch(vector<int>& nums, int target) {
 
     // Post-processing:
     // End Condition: left + 1 == right
-    if (nums[left] == target) return left;
-    if (nums[right] == target) return right;
+    if(nums[left] == target) return left;
+    if(nums[right] == target) return right;
     return -1;
 }
 ```
