@@ -25,6 +25,8 @@ Idea
 
 ## Implementation
 
+![](.img/../img/binary_template.png)
+
 ### Template 1
 
 - Only checking current (mid) element.
