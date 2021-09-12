@@ -110,14 +110,35 @@ const long long INF_9 = 1001002009;
 
 const long long MOD = 1000000007;
 
-int solve() {
+void solve(int num) {
     // in
-    int n;
-    read(n);
+    int n, m, a, b;
+    read(n, m, a, b);
 
-    ll ans = 0;
+    // impossible case
+    if (n + m - 1 > min(a, b)) {
+        printf("Case #%d: %s\n", num, "Impossible");
+        return;
+    }
 
-    return ans;
+    // fill min wait
+    int fill = min(a, b) / (n + m - 1);
+    vvi field(n, vi(m, fill));
+
+    // change top left & top right
+    int min_wait = fill * (n + m - 1);
+    if (a > min_wait) field[0][0] += a - min_wait;
+    if (b > min_wait) field[0][m - 1] += b - min_wait;
+
+    printf("Case #%d: %s\n", num, "Possible");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("%d", field[i][j]);
+            if (j < m - 1) printf(" ");
+        }
+        printf("\n");
+    }
+    return;
 }
 
 int main() {
@@ -129,7 +150,7 @@ int main() {
     cin >> t;
     int cnt = 1;
     while (t--) {
-        printf("Case #%d: %d\n", cnt, solve());
+        solve(cnt);
         cnt++;
     }
     return 0;
