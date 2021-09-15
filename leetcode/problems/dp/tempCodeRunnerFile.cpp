@@ -1,0 +1,3 @@
+
+    out(nums);
+    out(dp)
