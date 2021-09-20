@@ -88,10 +88,6 @@ bool sort_by_sec_desc(const pair<int, int>& a, const pair<int, int>& b) {
     return (a.second > b.second);
 }
 
-bool sort_by_fasa(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second < b.second);
-}
-
 // type
 typedef long long ll;
 typedef vector<int> vi;
@@ -114,51 +110,41 @@ const long long INF_9 = 1001002009;
         Coding Starts Here
 ------------------------------------*/
 
-const long long INFL = 1LL << 60;
-
-// 最長増加部分列の長さを求める
-int LIS(const vector<long long>& a) {
-    int N = (int)a.size();
-    vector<long long> dp(N, INFL);
-    for (int i = 0; i < N; ++i) {
-        // dp[k] >= a[i] となる最小のイテレータを見つける
-        auto it = lower_bound(dp.begin(), dp.end(), a[i]);
-
-        // そこを a[i] で書き換える
-        *it = a[i];
+map<long long, int> zip;
+map<int, long long> unzip;
+/*
+    座標圧縮
+    [zip] 6, 9, 9, 2, 100 -> [unzip] 1, 2, 2, 0, 3
+ */
+int compress(vector<long long>& x) {
+    zip.clear();
+    unzip.clear();
+    sort(x.begin(), x.end());
+    x.erase(unique(x.begin(), x.end()), x.end());
+    for (int i = 0; i < x.size(); i++) {
+        zip[x[i]] = i;
+        unzip[i] = x[i];
     }
-
-    // dp[k] < INFL となる最大の k に対して k+1 が答え
-    // それは dp[k] >= INFL となる最小の k に一致する
-    return lower_bound(dp.begin(), dp.end(), INFL) - dp.begin();
+    return x.size();
 }
 
 void solve() {
     // in
     int n, m;
     read(n, m);
-    vpii E(m);
+    vector<vll> pref(n);
     for (int i = 0; i < m; i++) {
-        int a, b;
-        read(a, b);
-        a--;
-        b--;
-        E[i] = {a, b};
+        int p, y;
+        read(p, y);
+        p--;
+        pref[p].push_back(y);
     }
 
-    // sorting
-    sort(E.begin(), E.end(), [](auto x, auto y) {
-        if (x.first < y.first) return true;
-        if (x.first > y.first) return false;
-        return x.second > y.second;
-    });
-
-    // LIS for second vector
-    vll b;
-    for (auto [f, s] : E) {
-        b.push_back(s);
+    // compress
+    for (int i = 0; i < n; i++) {
+        auto a = pref[i];
+        compress(a);
     }
-    out(LIS(b));
 }
 
 int main() {
