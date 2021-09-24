@@ -236,7 +236,7 @@ int op(int a, int b) { return min(a, b); }
 int e() { return INT_MAX; }
 // 探索条件を定義
 int target;
-bool f(int v) { return v < target; }
+bool f(int v) { return v > target; }
 
 // 0 indexed
 // construct: segtree<int, op, e> seg(a);
@@ -251,13 +251,25 @@ void solve() {
     string s;
     read(s);
 
+    // segtree
     vi a(n);
-    vpii p(n);
     for (int i = 0; i < n; i++) {
         a[i] = s[i] - 'a';
-        p[i] = {a[i], i};
     }
     segtree<int, op, e> seg(a);
+
+    // found min idx using max_right
+    int l = 0;
+    int r = n - k + 1;
+    for (size_t i = 0; i < k; i++) {
+        target = seg.prod(l, r);
+        int idx = seg.max_right<f>(l);
+        // cerr << target << " " << idx << " " << (char)(target + 'a') << endl;
+        cout << (char)(target + 'a');
+        l = idx + 1;
+        r++;
+    }
+    cout << endl;
 }
 
 int main() {
