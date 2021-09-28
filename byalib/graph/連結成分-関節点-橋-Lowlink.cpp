@@ -15,7 +15,7 @@ typedef pair<ll, ll> P;
     関節点の集合: vector<int> aps
     橋の集合: vector<P> bridges
 
-    グラフ G は連結である
+    無向グラフG G は連結である
 */
 struct LowLink {
     const Graph &G;

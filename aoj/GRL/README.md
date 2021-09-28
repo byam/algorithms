@@ -42,7 +42,8 @@ ref: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all
     - グラフの関節点・橋を列挙する構造体
     - 関節点の集合: `vector<int> aps`
     - 橋の集合: `vector<P> bridges`
-    - グラフ G は連結である
-
-- Bridges
-- Strongly Connected Components
+    - 無向グラフG G は連結である
+- [橋 / Brides / Lowlink](./3b-橋.cpp)
+  - 上記の Lowlink
+- [強連結成分分解 / Strongly Connected Components]
+  - 有向グラフG
