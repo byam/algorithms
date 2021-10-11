@@ -6,6 +6,7 @@ ref: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all
   - [最短経路 / Shortest Path](#最短経路--shortest-path)
   - [全域木 / Spanning Tree](#全域木--spanning-tree)
   - [連結成分 / Connected Components](#連結成分--connected-components)
+  - [サイクル / Path & Cycle](#サイクル--path--cycle)
 
 ## 最短経路 / Shortest Path
 - [単一始点最短経路 / Single Shortest Path / (Dijkstra)](./1a-単一始点最短経路.cpp)
@@ -47,3 +48,21 @@ ref: https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/all
   - 上記の Lowlink
 - [強連結成分分解 / Strongly Connected Components]
   - 有向グラフG
+
+## サイクル / Path & Cycle
+
+- トポロジカルソート: 閉路の無い有向グラフ DAG について行うソート
+  - ref: https://algo-logic.info/topological-sort/
+  - 頂点を一列に並べる
+  - 全ての辺の向きが左から右になるようにする (->)
+- 計算量
+  - O(|V| + |E|)
+  - BFS: 入ってくる辺の数が 0 となった頂点から作成する
+  - 有向グラフG
+- 閉路を検出
+  - グラフ G は閉路の無い有向グラフ DAG である
+  - グラフ G はトポロジカルソートできる
+  - 閉路なし：G.size() == DAG.size()
+- 練習:
+  - [有向グラフの閉路検査](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_A)
+  - [トポロジカルソート](https://onlinejudge.u-aizu.ac.jp/courses/library/5/GRL/4/GRL_4_B)

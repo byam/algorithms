@@ -130,26 +130,58 @@ const long long INF_9 = 1001002009;
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> twoSum(vector<int>& nums, int target) {
-    // brute force
-    vector<int> ans(2);
+int minOperations(vector<vector<int>>& grid, int x) {
+    vector<int> a, s;
 
-    int n = nums.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (target - nums[i] == nums[j]) {
-                ans[0] = i;
-                ans[1] = j;
-            }
+    for (auto g : grid) {
+        for (auto k : g) {
+            a.push_back(k);
         }
     }
 
+    sort(a.begin(), a.end());
+    // out(a);
+
+    int n = a.size();
+
+    // sub min
+    int mi = a[0];
+    for (int i = 0; i < n; i++) {
+        a[i] -= mi;
+    }
+    // out(a);
+
+    // check it is possible
+    for (int i = 1; i < n; i++) {
+        if (a[i] % x != 0) return -1;
+        a[i] /= x;
+    };
+    // out(a);
+
+    // accum
+    s.resize(n);
+    for (int i = 1; i < n; i++) s[i] = s[i - 1] + a[i];
+    // out(s);
+
+    // find min ans
+    int ans = s[n - 1];
+    for (int i = 1; i < n; i++) {
+        int lsum = s[i - 1];
+        int rsum = s[n - 1] - s[i];
+        int op = (a[i] * i - lsum) + (rsum - a[i] * (n - i - 1));
+
+        // cout << lsum << " " << rsum << " " << op << endl;
+
+        if (op < ans) ans = op;
+    }
     return ans;
 }
 
 int main() {
-    vector<int> nums({2, 7, 11, 15});
-    int target = 9;
-    out(twoSum(nums, target));
+    vector<vector<int>> grid;
+    grid.push_back(vector<int>({2, 4}));
+    grid.push_back(vector<int>({6, 8}));
+    int x = 2;
+    out(minOperations(grid, x));
     return 0;
 }

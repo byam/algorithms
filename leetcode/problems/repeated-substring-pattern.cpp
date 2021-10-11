@@ -130,26 +130,92 @@ const long long INF_9 = 1001002009;
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> twoSum(vector<int>& nums, int target) {
-    // brute force
-    vector<int> ans(2);
+class Solution {
+   public:
+    /**************************************
+     KMP法：文字列探索
+         - 計算量：O(n)
+         - ずらし表(部分マッチ用 / Prefix Table) を利用し比較位置を決める
+         - LPS("Longest proper Prefix which is also Suffix")
+         - パターン自体の部分マッチの位置を事前に用意する
+     ref:
+         - https://algoful.com/Archive/Algorithm/KMPSearch
+         -
+ http://www.btechsmartclass.com/data_structures/knuth-morris-pratt-algorithm.html
+         - https://www.codespeedy.com/knuth-morris-pratt-kmp-algorithm-in-c/
+ ***************************************/
 
-    int n = nums.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (target - nums[i] == nums[j]) {
-                ans[0] = i;
-                ans[1] = j;
+    vector<int> initPrefixTable(string txt) {
+        vector<int> lps(txt.length());
+        int len = 0;
+        int i = 1;
+        while (i < txt.length()) {
+            if (txt[i] == txt[len]) {
+                len++;
+                lps[i] = len;
+                i++;
+                continue;
+            } else {
+                if (len == 0) {
+                    lps[i] = 0;
+                    i++;
+                    continue;
+                } else {
+                    len = lps[len - 1];
+                    continue;
+                }
             }
         }
+        return lps;
     }
 
-    return ans;
-}
+    // found: return index of the text
+    // not found: -1
+    int KMP(string text, string pattern) {
+        int n = text.length();
+        int m = pattern.length();
+
+        // This function constructs the Lps array.
+        vector<int> Lps = initPrefixTable(pattern);
+
+        int i = 0, j = 0;
+        while (i < n) {
+            if (pattern[j] == text[i]) {
+                i++;
+                j++;
+            }
+            // If there is a match continue.
+            if (j == m) {
+                // if j==m it is confirmed that we have found
+                return i - m;
+                j = Lps[j - 1];
+            }
+            // If there is a mismatch
+            else if (i < n && pattern[j] != text[i]) {
+                // if j becomes 0 then simply increment the index i
+                if (j == 0) i++;
+
+                // Update j as Lps of last matched character
+                else
+                    j = Lps[j - 1];
+            }
+        }
+
+        // not found
+        return -1;
+    }
+
+    bool repeatedSubstringPattern(string s) {
+        string text = (s + s).substr(1, 2 * s.length() - 2);
+        string pattern = s;
+
+        return KMP(text, pattern) != -1;
+    }
+};
 
 int main() {
-    vector<int> nums({2, 7, 11, 15});
-    int target = 9;
-    out(twoSum(nums, target));
+    out(Solution().repeatedSubstringPattern("abab"));
+    out(Solution().repeatedSubstringPattern("aba"));
+    out(Solution().repeatedSubstringPattern("abcabcabcabc"));
     return 0;
 }

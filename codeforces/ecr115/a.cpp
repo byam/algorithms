@@ -130,26 +130,50 @@ const long long INF_9 = 1001002009;
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> twoSum(vector<int>& nums, int target) {
-    // brute force
-    vector<int> ans(2);
+void dfs(int x, int y, vvi grid, vector<vector<bool>>& field) {
+    field[x][y] = true;
+    int n = field[0].size();
 
-    int n = nums.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = i + 1; j < n; j++) {
-            if (target - nums[i] == nums[j]) {
-                ans[0] = i;
-                ans[1] = j;
-            }
+    if (x + 1 < n and grid[x + 1][y] == 0) dfs(x + 1, y, grid, field);
+    if (y + 1 < 2 and grid[x][y + 1] == 0) dfs(x, y + 1, grid, field);
+    if (x + 1 < n and y + 1 < 2 and grid[x + 1][y + 1] == 0)
+        dfs(x + 1, y + 1, grid, field);
+}
+
+void solve() {
+    // in
+    int n;
+    read(n);
+
+    vvi grid(2, vi(n, 0));
+    for (int i = 0; i < 2; i++) {
+        string s;
+        read(s);
+        for (int j = 0; j < n; j++) {
+            if (s[j] == '1') grid[i][j] = 1;
         }
     }
 
-    return ans;
+    vector field(2, vector<bool>(n, false));
+
+    rep(i, 2) rep(j, n) {
+        if (field[i][j]) continue;
+        dfs(i, j, grid, field);
+    }
+    if (field[1][n - 1])
+        out("YES");
+    else
+        out("NO");
 }
 
 int main() {
-    vector<int> nums({2, 7, 11, 15});
-    int target = 9;
-    out(twoSum(nums, target));
+    // make input and output more efficient
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
+    int t;
+    t = 1;
+    cin >> t;
+    while (t--) solve();
     return 0;
 }
