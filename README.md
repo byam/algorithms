@@ -1,16 +1,28 @@
-## algorithms
-Some very useful algorithms of programming.
+# algorithms
+
+The way to be a better programmer.
+
+- [algorithms](#algorithms)
+  - [Development Environment](#development-environment)
+    - [Local](#local)
+    - [Commands](#commands)
+
+## Development Environment
+
+ref:
+- https://qiita.com/EngTks/items/ffa2a7b4d264e7a052c6
+- https://qiita.com/ageprocpp/items/d5111699f9e8a0d88c89#tasksjson-%E3%81%AE%E8%A8%AD%E5%AE%9A
 
 
-#### Mathematics for algorithms
+### Local
+- MacOS
+- `g++`
+    - to use `#include <bits/stdc++.h>`
+- Extensions
+  - IntelliSence
+  - Code Runner
 
-* Primes
-    - [Is Prime ?](handy/src/IsPrime.java) : `O(srqrt(n))`
-    - [All Primes 1 to n](handy/src/AllPrime.java): [Sieve's algorithm](https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes), `O(n log log n)`
+### Commands
 
-* [GCD: Greatest Common Divisor](handy/src/GCD.java), [Euclid’s algorithm](https://en.wikipedia.org/wiki/Euclidean_algorithm#Algorithmic_efficiency) , `O(log min(a, b))`
-* [LCM: Lowest Common Multiple](handy/src/LCM.java),  `O(log min(a, b))`
-
-
----
-![pic1](LevelsOfDesign.png)
+- Compile & Run : `control + option + n`
+- Debug : `Cmd + Shift + D`
