@@ -126,7 +126,7 @@ typedef vector<vector<int>> Graph;
 
 // const
 const ll MOD = 1000000007;
-const int INF = 1e9;
+const ll INF = 1e18;
 
 /*-----------------------------------
         Coding Starts Here
@@ -134,27 +134,52 @@ const int INF = 1e9;
 
 void solve() {
     // in
-    int rd(n, m);
-    vector dist(n, vi(n, INF));
-    rep(i, 0, n) dist[i][i] = 0;
-
-    rep(i, 0, m) {
-        int rd(a, b, c);
-        a--;
-        b--;
-        dist[a][b] = c;
+    ll rd(h, w, n);
+    vvll F(h, vll(w));
+    vvll S(h, vll(w));
+    vector<pair<ll, pair<ll, ll>>> A(n);
+    for (int i = 0; i < n; i++) {
+        ll rd(r, c, x);
+        r--;
+        c--;
+        A[i] = {x, {r, c}};
+        F[r][c] = x;
     }
 
-    ll ans = 0;
-    // Worshall-Floyd
-    rep(k, 0, n) {
-        rep(i, 0, n) rep(j, 0, n) {
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-            if (dist[i][j] != INF) ans += dist[i][j];
+    auto B = A;
+    sort(all(A));
+    reverse(all(A));
+
+    for (int i = 0; i < n; i++) {
+        // check possible move?
+        ll a = A[i].first;
+        ll x = A[i].second.first;
+        ll y = A[i].second.second;
+        // outt(a, x, y);
+
+        // find max:
+        ll ms = 0;
+        bool found = false;
+        for (int j = 0; j < h; j++) {
+            if (F[j][y] > F[x][y]) {
+                chmax(ms, S[j][y]);
+                found = true;
+            }
         }
+        for (int j = 0; j < w; j++) {
+            if (F[x][j] > F[x][y]) {
+                chmax(ms, S[x][j]);
+                found = true;
+            }
+        }
+        // update
+        if (found) S[x][y] = ms + 1;
+        // out(S);
     }
 
-    out(ans);
+    for (auto x : B) {
+        out(S[x.second.first][x.second.second]);
+    }
 }
 
 int main() {

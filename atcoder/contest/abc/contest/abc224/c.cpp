@@ -126,34 +126,46 @@ typedef vector<vector<int>> Graph;
 
 // const
 const ll MOD = 1000000007;
-const int INF = 1e9;
+const ll INF = 1e18;
 
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
 
+// Function to check if three
+// points make a triangle
+bool checkTriangle(int x1, int y1, int x2, int y2, int x3, int y3) {
+    // Calculation the area of
+    // triangle. We have skipped
+    // multiplication with 0.5
+    // to avoid floating point
+    // computations
+    int a = x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2);
+
+    // Condition to check if
+    // area is not equal to 0
+    if (a == 0) return false;
+    return true;
+}
+
 void solve() {
     // in
-    int rd(n, m);
-    vector dist(n, vi(n, INF));
-    rep(i, 0, n) dist[i][i] = 0;
-
-    rep(i, 0, m) {
-        int rd(a, b, c);
-        a--;
-        b--;
-        dist[a][b] = c;
+    int rd(n);
+    vpii p(n);
+    for (int i = 0; i < n; i++) {
+        int rd(x, y);
+        p[i] = {x, y};
     }
-
     ll ans = 0;
-    // Worshall-Floyd
-    rep(k, 0, n) {
-        rep(i, 0, n) rep(j, 0, n) {
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-            if (dist[i][j] != INF) ans += dist[i][j];
+    for (int i = 0; i < n - 2; i++) {
+        for (int j = i + 1; j < n - 1; j++) {
+            for (int k = j + 1; k < n; k++) {
+                if (checkTriangle(p[i].first, p[i].second, p[j].first,
+                                  p[j].second, p[k].first, p[k].second))
+                    ans++;
+            }
         }
     }
-
     out(ans);
 }
 

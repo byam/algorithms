@@ -126,7 +126,7 @@ typedef vector<vector<int>> Graph;
 
 // const
 const ll MOD = 1000000007;
-const int INF = 1e9;
+const ll INF = 1e18;
 
 /*-----------------------------------
         Coding Starts Here
@@ -134,27 +134,25 @@ const int INF = 1e9;
 
 void solve() {
     // in
-    int rd(n, m);
-    vector dist(n, vi(n, INF));
-    rep(i, 0, n) dist[i][i] = 0;
+    int rd(h, w);
+    vector a(h, vi(w));
+    rep(i, 0, h) rep(j, 0, w) cin >> a[i][j];
 
-    rep(i, 0, m) {
-        int rd(a, b, c);
-        a--;
-        b--;
-        dist[a][b] = c;
-    }
-
-    ll ans = 0;
-    // Worshall-Floyd
-    rep(k, 0, n) {
-        rep(i, 0, n) rep(j, 0, n) {
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-            if (dist[i][j] != INF) ans += dist[i][j];
+    bool ans = true;
+    for (int i = 0; i < h; i++) {
+        for (int j = 0; j < w; j++) {
+            for (int k = i + 1; k < h; k++) {
+                for (int m = j + 1; m < w; m++) {
+                    if (a[i][j] + a[k][m] > a[i][m] + a[k][j]) ans = false;
+                }
+            }
         }
     }
 
-    out(ans);
+    if (ans)
+        out("Yes");
+    else
+        out("No");
 }
 
 int main() {

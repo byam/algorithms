@@ -5,8 +5,7 @@
 using namespace std;
 
 // func
-#define rep(i, first, last) for (int i = (first); i < (last); i++)
-#define rrep(i, last, first) for (int i = (last); i >= (first); i--)
+#define rep(i, last) for (int i = 0; i < (last); i++)
 #define srtv(v) sort((v).begin(), (v).end())
 #define all(v) (v).begin(), (v).end()
 
@@ -91,7 +90,7 @@ auto& operator>>(istream& is, vector<T>& xs) {
 template <class T>
 auto& operator<<(ostream& os, vector<T>& xs) {
     int sz = xs.size();
-    rep(i, 0, sz) os << xs[i] << " \n"[i + 1 == sz];
+    rep(i, sz) os << xs[i] << " \n"[i + 1 == sz];
     return os;
 }
 template <class T, class Y>
@@ -126,7 +125,6 @@ typedef vector<vector<int>> Graph;
 
 // const
 const ll MOD = 1000000007;
-const int INF = 1e9;
 
 /*-----------------------------------
         Coding Starts Here
@@ -134,26 +132,15 @@ const int INF = 1e9;
 
 void solve() {
     // in
-    int rd(n, m);
-    vector dist(n, vi(n, INF));
-    rep(i, 0, n) dist[i][i] = 0;
-
-    rep(i, 0, m) {
-        int rd(a, b, c);
-        a--;
-        b--;
-        dist[a][b] = c;
+    int rd(n, k);
+    if (n == 1) {
+        out(0);
+        return;
     }
 
-    ll ans = 0;
-    // Worshall-Floyd
-    rep(k, 0, n) {
-        rep(i, 0, n) rep(j, 0, n) {
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-            if (dist[i][j] != INF) ans += dist[i][j];
-        }
-    }
-
+    ll ans = n - k;
+    ans += (k - 1) / 2;
+    ans *= 2;
     out(ans);
 }
 
@@ -164,7 +151,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

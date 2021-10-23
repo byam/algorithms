@@ -126,7 +126,7 @@ typedef vector<vector<int>> Graph;
 
 // const
 const ll MOD = 1000000007;
-const int INF = 1e9;
+const ll INF = 1e18;
 
 /*-----------------------------------
         Coding Starts Here
@@ -134,27 +134,12 @@ const int INF = 1e9;
 
 void solve() {
     // in
-    int rd(n, m);
-    vector dist(n, vi(n, INF));
-    rep(i, 0, n) dist[i][i] = 0;
-
-    rep(i, 0, m) {
-        int rd(a, b, c);
-        a--;
-        b--;
-        dist[a][b] = c;
-    }
-
-    ll ans = 0;
-    // Worshall-Floyd
-    rep(k, 0, n) {
-        rep(i, 0, n) rep(j, 0, n) {
-            dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
-            if (dist[i][j] != INF) ans += dist[i][j];
-        }
-    }
-
-    out(ans);
+    string rd(s);
+    int n = s.length();
+    if (s[n - 2] == 'e' and s[n - 1] == 'r')
+        out("er");
+    else
+        out("ist");
 }
 
 int main() {
