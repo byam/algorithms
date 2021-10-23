@@ -132,54 +132,40 @@ const ll INF = 1e18;
         Coding Starts Here
 ------------------------------------*/
 
+using P = pair<int, int>;
+
 void solve() {
     // in
-    ll rd(h, w, n);
-    vvll F(h, vll(w));
-    vvll S(h, vll(w));
-    vector<pair<ll, pair<ll, ll>>> A(n);
-    for (int i = 0; i < n; i++) {
-        ll rd(r, c, x);
-        r--;
-        c--;
-        A[i] = {x, {r, c}};
-        F[r][c] = x;
-    }
-
-    auto B = A;
-    sort(all(A));
-    reverse(all(A));
+    int rd(h, w, n);
+    map<int, vector<P>> A;
+    map<P, int> cell;
 
     for (int i = 0; i < n; i++) {
-        // check possible move?
-        ll a = A[i].first;
-        ll x = A[i].second.first;
-        ll y = A[i].second.second;
-        // outt(a, x, y);
-
-        // find max:
-        ll ms = 0;
-        bool found = false;
-        for (int j = 0; j < h; j++) {
-            if (F[j][y] > F[x][y]) {
-                chmax(ms, S[j][y]);
-                found = true;
-            }
-        }
-        for (int j = 0; j < w; j++) {
-            if (F[x][j] > F[x][y]) {
-                chmax(ms, S[x][j]);
-                found = true;
-            }
-        }
-        // update
-        if (found) S[x][y] = ms + 1;
-        // out(S);
+        int rd(r, c, a);
+        --r;
+        --c;
+        A[-a].emplace_back(r, c);
+        cell[P(r, c)] = i;
     }
 
-    for (auto x : B) {
-        out(S[x.second.first][x.second.second]);
+    vi H(h), W(w);
+    vi ans(n);
+
+    for (auto [_, v] : A) {
+        // same points
+        for (auto [x, y] : v) {
+            int now = max(H[x], W[y]);
+            ans[cell[P(x, y)]] = now;
+        }
+
+        // same points
+        for (auto [x, y] : v) {
+            chmax(H[x], ans[cell[P(x, y)]] + 1);
+            chmax(W[y], ans[cell[P(x, y)]] + 1);
+        }
     }
+
+    for (auto x : ans) out(x);
 }
 
 int main() {
