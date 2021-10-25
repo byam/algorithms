@@ -4,7 +4,7 @@ using namespace std;
 
 template <class T>
 struct FenwickTreeRQPU {
-    vector<int> bit;  // binary indexed tree
+    vector<T> bit;  // binary indexed tree
     int n;
 
     FenwickTreeRQPU(int n) {
@@ -12,12 +12,12 @@ struct FenwickTreeRQPU {
         bit.assign(n + 1, 0);  // one base indexing
     }
 
-    FenwickTreeRQPU(vector<int> a) : FenwickTreeRQPU(a.size()) {
+    FenwickTreeRQPU(vector<T> a) : FenwickTreeRQPU(a.size()) {
         for (size_t i = 0; i < a.size(); i++) add(i, a[i]);
     }
 
     T sum(int idx) {
-        int ret = 0;
+        T ret = 0;
         for (++idx; idx > 0; idx -= idx & -idx) ret += bit[idx];
         return ret;
     }

@@ -122,16 +122,16 @@ const long long INF_9 = 1001002009;
 ------------------------------------*/
 
 template <class T>
-struct FenwickTreeRQPU {
+struct BIT {
     vector<int> bit;  // binary indexed tree
     int n;
 
-    FenwickTreeRQPU(int n) {
+    BIT(int n) {
         this->n = n + 1;
         bit.assign(n + 1, 0);  // one base indexing
     }
 
-    FenwickTreeRQPU(vector<int> a) : FenwickTreeRQPU(a.size()) {
+    BIT(vector<int> a) : BIT(a.size()) {
         for (size_t i = 0; i < a.size(); i++) add(i, a[i]);
     }
 
@@ -179,7 +179,7 @@ void solve() {
 
     // RSQ
     vi c(n);
-    FenwickTreeRQPU<int> bit(n);
+    BIT<int> bit(n);
     ll ans = 0;
     for (int i = 0; i < n * m; i++) {
         int l = (b[i] / m) * m;

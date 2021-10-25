@@ -4,24 +4,11 @@
 // using namespace atcoder;
 using namespace std;
 
-// debug
-#define printv(v)         \
-    for (auto x : v) {    \
-        cerr << x << " "; \
-    }                     \
-    cerr << endl;
-
-#define print2d(v, n, m)                \
-    for (int i = 0; i < (n); i++) {     \
-        for (int j = 0; j < (m); j++) { \
-            cerr << v[i][j] << " ";     \
-        }                               \
-        cerr << endl;                   \
-    }
-
 // func
-#define rep(i, last) for (int i = 0; i < (last); i++)
+#define rep(i, first, last) for (int i = (first); i < (last); i++)
+#define rrep(i, last, first) for (int i = (last); i >= (first); i--)
 #define srtv(v) sort((v).begin(), (v).end())
+#define all(v) (v).begin(), (v).end()
 
 // template
 template <class T>
@@ -37,6 +24,7 @@ void chmax(T& a, T b) {
     }
 }
 
+// out -> print
 template <class T>
 void out(T x) {
     cout << x << "\n";
@@ -53,6 +41,41 @@ void out(vector<T> x) {
     cout << "\n";
 }
 
+template <class T>
+void out(vector<pair<T, T>> p) {
+    for (auto [f, s] : p) {
+        cout << f << " " << s << endl;
+    }
+}
+
+template <class T>
+void out(map<T, T> m) {
+    for (auto [k, v] : m) {
+        cout << k << ": " << v << endl;
+    }
+}
+
+template <class T>
+void out(set<T> s) {
+    for (auto x : s) {
+        cout << x << " ";
+    }
+    cout << endl;
+}
+
+// パラメータパックが空になったら終了
+void outt() { cout << endl; }
+
+// ひとつ以上のパラメータを受け取るようにし、
+// 可変引数を先頭とそれ以外に分割する
+template <class Head, class... Tail>
+void outt(Head&& head, Tail&&... tail) {
+    std::cout << head << " ";
+
+    // パラメータパックtailをさらにheadとtailに分割する
+    outt(std::forward<Tail>(tail)...);
+}
+
 // in
 #define rd(...)  \
     __VA_ARGS__; \
@@ -65,6 +88,17 @@ auto& operator>>(istream& is, vector<T>& xs) {
     for (auto& x : xs) is >> x;
     return is;
 }
+template <class T>
+auto& operator<<(ostream& os, vector<T>& xs) {
+    int sz = xs.size();
+    rep(i, 0, sz) os << xs[i] << " \n"[i + 1 == sz];
+    return os;
+}
+template <class T, class Y>
+auto& operator<<(ostream& os, pair<T, Y>& xs) {
+    os << "{" << xs.first << ", " << xs.second << "}";
+    return os;
+}
 template <class T, class Y>
 auto& operator>>(istream& is, vector<pair<T, Y>>& xs) {
     for (auto& [x1, x2] : xs) is >> x1 >> x2;
@@ -73,31 +107,6 @@ auto& operator>>(istream& is, vector<pair<T, Y>>& xs) {
 template <class... Args>
 auto& read(Args&... args) {
     return (cin >> ... >> args);
-}
-
-// Driver function to sort the vector elements
-// by second element of pairs
-bool sort_by_fir_desc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second > b.second);
-}
-bool sort_by_sec_asc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second < b.second);
-}
-bool sort_by_sec_desc(const pair<int, int>& a, const pair<int, int>& b) {
-    return (a.second > b.second);
-}
-
-bool sort_by_2asc_1desc(const pair<int, int>& a, const pair<int, int>& b) {
-    if (a.second < b.second)
-        return true;
-    else if (a.second > b.second)
-        return false;
-    else {
-        if (a.first < b.first)
-            return false;
-        else
-            return true;
-    };
 }
 
 // type
@@ -113,30 +122,45 @@ typedef priority_queue<long long, vector<long long>, greater<long long>> pqlll;
 typedef vector<pair<int, int>> vpii;
 typedef vector<vector<int>> vvi;
 typedef vector<vector<long long>> vvll;
+typedef vector<vector<int>> Graph;
 
 // const
-const long long INF_9 = 1001002009;
+const ll MOD = 1000000007;
+const ll INF = 1e18;
 
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-
 template <class T>
-struct BIT {
-    vector<int> bit;  // binary indexed tree
+struct BitRSPU {
+    /*
+        Fenwick Binary Indexed Tree
+
+        Operation
+            - Range Sum Query
+            - Point Add
+        Time:
+            - Build: O(n)
+            - Range Query: O(log n)
+            - Point Update: O(log n)
+        Memory:
+            - O(N)
+    */
+
+    vector<T> bit;  // binary indexed tree
     int n;
 
-    BIT(int n) {
+    BitRSPU(int n) {
         this->n = n + 1;
         bit.assign(n + 1, 0);  // one base indexing
     }
 
-    BIT(vector<int> a) : BIT(a.size()) {
+    BitRSPU(vector<T> a) : BitRSPU(a.size()) {
         for (size_t i = 0; i < a.size(); i++) add(i, a[i]);
     }
 
     T sum(int idx) {
-        int ret = 0;
+        T ret = 0;
         for (++idx; idx > 0; idx -= idx & -idx) ret += bit[idx];
         return ret;
     }
@@ -152,34 +176,24 @@ struct BIT {
 
 void solve() {
     // in
-    int n, m;
-    read(n, m);
-    vpii a(m);
-    for (int i = 0; i < m; i++) {
-        int x;
-        read(x);
-        a[i] = {i, x};
-    }
-    sort(a.begin(), a.end(), sort_by_2asc_1desc);
-    // for (auto [f, s] : a) {
-    //     cout << f << " " << s << endl;
-    // }
-    vi b(m);
-    int r = 0;
-    for (auto [f, s] : a) {
-        b[f] = r;
-        r++;
-    }
-    // out(b);
+    int rd(n);
+    vll rdv(a, n);
 
-    // RSQ
-    vi c(m);
-    BIT<int> bit(m);
+    BitRSPU<ll> bit(a);
+
+    ll cur = 0;
     ll ans = 0;
-    for (int i = 0; i < m; i++) {
-        ans += bit.sum(0, b[i]);
-        bit.add(b[i], 1);
+    // ll acc = 0;
+    ll max_acc = 0;
+
+    rep(i, 0, n) {
+        // acc += a[i];
+        ll acc = bit.sum(0, i);
+        chmax(max_acc, acc);
+        chmax(ans, cur + max_acc);
+        cur += acc;
     }
+
     out(ans);
 }
 
@@ -190,7 +204,7 @@ int main() {
 
     int t;
     t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) solve();
     return 0;
 }
