@@ -132,38 +132,27 @@ const ll INF = 1e18;
         Coding Starts Here
 ------------------------------------*/
 
-// Returns LCM of array elements
-ll findlcm(vll a) {
-    // Initialize result
-    ll ans = a[0];
-    int n = a.size();
-
-    // ans contains LCM of arr[0], ..arr[i]
-    // after i'th iteration,
-    for (int i = 1; i < n; i++) ans = (((a[i] * ans)) / (gcd(a[i], ans)));
-
-    return ans;
-}
-
 void solve() {
     // in
     int rd(n);
-    vll rdv(a, n);
-    vll b(n);
+    vi rdv(a, n);
 
     int cur = 0;
     if (n % 2) {
-        b[0] = a[2];
-        b[1] = a[2];
-        b[2] = -(a[0] + a[1]);
+        if (a[0] + a[1] != 0)
+            printf("%d %d %d ", a[2], a[2], -(a[0] + a[1]));
+        else if (a[0] + a[2] != 0)
+            printf("%d %d %d ", a[1], -(a[0] + a[2]), a[1]);
+        else
+            printf("%d %d %d ", -(a[1] + a[2]), a[0], a[0]);
         cur += 3;
     }
 
     for (int i = cur; i < n; i += 2) {
-        b[i] = a[i + 1];
-        b[i + 1] = -a[i];
+        printf("%d %d ", a[i + 1], -a[i]);
     }
-    out(b);
+    printf("\n");
+    return;
 }
 
 int main() {
