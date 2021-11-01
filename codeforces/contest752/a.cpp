@@ -131,76 +131,56 @@ const ll INF = 1e18;
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-// divisors of n
-vector<int> findDivisors(int n) {
-    vector<int> divs;
+/*
+    最長増加部分列の長さを求める O(nlogn)
+ */
+const ll INFL = 1e18;
+int LIS(const vector<long long>& a) {
+    int N = (int)a.size();
+    vector<long long> dp(N, INFL);
+    for (int i = 0; i < N; ++i) {
+        // dp[k] >= a[i] となる最小のイテレータを見つける
+        auto it = lower_bound(dp.begin(), dp.end(), a[i]);
 
-    int i;
-    for (i = 1; i * i < n; i++) {
-        if (n % i == 0) divs.push_back(i);
-    }
-    if (i - (n / i) == 1) {
-        i--;
-    }
-    for (; i >= 1; i--) {
-        if (n % i == 0) divs.push_back(n / i);
-    }
-    return divs;
-}
-
-// A function to print all prime factors of a given number n
-vector<int> primeFactors(int n) {
-    vector<int> f;
-
-    // Print the number of 2s that divide n
-    while (n % 2 == 0) {
-        f.push_back(2);
-        n = n / 2;
+        // そこを a[i] で書き換える
+        *it = a[i];
     }
 
-    // n must be odd at this point.  So we can skip
-    // one element (Note i = i +2)
-    for (int i = 3; i <= sqrt(n); i = i + 2) {
-        // While i divides n, print i and divide n
-        while (n % i == 0) {
-            f.push_back(i);
-            n = n / i;
-        }
-    }
-
-    // This condition is to handle the case when n
-    // is a prime number greater than 2
-    if (n > 2) f.push_back(n);
-
-    return f;
-}
-
-vector<pair<long long, long long>> prime_factor_cnt(long long n) {
-    vector<pair<long long, long long>> res;
-    for (long long p = 2; p * p <= n; ++p) {
-        if (n % p != 0) continue;
-        int num = 0;
-        while (n % p == 0) {
-            ++num;
-            n /= p;
-        }
-        res.push_back(make_pair(p, num));
-    }
-    if (n != 1) res.push_back(make_pair(n, 1));
-    return res;
+    // dp[k] < INFL となる最大の k に対して k+1 が答え
+    // それは dp[k] >= INFL となる最小の k に一致する
+    return lower_bound(dp.begin(), dp.end(), INFL) - dp.begin();
 }
 
 void solve() {
     // in
     int rd(n);
-    map<ll, ll> m;
-    rep(i, 1, n) {
-        auto primes = prime_factor_cnt(i);
-        for(auto p: primes) {
-            m[p.first] += p.second;
-        }
+    vll rdv(a, n);
+
+    if(n%2==0) {
+        out("YES");
+        return;
     }
-    out(m);
+
+    vi b;
+    int cur = 1;
+    for (int i = 1; i < n; i++) {
+        if (a[i] > a[i - 1])
+            cur++;
+        else if (a[i] < a[i - 1]) {
+            b.push_back(cur);
+            cur = 1;
+        }
+        if (i == n - 1) b.push_back(cur);
+    }
+    out(b);
+    int ans = b[0];
+    for (int i = 1; i < b.size(); i++) {
+        ans ^= b[i];
+    }
+    if (ans == 0)
+        out("YES");
+    else
+        out("NO");
 }
 
 int main() {
@@ -210,7 +190,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

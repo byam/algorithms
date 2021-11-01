@@ -131,76 +131,108 @@ const ll INF = 1e18;
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-// divisors of n
-vector<int> findDivisors(int n) {
-    vector<int> divs;
+// Implement (union by size) + (path compression)
+// Reference:
+// Zvi Galil and Giuseppe F. Italiano,
+// Data structures and algorithms for disjoint set union problems
+struct dsu {
+   public:
+    dsu() : _n(0) {}
+    explicit dsu(int n) : _n(n), parent_or_size(n, -1) {}
 
-    int i;
-    for (i = 1; i * i < n; i++) {
-        if (n % i == 0) divs.push_back(i);
-    }
-    if (i - (n / i) == 1) {
-        i--;
-    }
-    for (; i >= 1; i--) {
-        if (n % i == 0) divs.push_back(n / i);
-    }
-    return divs;
-}
-
-// A function to print all prime factors of a given number n
-vector<int> primeFactors(int n) {
-    vector<int> f;
-
-    // Print the number of 2s that divide n
-    while (n % 2 == 0) {
-        f.push_back(2);
-        n = n / 2;
+    int merge(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        int x = leader(a), y = leader(b);
+        if (x == y) return x;
+        if (-parent_or_size[x] < -parent_or_size[y]) std::swap(x, y);
+        parent_or_size[x] += parent_or_size[y];
+        parent_or_size[y] = x;
+        return x;
     }
 
-    // n must be odd at this point.  So we can skip
-    // one element (Note i = i +2)
-    for (int i = 3; i <= sqrt(n); i = i + 2) {
-        // While i divides n, print i and divide n
-        while (n % i == 0) {
-            f.push_back(i);
-            n = n / i;
+    bool same(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        return leader(a) == leader(b);
+    }
+
+    int leader(int a) {
+        assert(0 <= a && a < _n);
+        if (parent_or_size[a] < 0) return a;
+        return parent_or_size[a] = leader(parent_or_size[a]);
+    }
+
+    int size(int a) {
+        assert(0 <= a && a < _n);
+        return -parent_or_size[leader(a)];
+    }
+
+    std::vector<std::vector<int>> groups() {
+        std::vector<int> leader_buf(_n), group_size(_n);
+        for (int i = 0; i < _n; i++) {
+            leader_buf[i] = leader(i);
+            group_size[leader_buf[i]]++;
         }
-    }
-
-    // This condition is to handle the case when n
-    // is a prime number greater than 2
-    if (n > 2) f.push_back(n);
-
-    return f;
-}
-
-vector<pair<long long, long long>> prime_factor_cnt(long long n) {
-    vector<pair<long long, long long>> res;
-    for (long long p = 2; p * p <= n; ++p) {
-        if (n % p != 0) continue;
-        int num = 0;
-        while (n % p == 0) {
-            ++num;
-            n /= p;
+        std::vector<std::vector<int>> result(_n);
+        for (int i = 0; i < _n; i++) {
+            result[i].reserve(group_size[i]);
         }
-        res.push_back(make_pair(p, num));
+        for (int i = 0; i < _n; i++) {
+            result[leader_buf[i]].push_back(i);
+        }
+        result.erase(std::remove_if(
+                         result.begin(), result.end(),
+                         [&](const std::vector<int>& v) { return v.empty(); }),
+                     result.end());
+        return result;
     }
-    if (n != 1) res.push_back(make_pair(n, 1));
-    return res;
-}
+
+   private:
+    int _n;
+    // root node: -1 * component size
+    // otherwise: parent
+    std::vector<int> parent_or_size;
+};
 
 void solve() {
     // in
-    int rd(n);
-    map<ll, ll> m;
-    rep(i, 1, n) {
-        auto primes = prime_factor_cnt(i);
-        for(auto p: primes) {
-            m[p.first] += p.second;
+    int rd(n, q);
+    vi a(n + 1);
+    vi b(n + 1);
+
+    for (int i = 0; i < q; i++) {
+        int rd(c);
+        if (c == 1) {
+            int rd(x, y);
+            a[x] = y;
+            b[y] = x;
+        }
+        if (c == 2) {
+            int rd(x, y);
+            a[x] = 0;
+            b[y] = 0;
+        }
+        if (c == 3) {
+            int rd(x);
+            deque<int> q;
+            int cur = x;
+            while (cur) {
+                q.push_back(cur);
+                cur = a[cur];
+            }
+            int pre = b[x];
+            while (pre) {
+                q.push_front(pre);
+                pre = b[pre];
+            }
+            q.push_front(q.size());
+            for (auto x : q) {
+                cout << x << " ";
+            }
+            cout << endl;
         }
     }
-    out(m);
 }
 
 int main() {

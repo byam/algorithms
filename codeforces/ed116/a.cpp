@@ -131,76 +131,51 @@ const ll INF = 1e18;
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-// divisors of n
-vector<int> findDivisors(int n) {
-    vector<int> divs;
 
-    int i;
-    for (i = 1; i * i < n; i++) {
-        if (n % i == 0) divs.push_back(i);
+int cnt(string s, char d) {
+    int n = s.length();
+
+    int ans = 0;
+    for (int i = 0; i < n - 1; i++) {
+        if (s[i] == d and s[i] != s[i + 1]) ans++;
     }
-    if (i - (n / i) == 1) {
-        i--;
-    }
-    for (; i >= 1; i--) {
-        if (n % i == 0) divs.push_back(n / i);
-    }
-    return divs;
+    return ans;
 }
 
-// A function to print all prime factors of a given number n
-vector<int> primeFactors(int n) {
-    vector<int> f;
-
-    // Print the number of 2s that divide n
-    while (n % 2 == 0) {
-        f.push_back(2);
-        n = n / 2;
-    }
-
-    // n must be odd at this point.  So we can skip
-    // one element (Note i = i +2)
-    for (int i = 3; i <= sqrt(n); i = i + 2) {
-        // While i divides n, print i and divide n
-        while (n % i == 0) {
-            f.push_back(i);
-            n = n / i;
+string change(string s, char d, int k) {
+    int n = s.length();
+    for (int i = 0; i < n - 1; i++) {
+        if (!k) break;
+        if (s[i] == d and s[i] != s[i + 1]) {
+            s[i] = s[i + 1];
+            k--;
         }
     }
-
-    // This condition is to handle the case when n
-    // is a prime number greater than 2
-    if (n > 2) f.push_back(n);
-
-    return f;
-}
-
-vector<pair<long long, long long>> prime_factor_cnt(long long n) {
-    vector<pair<long long, long long>> res;
-    for (long long p = 2; p * p <= n; ++p) {
-        if (n % p != 0) continue;
-        int num = 0;
-        while (n % p == 0) {
-            ++num;
-            n /= p;
-        }
-        res.push_back(make_pair(p, num));
-    }
-    if (n != 1) res.push_back(make_pair(n, 1));
-    return res;
+    return s;
 }
 
 void solve() {
     // in
-    int rd(n);
-    map<ll, ll> m;
-    rep(i, 1, n) {
-        auto primes = prime_factor_cnt(i);
-        for(auto p: primes) {
-            m[p.first] += p.second;
+    string rd(s);
+    int ab = cnt(s, 'a');
+    int ba = cnt(s, 'b');
+    if (ab == ba) {
+        out(s);
+        return;
+    }
+
+    int n = s.length();
+    for (int i = 0; i < n; i++) {
+        auto ss = s;
+        if (ss[i] == 'a')
+            ss[i] = 'b';
+        else
+            ss[i] = 'a';
+        if (cnt(ss, 'a') == cnt(ss, 'b')) {
+            out(ss);
+            break;
         }
     }
-    out(m);
 }
 
 int main() {
@@ -210,7 +185,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

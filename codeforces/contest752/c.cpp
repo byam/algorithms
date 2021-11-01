@@ -131,76 +131,28 @@ const ll INF = 1e18;
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-// divisors of n
-vector<int> findDivisors(int n) {
-    vector<int> divs;
-
-    int i;
-    for (i = 1; i * i < n; i++) {
-        if (n % i == 0) divs.push_back(i);
-    }
-    if (i - (n / i) == 1) {
-        i--;
-    }
-    for (; i >= 1; i--) {
-        if (n % i == 0) divs.push_back(n / i);
-    }
-    return divs;
-}
-
-// A function to print all prime factors of a given number n
-vector<int> primeFactors(int n) {
-    vector<int> f;
-
-    // Print the number of 2s that divide n
-    while (n % 2 == 0) {
-        f.push_back(2);
-        n = n / 2;
-    }
-
-    // n must be odd at this point.  So we can skip
-    // one element (Note i = i +2)
-    for (int i = 3; i <= sqrt(n); i = i + 2) {
-        // While i divides n, print i and divide n
-        while (n % i == 0) {
-            f.push_back(i);
-            n = n / i;
-        }
-    }
-
-    // This condition is to handle the case when n
-    // is a prime number greater than 2
-    if (n > 2) f.push_back(n);
-
-    return f;
-}
-
-vector<pair<long long, long long>> prime_factor_cnt(long long n) {
-    vector<pair<long long, long long>> res;
-    for (long long p = 2; p * p <= n; ++p) {
-        if (n % p != 0) continue;
-        int num = 0;
-        while (n % p == 0) {
-            ++num;
-            n /= p;
-        }
-        res.push_back(make_pair(p, num));
-    }
-    if (n != 1) res.push_back(make_pair(n, 1));
-    return res;
-}
 
 void solve() {
     // in
     int rd(n);
-    map<ll, ll> m;
-    rep(i, 1, n) {
-        auto primes = prime_factor_cnt(i);
-        for(auto p: primes) {
-            m[p.first] += p.second;
+    vi rdv(a, n);
+
+    if (a[0] == 2) {
+        out("NO");
+        return;
+    }
+    bool check = true;
+    for (int i = 0; i < n; i++) {
+        if (a[i] % (i + 2) != 0) {
+            check = false;
+            outt(a[i], i);
         }
     }
-    out(m);
+
+    if (!check)
+        out("YES");
+    else
+        out("NO");
 }
 
 int main() {
@@ -210,7 +162,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
