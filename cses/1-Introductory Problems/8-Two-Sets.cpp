@@ -140,28 +140,31 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    int rd(n);
-    if (n % 2 == 0) {
-        out("NO");
-        return;
-    }
+    ll rd(n);
 
     ll sum = n * (n + 1) / 2;
     ll shalf = sum / 2;
-    set<int> a, b;
-    for (int i = n; i > 0; i--) {
+    ll asum = 0;
+    ll bsum = 0;
+    set<ll> a, b;
+    for (ll i = n; i > 0; i--) {
         if (shalf >= i) {
             a.insert(i);
             shalf -= i;
+            asum += i;
         } else {
             b.insert(i);
+            bsum += i;
         }
     }
-    out("YES");
-    out(a.size());
-    out(a);
-    out(b.size());
-    out(b);
+    if (asum == bsum) {
+        out("YES");
+        out(a.size());
+        out(a);
+        out(b.size());
+        out(b);
+    } else
+        out("NO");
 }
 
 int main() {
