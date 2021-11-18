@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 
+<<<<<<< HEAD
 #include <iostream>
 #include <map>
 #include <queue>
 #include <set>
 #include <vector>
 
+=======
+>>>>>>> 64c7eaa (daily)
 //#include <atcoder/all>
 // using namespace atcoder;
 using namespace std;
@@ -140,10 +143,37 @@ const ll INF = 1e18;
 
 void solve() {
     // in
+<<<<<<< HEAD
     ll rd(n, a, b, p, q);
     ll c = lcm(a, b);
     ll ans = (n / a) * p + (n / b) * q - (n / c) * min(p, q);
     out(ans);
+=======
+    string rd(s);
+    for (int i = 0; i < s.length() - 1; i++) {
+        if (s[i] != s[i + 1]) continue;
+
+        bool z = false;
+        bool y = false;
+        if (s[i] == 'z') z = true;
+        if (s[i] == 'y') y = true;
+
+        if (z)
+            s[i + 1] = s[i] - 1;
+        else
+            s[i + 1] = s[i] + 1;
+
+        if (i + 2 < s.length() and s[i + 1] == s[i + 2]) {
+            if (z)
+                s[i + 1] = s[i] - 2;
+            else if (y)
+                s[i + 1] = s[i] - 2;
+            else
+                s[i + 1] = s[i] + 2;
+        }
+    }
+    out(s);
+>>>>>>> 64c7eaa (daily)
 }
 
 int main() {

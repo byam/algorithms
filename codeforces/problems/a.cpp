@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 
+<<<<<<< HEAD
 #include <iostream>
 #include <map>
 #include <queue>
 #include <set>
 #include <vector>
 
+=======
+>>>>>>> 64c7eaa (daily)
 //#include <atcoder/all>
 // using namespace atcoder;
 using namespace std;
@@ -140,9 +143,29 @@ const ll INF = 1e18;
 
 void solve() {
     // in
+<<<<<<< HEAD
     ll rd(n, k);
     ll ans = n + (k - n % k);
     out(ans);
+=======
+    int rd(a, ta, b, tb);
+    string rd(t);
+    int s = stoi(t.substr(0, 2)) * 60 + stoi(t.substr(3, 2));
+
+    int f = s + ta;
+
+    // bus start
+    // outt(min(f, 23 * 60 + 59), max(s - tb, 300));
+    // int diff = (min(f, 23 * 60 + 59) - max(s - tb, 300));
+    // int cnt = diff / b;
+    // out(cnt);
+
+    int cnt = 0;
+    for (int i = 300; i < 24 * 60; i += b) {
+        if (i > s - tb and i < s + ta) cnt++;
+    }
+    out(cnt);
+>>>>>>> 64c7eaa (daily)
 }
 
 int main() {

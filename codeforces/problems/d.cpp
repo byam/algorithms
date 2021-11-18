@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 
+<<<<<<< HEAD
 #include <iostream>
 #include <map>
 #include <queue>
 #include <set>
 #include <vector>
 
+=======
+>>>>>>> 64c7eaa (daily)
 //#include <atcoder/all>
 // using namespace atcoder;
 using namespace std;
@@ -138,6 +141,7 @@ const ll INF = 1e18;
         Coding Starts Here
 ------------------------------------*/
 
+<<<<<<< HEAD
 ll mod_mul(ll a, ll b) { return ((a % MOD) * (b % MOD)) % MOD; }
 ll mod_add(ll a, ll b) { return ((a % MOD) + (b % MOD)) % MOD; }
 
@@ -180,6 +184,26 @@ void solve() {
     ll rd(a, b, n, x);
 
     out(fib(a, b, n, x));
+=======
+void solve() {
+    // in
+    int rd(n);
+    vi a;
+    map<int, bool> m;
+    for (int i = 0; i < n; i++) {
+        int rd(x);
+        if (x == 1)
+            a.push_back(x);
+        else {
+            if (m[x]) continue;
+            m[x] = true;
+            a.push_back(x);
+        }
+    }
+    out(a);
+    sort(all(a));
+    
+>>>>>>> 64c7eaa (daily)
 }
 
 int main() {

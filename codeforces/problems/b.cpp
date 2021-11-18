@@ -1,11 +1,14 @@
 #include <bits/stdc++.h>
 
+<<<<<<< HEAD
 #include <iostream>
 #include <map>
 #include <queue>
 #include <set>
 #include <vector>
 
+=======
+>>>>>>> 64c7eaa (daily)
 //#include <atcoder/all>
 // using namespace atcoder;
 using namespace std;
@@ -140,6 +143,7 @@ const ll INF = 1e18;
 
 void solve() {
     // in
+<<<<<<< HEAD
     int rd(y);
     bool yleap = y % 400 == 0 || (y % 4 == 0 && y % 100 != 0) ? true : false;
 
@@ -158,6 +162,36 @@ void solve() {
         if (d % 7 == 0 and yleap == leap) break;
     }
     out(y);
+=======
+    int rd(n, m, k);
+    vi p(k);
+    for (int i = 0; i < k; i++) {
+        cin >> p[i];
+        p[i]--;
+    }
+
+    vvi a(n, vi(m));
+    rep(i, 0, n) rep(j, 0, m) {
+        cin >> a[i][j];
+        a[i][j]--;
+    }
+
+    ll ans = 0;
+    rep(i, 0, n) {
+        rep(j, 0, m) {
+            int pos = a[i][j];
+            // int pos = find(p.begin(), p.end(), a[i][j]) - p.begin();
+            ans += p[pos] + 1;
+
+            // update p
+            for (int l = 0; l < p[pos]; l++) {
+                p[l + 1] = p[l];
+            }
+            p[0] = a[i][j];
+        }
+    }
+    out(ans);
+>>>>>>> 64c7eaa (daily)
 }
 
 int main() {
