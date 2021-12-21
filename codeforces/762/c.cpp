@@ -140,37 +140,57 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    int rd(q);
+    string rd(a, s);
+    string b = "";
 
-    vi ans;
-    map<int, int> m;
-    map<int, vi> Q;
+    int i = a.size() - 1;
+    int j = s.size() - 1;
 
-    for (int i = 0; i < q; i++) {
-        int rd(c);
-        vi rdv(x, c);
-        Q[i] = x;
-    }
+    while (i >= 0 and j >= 0) {
+        int x = a[i] - '0';
+        int z = s[j] - '0';
+        i--;
+        j--;
 
-    for (int i = q - 1; i >= 0; i--) {
-        if (Q[i].size() == 1) {
-            int x = Q[i][0];
-            if (m[x])
-                ans.push_back(m[x]);
-            else
-                ans.push_back(x);
-        } else {
-            int x = Q[i][0];
-            int y = Q[i][1];
-            if (m[y])
-                m[x] = m[y];
-            else
-                m[x] = y;
+        if (z - x < 0) {
+            if (j < 0) {
+                out(-1);
+                return;
+            }
+            if (s[j] != '1') {
+                out(-1);
+                return;
+            }
+            z = 10 + z;
+            j--;
         }
+
+        b += (z - x) + '0';
     }
 
-    reverse(all(ans));
-    out(ans);
+    reverse(all(b));
+
+    if (i >= 0) {
+        out(-1);
+        return;
+    }
+
+    if (j >= 0) {
+        b = s.substr(0, j + 1) + b;
+    }
+
+    for (int i = 0; i < b.size(); i++) {
+        if (b[i] == '0') continue;
+        b = b.substr(i);
+        break;
+    }
+
+    if (b == "") {
+        out(-1);
+        return;
+    }
+
+    out(b);
 }
 
 int main() {
@@ -180,7 +200,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

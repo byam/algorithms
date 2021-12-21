@@ -142,34 +142,30 @@ void solve() {
     // in
     int rd(q);
 
-    vi ans;
-    map<int, int> m;
-    map<int, vi> Q;
+    map<int, vi> m;
 
+    int n = 0;
     for (int i = 0; i < q; i++) {
         int rd(c);
-        vi rdv(x, c);
-        Q[i] = x;
-    }
-
-    for (int i = q - 1; i >= 0; i--) {
-        if (Q[i].size() == 1) {
-            int x = Q[i][0];
-            if (m[x])
-                ans.push_back(m[x]);
-            else
-                ans.push_back(x);
+        if (c == 1) {
+            int rd(x);
+            m[x].push_back(n);
+            n++;
         } else {
-            int x = Q[i][0];
-            int y = Q[i][1];
-            if (m[y])
-                m[x] = m[y];
-            else
-                m[x] = y;
+            // copy small to big
+            int rd(x, y);
+            if (x == y) continue;
+            if (m[x].size() > m[y].size()) m[x].swap(m[y]);
+            for (auto k : m[x]) m[y].push_back(k);
+            m.erase(x);
         }
     }
 
-    reverse(all(ans));
+    vi ans(n);
+    for (auto [k, v] : m) {
+        for (auto idx : v) ans[idx] = k;
+    }
+
     out(ans);
 }
 

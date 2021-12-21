@@ -140,37 +140,54 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    int rd(q);
+    ll rd(a, s);
+    ll b = 0;
+    ll a_copy = a;
 
-    vi ans;
-    map<int, int> m;
-    map<int, vi> Q;
+    int cnt = 0;
+    while (a > 0 and s > 0) {
+        ll x = a % 10;
+        ll z = s % 10;
 
-    for (int i = 0; i < q; i++) {
-        int rd(c);
-        vi rdv(x, c);
-        Q[i] = x;
-    }
+        a /= 10;
+        s /= 10;
 
-    for (int i = q - 1; i >= 0; i--) {
-        if (Q[i].size() == 1) {
-            int x = Q[i][0];
-            if (m[x])
-                ans.push_back(m[x]);
-            else
-                ans.push_back(x);
-        } else {
-            int x = Q[i][0];
-            int y = Q[i][1];
-            if (m[y])
-                m[x] = m[y];
-            else
-                m[x] = y;
+        if (z < x) {
+            if (s > 0) {
+                z = (s % 10) * 10 + z;
+                s /= 10;
+                if (z > 18) {
+                    out(-1);
+                    return;
+                }
+            } else {
+                out(-1);
+                return;
+            }
         }
+
+        ll cur = powl(10, cnt) * (z - x);
+        b += cur;
+        cnt++;
     }
 
-    reverse(all(ans));
+    // outt(b, a, s);
+
+    if (a > 0) {
+        out(-1);
+        return;
+    }
+
+    ll ans = s;
+    while (a_copy > 0) {
+        a_copy /= 10;
+        ans *= 10;
+    }
+    ans += b;
     out(ans);
+
+    b = ans;
+    if (a > b) swap(a, b);
 }
 
 int main() {
@@ -180,7 +197,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

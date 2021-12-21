@@ -140,37 +140,16 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    int rd(q);
+    int rd(n);
 
-    vi ans;
-    map<int, int> m;
-    map<int, vi> Q;
-
-    for (int i = 0; i < q; i++) {
-        int rd(c);
-        vi rdv(x, c);
-        Q[i] = x;
+    set<int> s;
+    for (int i = 1; i * i <= n; i++) {
+        s.insert(i * i);
     }
-
-    for (int i = q - 1; i >= 0; i--) {
-        if (Q[i].size() == 1) {
-            int x = Q[i][0];
-            if (m[x])
-                ans.push_back(m[x]);
-            else
-                ans.push_back(x);
-        } else {
-            int x = Q[i][0];
-            int y = Q[i][1];
-            if (m[y])
-                m[x] = m[y];
-            else
-                m[x] = y;
-        }
+    for (int i = 1; i * i * i <= n; i++) {
+        s.insert(i * i * i);
     }
-
-    reverse(all(ans));
-    out(ans);
+    out(s.size());
 }
 
 int main() {
@@ -180,7 +159,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

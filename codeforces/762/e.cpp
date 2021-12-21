@@ -140,36 +140,38 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    int rd(q);
+    int rd(n);
+    vll rdv(a, n);
 
-    vi ans;
-    map<int, int> m;
-    map<int, vi> Q;
+    sort(all(a));
 
-    for (int i = 0; i < q; i++) {
-        int rd(c);
-        vi rdv(x, c);
-        Q[i] = x;
+    map<ll, ll> m;
+    for (auto x : a) m[x]++;
+
+    vll psum(n);
+    ll pre = 0;
+    for (int i = 0; i < n; i++) {
+        psum[i] = pre + a[i];
+        pre = psum[i];
     }
 
-    for (int i = q - 1; i >= 0; i--) {
-        if (Q[i].size() == 1) {
-            int x = Q[i][0];
-            if (m[x])
-                ans.push_back(m[x]);
-            else
-                ans.push_back(x);
-        } else {
-            int x = Q[i][0];
-            int y = Q[i][1];
-            if (m[y])
-                m[x] = m[y];
-            else
-                m[x] = y;
+    // out(m);
+    // out(psum);
+
+    vll ans;
+    for (int i = 0; i <= n; i++) {
+        int lb = lower_bound(a.begin(), a.end(), i) - a.begin();
+        // outt(i, lb);
+        if (lb == n or lb < i) {
+            ans.push_back(-1);
+            continue;
         }
-    }
 
-    reverse(all(ans));
+        ll mv = m[i];
+        if (i > 1) mv += i * (i - 1) / 2;
+        if (lb > 0) mv -= psum[lb - 1];
+        ans.push_back(mv);
+    }
     out(ans);
 }
 
@@ -180,7 +182,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
