@@ -140,29 +140,24 @@ const ll INF = 1e18;
 
 void solve() {
     // in
-    ll rd(p, q, a, b, c);
-
-    map<ll, bool> m;
-    string ans = "Draw";
-
-    while (true) {
-        p = (p * a + b) % c;
-        q = (q * a + b) % c;
-
-        if (m[p] and m[q]) break;
-        if (m[p]) {
-            ans = "Pany";
-            break;
-        }
-        if (m[q]) {
-            ans = "Acom";
-            break;
-        }
-        m[p] = true;
-        m[q] = true;
+    int rd(n, k);
+    vi rdv(p, n);
+    vector<priority_queue<pair<int, int>>> d(n);
+    for (int i = 0; i < n - 1; i++) {
+        int rd(x, y);
+        x--;
+        y--;
+        d[x].push({p[y], y});
     }
-    out(ans);
-    return;
+    ll ans = 0;
+
+    priority_queue<pair<int, int>> q;
+    q.push({p[0], 0});
+    while (!q.empty() and !k) {
+        pii cur = q.top();
+        ans += cur.first;
+        q.pop();
+    }
 }
 
 int main() {
@@ -172,7 +167,7 @@ int main() {
 
     int t;
     t = 1;
-    cin >> t;
+    // cin >> t;
     while (t--) solve();
     return 0;
 }
