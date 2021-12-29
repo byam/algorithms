@@ -9,7 +9,6 @@ ref:
   - https://github.com/Reputeless/tenkei_90
   - https://kenkoooo.com/atcoder/#/contest/show/6b06f113-bcc4-451e-97d6-93062f77d26a
 
-# 問題：🌟 2
 
 - [競プロ典型 90 問](#競プロ典型-90-問)
 - [問題：🌟 2](#問題-2)
@@ -23,6 +22,12 @@ ref:
   - [061. deque を知っていますか？](#061-deque-を知っていますか)
   - [067. N 進法展開を理解しよう](#067-n-進法展開を理解しよう)
   - [078. グラフの基本を知ろう](#078-グラフの基本を知ろう)
+- [問題：🌟 3](#問題-3)
+  - [002. 小さい制約は全探索を考えよう](#002-小さい制約は全探索を考えよう)
+  - [007. 要素の検索はソートして二分探索](#007-要素の検索はソートして二分探索)
+  - [014. ソートして貪欲法](#014-ソートして貪欲法)
+
+# 問題：🌟 2
 
 ## 004. 扱いやすい形にして前計算しよう
 
@@ -112,3 +117,90 @@ ref:
   - [ABC166 C - Peaks](https://atcoder.jp/contests/abc166/tasks/abc166_c)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/078.jpg)
+
+# 問題：🌟 3
+
+## 002. 小さい制約は全探索を考えよう
+
+- Problem
+  - [002 - Encyclopedia of Parentheses](https://atcoder.jp/contests/typical90/tasks/typical90_b)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/002.jpg)
+- Code
+```cpp
+    // 全探索
+    for (int bitmask = 0; bitmask < (1 << n); bitmask++) {
+        string s = "";
+        for (int j = 0; j < n; j++) {
+            if (bitmask & (1 << j))
+                s += "(";
+            else
+                s += ")";
+        }
+        if (isValid(s)) ans.push_back(s);
+    }
+```
+
+## 007. 要素の検索はソートして二分探索
+
+- Problem
+  - [007 - CP Classes](https://atcoder.jp/contests/typical90/tasks/typical90_g)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/007.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    int rd(n);
+    vi rdv(a, n);
+    sort(all(a));
+    int rd(q);
+    for (int i = 0; i < q; i++) {
+        int rd(b);
+
+        // binary search
+        auto it = lower_bound(all(a), b);
+        int ans = 0;
+        // not found
+        if (it == a.end()) {
+            ans = abs(b - a[n - 1]);
+        } else {
+            // get index
+            int idx = it - a.begin();
+            ans = abs(b - a[idx]);
+            if (idx > 0) chmin(ans, abs(b - a[idx - 1]));
+        }
+        out(ans);
+    }
+
+```
+
+</details>
+
+## 014. ソートして貪欲法
+
+- Problem
+  - [014 - We Used to Sing a Song Together](https://atcoder.jp/contests/typical90/tasks/typical90_n)
+- Sub Problem
+  - [ABC131 D - Megalomania](https://atcoder.jp/contests/abc131/tasks/abc131_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/014.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    int rd(n);
+    vi rdv(a, n);
+    vi rdv(b, n);
+    sort(all(a));
+    sort(all(b));
+    ll e = 0;
+    for (int i = 0; i < n; i++) {
+        e += abs(a[i] - b[i]);
+    }
+    out(e);
+```
+
+</details>

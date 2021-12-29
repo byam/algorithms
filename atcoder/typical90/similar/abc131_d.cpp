@@ -141,24 +141,22 @@ const ll INF = 1e18;
 void solve() {
     // in
     int rd(n);
-    vi rdv(a, n);
-    sort(all(a));
-    int rd(q);
-    for (int i = 0; i < q; i++) {
-        int rd(b);
-
-        // binary search
-        auto it = lower_bound(all(a), b);
-        int ans = 0;
-        if (it == a.end()) {
-            ans = abs(b - a[n - 1]);
-        } else {
-            int idx = it - a.begin();
-            ans = abs(b - a[idx]);
-            if (idx > 0) chmin(ans, abs(b - a[idx - 1]));
-        }
-        out(ans);
+    vpii p(n);
+    for (int i = 0; i < n; i++) {
+        int rd(a, b);
+        p[i] = {b, a};
     }
+
+    // sort by B
+    sort(all(p));
+
+    string ans = "Yes";
+    int cur = 0;
+    for (auto [b, a] : p) {
+        cur += a;
+        if (cur > b) ans = "No";
+    }
+    out(ans);
 }
 
 int main() {

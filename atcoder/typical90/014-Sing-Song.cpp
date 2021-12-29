@@ -142,23 +142,14 @@ void solve() {
     // in
     int rd(n);
     vi rdv(a, n);
+    vi rdv(b, n);
     sort(all(a));
-    int rd(q);
-    for (int i = 0; i < q; i++) {
-        int rd(b);
-
-        // binary search
-        auto it = lower_bound(all(a), b);
-        int ans = 0;
-        if (it == a.end()) {
-            ans = abs(b - a[n - 1]);
-        } else {
-            int idx = it - a.begin();
-            ans = abs(b - a[idx]);
-            if (idx > 0) chmin(ans, abs(b - a[idx - 1]));
-        }
-        out(ans);
+    sort(all(b));
+    ll e = 0;
+    for (int i = 0; i < n; i++) {
+        e += abs(a[i] - b[i]);
     }
+    out(e);
 }
 
 int main() {
