@@ -16,6 +16,7 @@ ref:
   - [022. 最大公約数(gcd)はユークリッドの互除法](#022-最大公約数gcdはユークリッドの互除法)
   - [024. パリティを考える](#024-パリティを考える)
   - [033. コーナーケースに気を付けよう](#033-コーナーケースに気を付けよう)
+  - [055. 定数倍を見積もる](#055-定数倍を見積もる)
 
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
@@ -46,3 +47,12 @@ ref:
   - [ABC184 C - Super Ryuma](https://atcoder.jp/contests/abc184/tasks/abc184_c)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/033.jpg)
+
+## 055. 定数倍を見積もる
+
+- Problem
+  - [055 - Select 5](https://atcoder.jp/contests/typical90/tasks/typical90_bc)
+- Sub Problems
+  - [C - Coins](https://atcoder.jp/contests/cpsco2019-s1/tasks/cpsco2019_s1_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/055.jpg)
