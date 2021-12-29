@@ -26,6 +26,7 @@ ref:
   - [002. 小さい制約は全探索を考えよう](#002-小さい制約は全探索を考えよう)
   - [007. 要素の検索はソートして二分探索](#007-要素の検索はソートして二分探索)
   - [014. ソートして貪欲法](#014-ソートして貪欲法)
+  - [016. 工夫した全探索](#016-工夫した全探索)
 
 # 問題：🌟 2
 
@@ -126,7 +127,10 @@ ref:
   - [002 - Encyclopedia of Parentheses](https://atcoder.jp/contests/typical90/tasks/typical90_b)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/002.jpg)
-- Code
+
+<details>
+<summary> Code </summary>
+
 ```cpp
     // 全探索
     for (int bitmask = 0; bitmask < (1 << n); bitmask++) {
@@ -140,6 +144,8 @@ ref:
         if (isValid(s)) ans.push_back(s);
     }
 ```
+
+</details>
 
 ## 007. 要素の検索はソートして二分探索
 
@@ -186,6 +192,33 @@ ref:
   - [ABC131 D - Megalomania](https://atcoder.jp/contests/abc131/tasks/abc131_d)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/014.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    int rd(n);
+    vi rdv(a, n);
+    vi rdv(b, n);
+    sort(all(a));
+    sort(all(b));
+    ll e = 0;
+    for (int i = 0; i < n; i++) {
+        e += abs(a[i] - b[i]);
+    }
+    out(e);
+```
+
+</details>
+
+## 016. 工夫した全探索
+
+- Problem
+  - [016 -  Minimum Coins](https://atcoder.jp/contests/typical90/tasks/typical90_p)
+- Sub Problem
+  - [ABC051 B - Sum of Three Integers](https://atcoder.jp/contests/abc051/tasks/abc051_b)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/016.jpg)
 
 <details>
   <summary> Code </summary>
