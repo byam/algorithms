@@ -27,6 +27,7 @@ ref:
   - [007. 要素の検索はソートして二分探索](#007-要素の検索はソートして二分探索)
   - [014. ソートして貪欲法](#014-ソートして貪欲法)
   - [016. 工夫した全探索](#016-工夫した全探索)
+  - [018. 三角関数を使いこなそう](#018-三角関数を使いこなそう)
 
 # 問題：🌟 2
 
@@ -234,6 +235,40 @@ ref:
         e += abs(a[i] - b[i]);
     }
     out(e);
+```
+
+</details>
+
+## 018. 三角関数を使いこなそう
+
+- Problem
+  - [018 -  Statue of Chokudai](https://atcoder.jp/contests/typical90/tasks/typical90_r)
+- Sub Problem
+  - [ABC168 C - Colon](https://atcoder.jp/contests/abc168/tasks/abc168_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/018.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    long double rd(T, L, X, Y);
+    int rd(Q);
+    for (int i = 0; i < Q; i++) {
+        int rd(E);
+
+        // E 分後の座標
+        long double r = L / 2.;
+        long double x = 0.;
+        long double y = -r * sin(E / T * 2. * M_PI);
+        long double z = r - r * cos(E / T * 2. * M_PI);
+
+        // 俯角をまとめる
+        long double d1 = sqrt((X - x) * (X - x) + (Y - y) * (Y - y));
+        long double d2 = z;
+        long double ans = atan2(d2, d1) * 180. / M_PI;
+        printf("%.8Lf\n", ans);
+    }
 ```
 
 </details>
