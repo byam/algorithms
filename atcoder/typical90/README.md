@@ -18,6 +18,7 @@ ref:
   - [033. コーナーケースに気を付けよう](#033-コーナーケースに気を付けよう)
   - [055. 定数倍を見積もる](#055-定数倍を見積もる)
   - [061. deque を知っていますか？](#061-deque-を知っていますか)
+  - [067. N 進法展開を理解しよう](#067-n-進法展開を理解しよう)
 
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
@@ -66,3 +67,12 @@ ref:
   - [ABC158 D - String Formation](https://atcoder.jp/contests/abc158/tasks/abc158_d)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/061.jpg)
+
+## 067. N 進法展開を理解しよう
+
+- Problem
+  - [067 - Base 8 to 9](https://atcoder.jp/contests/typical90/tasks/typical90_bo)
+- Sub Problems
+  - [ABC186 C - Unlucky 7](https://atcoder.jp/contests/abc186/tasks/abc186_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/067.jpg)
