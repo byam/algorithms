@@ -9,16 +9,18 @@ ref:
   - https://github.com/Reputeless/tenkei_90
   - https://kenkoooo.com/atcoder/#/contest/show/6b06f113-bcc4-451e-97d6-93062f77d26a
 
-## 問題
+# 問題：🌟 2
 
 - [競プロ典型 90 問](#競プロ典型-90-問)
-  - [問題](#問題)
+- [問題：🌟 2](#問題-2)
   - [022. 最大公約数(gcd)はユークリッドの互除法](#022-最大公約数gcdはユークリッドの互除法)
   - [024. パリティを考える](#024-パリティを考える)
+  - [027. map を使いこなそう](#027-map-を使いこなそう)
   - [033. コーナーケースに気を付けよう](#033-コーナーケースに気を付けよう)
   - [055. 定数倍を見積もる](#055-定数倍を見積もる)
   - [061. deque を知っていますか？](#061-deque-を知っていますか)
   - [067. N 進法展開を理解しよう](#067-n-進法展開を理解しよう)
+  - [078. グラフの基本を知ろう](#078-グラフの基本を知ろう)
 
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
@@ -40,6 +42,15 @@ ref:
   - [AGC020 A - Move and Win](https://atcoder.jp/contests/agc020/tasks/agc020_a)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/024.jpg)
+
+## 027. map を使いこなそう
+
+- Problem
+  - [027 - Sign Up Requests](https://atcoder.jp/contests/typical90/tasks/typical90_aa)
+- Sub Problems
+  - [ABC155 C - Poll](https://atcoder.jp/contests/abc155/tasks/abc155_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/027.jpg)
 
 ## 033. コーナーケースに気を付けよう
 
@@ -76,3 +87,12 @@ ref:
   - [ABC186 C - Unlucky 7](https://atcoder.jp/contests/abc186/tasks/abc186_c)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/067.jpg)
+
+## 078. グラフの基本を知ろう
+
+- Problem
+  - [078 - Easy Graph Problem](https://atcoder.jp/contests/typical90/tasks/typical90_bz)
+- Sub Problems
+  - [ABC166 C - Peaks](https://atcoder.jp/contests/abc166/tasks/abc166_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/078.jpg)
