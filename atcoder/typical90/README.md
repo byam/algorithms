@@ -17,6 +17,7 @@ ref:
   - [024. パリティを考える](#024-パリティを考える)
   - [033. コーナーケースに気を付けよう](#033-コーナーケースに気を付けよう)
   - [055. 定数倍を見積もる](#055-定数倍を見積もる)
+  - [061. deque を知っていますか？](#061-deque-を知っていますか)
 
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
@@ -56,3 +57,12 @@ ref:
   - [C - Coins](https://atcoder.jp/contests/cpsco2019-s1/tasks/cpsco2019_s1_c)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/055.jpg)
+
+## 061. deque を知っていますか？
+
+- Problem
+  - [061 - Deck](https://atcoder.jp/contests/typical90/tasks/typical90_bi)
+- Sub Problems
+  - [ABC158 D - String Formation](https://atcoder.jp/contests/abc158/tasks/abc158_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/061.jpg)
