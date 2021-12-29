@@ -13,6 +13,8 @@ ref:
 
 - [競プロ典型 90 問](#競プロ典型-90-問)
 - [問題：🌟 2](#問題-2)
+  - [004. 扱いやすい形にして前計算しよう](#004-扱いやすい形にして前計算しよう)
+  - [010. 区間の総和は累積和](#010-区間の総和は累積和)
   - [022. 最大公約数(gcd)はユークリッドの互除法](#022-最大公約数gcdはユークリッドの互除法)
   - [024. パリティを考える](#024-パリティを考える)
   - [027. map を使いこなそう](#027-map-を使いこなそう)
@@ -22,10 +24,24 @@ ref:
   - [067. N 進法展開を理解しよう](#067-n-進法展開を理解しよう)
   - [078. グラフの基本を知ろう](#078-グラフの基本を知ろう)
 
+## 004. 扱いやすい形にして前計算しよう
+
+- Problem
+  - [004 - Cross Sum](https://atcoder.jp/contests/typical90/tasks/typical90_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/004.jpg)
+
+## 010. 区間の総和は累積和
+
+- Problem
+  - [010 - Score Sum Queries](https://atcoder.jp/contests/typical90/tasks/typical90_j)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/010.jpg)
+
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
 - Problem
-  - [022 - Cubic Cake（★2）](https://atcoder.jp/contests/typical90/tasks/typical90_v)
+  - [022 - Cubic Cake](https://atcoder.jp/contests/typical90/tasks/typical90_v)
 - Sub Problems
   - [ABC162 C - Sum of gcd of Tuples (Easy)](https://atcoder.jp/contests/abc162/tasks/abc162_c)
   - [ABC118 C - Monsters Battle Royale](https://atcoder.jp/contests/abc118/tasks/abc118_c)
