@@ -15,6 +15,7 @@ ref:
   - [問題](#問題)
   - [022. 最大公約数(gcd)はユークリッドの互除法](#022-最大公約数gcdはユークリッドの互除法)
   - [024. パリティを考える](#024-パリティを考える)
+  - [033. コーナーケースに気を付けよう](#033-コーナーケースに気を付けよう)
 
 ## 022. 最大公約数(gcd)はユークリッドの互除法
 
@@ -36,3 +37,12 @@ ref:
   - [AGC020 A - Move and Win](https://atcoder.jp/contests/agc020/tasks/agc020_a)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/024.jpg)
+
+## 033. コーナーケースに気を付けよう
+
+- Problem
+  - [033 - Not Too Bright](https://atcoder.jp/contests/typical90/tasks/typical90_ag)
+- Sub Problems
+  - [ABC184 C - Super Ryuma](https://atcoder.jp/contests/abc184/tasks/abc184_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/033.jpg)
