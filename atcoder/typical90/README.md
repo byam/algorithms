@@ -36,6 +36,7 @@ ref:
 
 - Problem
   - [004 - Cross Sum](https://atcoder.jp/contests/typical90/tasks/typical90_d)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/004.jpg)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/004.jpg)
 
@@ -43,6 +44,7 @@ ref:
 
 - Problem
   - [010 - Score Sum Queries](https://atcoder.jp/contests/typical90/tasks/typical90_j)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/010.jpg)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/010.jpg)
 
@@ -50,6 +52,7 @@ ref:
 
 - Problem
   - [022 - Cubic Cake](https://atcoder.jp/contests/typical90/tasks/typical90_v)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/022.jpg)
 - Sub Problems
   - [ABC162 C - Sum of gcd of Tuples (Easy)](https://atcoder.jp/contests/abc162/tasks/abc162_c)
   - [ABC118 C - Monsters Battle Royale](https://atcoder.jp/contests/abc118/tasks/abc118_c)
@@ -60,6 +63,7 @@ ref:
 
 - Problem
   - [024 - Select +／- One](https://atcoder.jp/contests/typical90/tasks/typical90_x)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/024.jpg)
 - Sub Problems
   - [ABC189 C - Traveling](https://atcoder.jp/contests/abc086/tasks/arc089_a)
   - [AGC002 A- Range Product](https://atcoder.jp/contests/agc002/tasks/agc002_a)
@@ -71,6 +75,7 @@ ref:
 
 - Problem
   - [027 - Sign Up Requests](https://atcoder.jp/contests/typical90/tasks/typical90_aa)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/027.jpg)
 - Sub Problems
   - [ABC155 C - Poll](https://atcoder.jp/contests/abc155/tasks/abc155_c)
 - Solution
@@ -80,6 +85,7 @@ ref:
 
 - Problem
   - [033 - Not Too Bright](https://atcoder.jp/contests/typical90/tasks/typical90_ag)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/033.jpg)
 - Sub Problems
   - [ABC184 C - Super Ryuma](https://atcoder.jp/contests/abc184/tasks/abc184_c)
 - Solution
@@ -89,6 +95,7 @@ ref:
 
 - Problem
   - [055 - Select 5](https://atcoder.jp/contests/typical90/tasks/typical90_bc)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/055.jpg)
 - Sub Problems
   - [C - Coins](https://atcoder.jp/contests/cpsco2019-s1/tasks/cpsco2019_s1_c)
 - Solution
@@ -98,6 +105,7 @@ ref:
 
 - Problem
   - [061 - Deck](https://atcoder.jp/contests/typical90/tasks/typical90_bi)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/061.jpg)
 - Sub Problems
   - [ABC158 D - String Formation](https://atcoder.jp/contests/abc158/tasks/abc158_d)
 - Solution
@@ -107,6 +115,7 @@ ref:
 
 - Problem
   - [067 - Base 8 to 9](https://atcoder.jp/contests/typical90/tasks/typical90_bo)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/067.jpg)
 - Sub Problems
   - [ABC186 C - Unlucky 7](https://atcoder.jp/contests/abc186/tasks/abc186_c)
 - Solution
@@ -116,6 +125,7 @@ ref:
 
 - Problem
   - [078 - Easy Graph Problem](https://atcoder.jp/contests/typical90/tasks/typical90_bz)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/078.jpg)
 - Sub Problems
   - [ABC166 C - Peaks](https://atcoder.jp/contests/abc166/tasks/abc166_c)
 - Solution
@@ -127,6 +137,7 @@ ref:
 
 - Problem
   - [002 - Encyclopedia of Parentheses](https://atcoder.jp/contests/typical90/tasks/typical90_b)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/002.jpg)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/002.jpg)
 
@@ -153,6 +164,7 @@ ref:
 
 - Problem
   - [007 - CP Classes](https://atcoder.jp/contests/typical90/tasks/typical90_g)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/007.jpg)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/007.jpg)
 
@@ -190,6 +202,7 @@ ref:
 
 - Problem
   - [014 - We Used to Sing a Song Together](https://atcoder.jp/contests/typical90/tasks/typical90_n)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/014.jpg)
 - Sub Problem
   - [ABC131 D - Megalomania](https://atcoder.jp/contests/abc131/tasks/abc131_d)
 - Solution
@@ -217,6 +230,7 @@ ref:
 
 - Problem
   - [016 -  Minimum Coins](https://atcoder.jp/contests/typical90/tasks/typical90_p)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/016.jpg)
 - Sub Problem
   - [ABC051 B - Sum of Three Integers](https://atcoder.jp/contests/abc051/tasks/abc051_b)
 - Solution
@@ -285,6 +299,7 @@ ref:
 
 - Problem
   - [020 -  Log Inequality](https://atcoder.jp/contests/typical90/tasks/typical90_t)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/020.jpg)
 - Sub Problem
   - [ABC169 B - Multiplication 2](https://atcoder.jp/contests/abc169/tasks/abc169_b)
   - [ABC169 C - Multiplication 3](https://atcoder.jp/contests/abc169/tasks/abc169_c)
