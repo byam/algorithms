@@ -29,6 +29,7 @@ ref:
   - [016. 工夫した全探索](#016-工夫した全探索)
   - [018. 三角関数を使いこなそう](#018-三角関数を使いこなそう)
   - [020. 整数で処理して誤差をなくそう](#020-整数で処理して誤差をなくそう)
+  - [032. 小さい制約は順列全探索](#032-小さい制約は順列全探索)
 
 # 問題：🌟 2
 
@@ -240,16 +241,24 @@ ref:
   <summary> Code </summary>
 
 ```cpp
-    int rd(n);
-    vi rdv(a, n);
-    vi rdv(b, n);
-    sort(all(a));
-    sort(all(b));
-    ll e = 0;
-    for (int i = 0; i < n; i++) {
-        e += abs(a[i] - b[i]);
+    // in
+    ll rd(n);
+    ll rd(a, b, c);
+
+    ll ans = INT_MAX;
+    ll ma = 10000;
+
+    for (ll i = 0; i < ma; i++) {
+        for (ll j = 0; j < ma - i; j++) {
+            // 工夫する
+            ll d = n - i * a - j * b;
+            if (d >= 0 and d % c == 0) {
+                ll k = d / c;
+                chmin(ans, i + j + k);
+            }
+        }
     }
-    out(e);
+    out(ans);
 ```
 
 </details>
@@ -319,6 +328,47 @@ ref:
         out("Yes");
     else
         out("No");
+```
+
+</details>
+
+## 032. 小さい制約は順列全探索
+
+- Problem
+  - [032 -  Atcoder Ekiden](https://atcoder.jp/contests/typical90/tasks/typical90_af)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/032.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/032.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // 全探索 by 順列
+    vi p(n);
+    for (int i = 0; i < n; i++) p[i] = i + 1;
+    int ans = INT_MAX;
+    do {
+        // check
+        bool ok = true;
+        for (int i = 0; i < n - 1; i++) {
+            int cur = p[i];
+            int next = p[i + 1];
+            if (cur > next) swap(cur, next);
+            if (e.find({cur, next}) != e.end()) ok = false;
+        }
+
+        // calculate time
+        if (ok) {
+            int time = 0;
+            for (int i = 0; i < n; i++) {
+                time += g[p[i] - 1][i];
+            }
+            chmin(ans, time);
+        }
+
+    } while (next_permutation(all(p)));
+
 ```
 
 </details>
