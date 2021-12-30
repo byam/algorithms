@@ -131,42 +131,26 @@ typedef vector<vector<int>> vvi;
 typedef vector<vector<long long>> vvll;
 typedef vector<vector<int>> Graph;
 
-// const
-const ll MOD = 1000000007;
-const ll INF = 1e18;
-
 // geometry
 template <class T>
 T to_rad(T angle) {
     return angle * M_PI / 180.;
 }
 
+// const
+const ll MOD = 1000000007;
+const ll INF = 1e18;
+
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
 
-// c^2 = a^2 + b^2 - 2 * a * b * cos(alpha)
-
 void solve() {
     // in
-    ld rd(A, B, H, M);
-
-    // minute move
-    pair<ld, ld> m;
-    ld ma = 360. / 60. * M;
-    m.first = B * sin(to_rad(ma));
-    m.second = B * cos(to_rad(ma));
-
-    // hour move
-    pair<ld, ld> h;
-    ld ha = 360. / 12. * H + ma / 12.;
-    h.first = A * sin(to_rad(ha));
-    h.second = A * cos(to_rad(ha));
-
-    // distance
-    ld d = sqrt(pow(h.first - m.first, 2) + pow(h.second - m.second, 2));
-
-    printf("%.9Lf\n", d);
+    ll a, b1, b2;
+    scanf("%lld %lld.%lld", &a, &b1, &b2);
+    ll ans = a * (b1 * 100 + b2) / 100;
+    out(ans);
 }
 
 int main() {

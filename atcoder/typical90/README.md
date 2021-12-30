@@ -28,6 +28,7 @@ ref:
   - [014. ソートして貪欲法](#014-ソートして貪欲法)
   - [016. 工夫した全探索](#016-工夫した全探索)
   - [018. 三角関数を使いこなそう](#018-三角関数を使いこなそう)
+  - [020. 整数で処理して誤差をなくそう](#020-整数で処理して誤差をなくそう)
 
 # 問題：🌟 2
 
@@ -269,6 +270,40 @@ ref:
         long double ans = atan2(d2, d1) * 180. / M_PI;
         printf("%.8Lf\n", ans);
     }
+
+
+    // geometry
+    template <class T>
+    T to_rad(T angle) {
+        return angle * M_PI / 180.;
+    }
+```
+
+</details>
+
+## 020. 整数で処理して誤差をなくそう
+
+- Problem
+  - [020 -  Log Inequality](https://atcoder.jp/contests/typical90/tasks/typical90_t)
+- Sub Problem
+  - [ABC169 B - Multiplication 2](https://atcoder.jp/contests/abc169/tasks/abc169_b)
+  - [ABC169 C - Multiplication 3](https://atcoder.jp/contests/abc169/tasks/abc169_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/020.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    ll rd(a, b, c);
+
+    // check: a < c^b
+    // note: use powl instead of pow
+    if (a < powl(c, b))
+        out("Yes");
+    else
+        out("No");
 ```
 
 </details>
