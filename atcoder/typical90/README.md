@@ -30,6 +30,7 @@ ref:
   - [018. 三角関数を使いこなそう](#018-三角関数を使いこなそう)
   - [020. 整数で処理して誤差をなくそう](#020-整数で処理して誤差をなくそう)
   - [032. 小さい制約は順列全探索](#032-小さい制約は順列全探索)
+  - [038. オーバーロードに注意](#038-オーバーロードに注意)
 
 # 問題：🌟 2
 
@@ -369,6 +370,32 @@ ref:
 
     } while (next_permutation(all(p)));
 
+```
+
+</details>
+
+## 038. オーバーロードに注意
+
+- Problem
+  - [038 -  Large LCM](https://atcoder.jp/contests/typical90/tasks/typical90_al)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/038.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/038.jpg)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    ll rd(a, b);
+    ll g = gcd(a, b);
+    ll b1 = b / g;
+
+    ll large = 1e18;
+    if (large / a < b1) {
+        out("Large");
+    } else {
+        out(b1 * a);
+    }
 ```
 
 </details>
