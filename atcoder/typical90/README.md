@@ -33,6 +33,7 @@ ref:
   - [038. オーバーロードに注意](#038-オーバーロードに注意)
   - [044. 見かけ上の変化をメモ](#044-見かけ上の変化をメモ)
   - [046. 同じ意味のものをまとめて考える](#046-同じ意味のものをまとめて考える)
+  - [048. 上界と下界を見積もる](#048-上界と下界を見積もる)
 
 # 問題：🌟 2
 
@@ -483,6 +484,40 @@ ref:
             for (auto [kc, vc] : mc)
                 if ((ka + kb + kc) % 46 == 0) ans += 1LL * va * vb * vc;
 
+    out(ans);
+```
+
+</details>
+
+## 048. 上界と下界を見積もる
+
+- Problem
+  - [048 -  I will not drop out](https://atcoder.jp/contests/typical90/tasks/typical90_av)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/048.jpg)
+- Sub Problem
+  - [ABC164 D - Multiple of 2019](https://atcoder.jp/contests/abc199/tasks/abc199_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/048.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/048.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n, k);
+    vi p;
+    for (int i = 0; i < n; i++) {
+        int rd(a, b);
+        p.push_back(b);
+        p.push_back(a - b);
+    }
+    sort(all(p));
+    reverse(all(p));
+    ll ans = 0;
+    for (int i = 0; i < k; i++) {
+        ans += p[i];
+    }
     out(ans);
 ```
 
