@@ -31,6 +31,7 @@ ref:
   - [020. 整数で処理して誤差をなくそう](#020-整数で処理して誤差をなくそう)
   - [032. 小さい制約は順列全探索](#032-小さい制約は順列全探索)
   - [038. オーバーロードに注意](#038-オーバーロードに注意)
+  - [038. 見かけ上の変化をメモ](#038-見かけ上の変化をメモ)
 
 # 問題：🌟 2
 
@@ -395,6 +396,52 @@ ref:
         out("Large");
     } else {
         out(b1 * a);
+    }
+```
+
+</details>
+
+## 038. 見かけ上の変化をメモ
+
+- Problem
+  - [044 -  Shift and Swapping](https://atcoder.jp/contests/typical90/tasks/typical90_ar)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/044.jpg)
+- Sub Problem
+  - [ABC199 C - IPFL](https://atcoder.jp/contests/abc199/tasks/abc199_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/044.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/044.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n, q);
+    vi rdv(a, n);
+
+    int cur = 0;
+    for (int i = 0; i < q; i++) {
+        int rd(t, x, y);
+        x--;
+        y--;
+        cur = (cur + n) % n;
+
+        if (t == 1) {
+            x = (x + cur) % n;
+            y = (y + cur) % n;
+            // swap
+            swap(a[x], a[y]);
+        }
+        if (t == 2) {
+            // shift
+            cur--;
+        }
+        if (t == 3) {
+            x = (x + cur) % n;
+            // print
+            out(a[x]);
+        }
     }
 ```
 
