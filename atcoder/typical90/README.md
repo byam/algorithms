@@ -31,7 +31,8 @@ ref:
   - [020. 整数で処理して誤差をなくそう](#020-整数で処理して誤差をなくそう)
   - [032. 小さい制約は順列全探索](#032-小さい制約は順列全探索)
   - [038. オーバーロードに注意](#038-オーバーロードに注意)
-  - [038. 見かけ上の変化をメモ](#038-見かけ上の変化をメモ)
+  - [044. 見かけ上の変化をメモ](#044-見かけ上の変化をメモ)
+  - [046. 同じ意味のものをまとめて考える](#046-同じ意味のものをまとめて考える)
 
 # 問題：🌟 2
 
@@ -401,7 +402,7 @@ ref:
 
 </details>
 
-## 038. 見かけ上の変化をメモ
+## 044. 見かけ上の変化をメモ
 
 - Problem
   - [044 -  Shift and Swapping](https://atcoder.jp/contests/typical90/tasks/typical90_ar)
@@ -443,6 +444,46 @@ ref:
             out(a[x]);
         }
     }
+```
+
+</details>
+
+## 046. 同じ意味のものをまとめて考える
+
+- Problem
+  - [046 -  I Love 46](https://atcoder.jp/contests/typical90/tasks/typical90_at)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/046.jpg)
+- Sub Problem
+  - [ABC164 D - Multiple of 2019](https://atcoder.jp/contests/abc199/tasks/abc199_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/046.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/046.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n);
+    vi rdv(a, n);
+    vi rdv(b, n);
+    vi rdv(c, n);
+
+    // count remainders
+    map<int, int> ma, mb, mc;
+
+    for (auto x : a) ma[x % 46]++;
+    for (auto x : b) mb[x % 46]++;
+    for (auto x : c) mc[x % 46]++;
+
+    // check
+    ll ans = 0;
+    for (auto [ka, va] : ma)
+        for (auto [kb, vb] : mb)
+            for (auto [kc, vc] : mc)
+                if ((ka + kb + kc) % 46 == 0) ans += 1LL * va * vb * vc;
+
+    out(ans);
 ```
 
 </details>
