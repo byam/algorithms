@@ -35,6 +35,7 @@ ref:
   - [046. 同じ意味のものをまとめて考える](#046-同じ意味のものをまとめて考える)
   - [048. 上界と下界を見積もる](#048-上界と下界を見積もる)
   - [050. 漸化式を立てて DP をしよう](#050-漸化式を立てて-dp-をしよう)
+  - [052. 因数分解をしよう](#052-因数分解をしよう)
 
 # 問題：🌟 2
 
@@ -546,6 +547,41 @@ ref:
         if (i >= l) a[i] = (a[i] + a[i - l]) % MOD;
     }
     out(a[n]);
+```
+
+</details>
+
+## 052. 因数分解をしよう
+
+- Problem
+  - [052 - Dice Product](https://atcoder.jp/contests/typical90/tasks/typical90_az)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/052.jpg)
+- Sub Problem
+  - [ABC190 D - Staircase Sequences](https://atcoder.jp/contests/abc190/tasks/abc190_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/052.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/052.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n);
+
+    ll ans = 1;
+
+    // update
+    for (int i = 0; i < n; i++) {
+        vi rdv(b, 6);
+        ll p = 0;
+        for (auto x : b) p += x;
+
+        // A * B = sum(A) * sum(B);
+        ans = (ans * p) % MOD;
+    }
+
+    out(ans);
 ```
 
 </details>
