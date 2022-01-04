@@ -34,6 +34,7 @@ ref:
   - [044. 見かけ上の変化をメモ](#044-見かけ上の変化をメモ)
   - [046. 同じ意味のものをまとめて考える](#046-同じ意味のものをまとめて考える)
   - [048. 上界と下界を見積もる](#048-上界と下界を見積もる)
+  - [050. 漸化式を立てて DP をしよう](#050-漸化式を立てて-dp-をしよう)
 
 # 問題：🌟 2
 
@@ -495,7 +496,7 @@ ref:
   - [048 -  I will not drop out](https://atcoder.jp/contests/typical90/tasks/typical90_av)
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/048.jpg)
 - Sub Problem
-  - [ABC164 D - Multiple of 2019](https://atcoder.jp/contests/abc199/tasks/abc199_c)
+  - [ABC141 D - Powerful Discount Tickets](https://atcoder.jp/contests/abc141/tasks/abc141_d)
 - Solution
   - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/048.jpg)
   - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/048.cpp)
@@ -519,6 +520,32 @@ ref:
         ans += p[i];
     }
     out(ans);
+```
+
+</details>
+
+## 050. 漸化式を立てて DP をしよう
+
+- Problem
+  - [050 - Stair Jump](https://atcoder.jp/contests/typical90/tasks/typical90_ax)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/050.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/050.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/050.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n, l);
+
+    vll a(n + 1, 1);
+    for (int i = 1; i <= n; i++) {
+        a[i] = a[i - 1];
+        if (i >= l) a[i] = (a[i] + a[i - l]) % MOD;
+    }
+    out(a[n]);
 ```
 
 </details>
