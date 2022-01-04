@@ -38,6 +38,7 @@ ref:
   - [052. 因数分解をしよう](#052-因数分解をしよう)
   - [064. 段差を考えよう](#064-段差を考えよう)
   - [069. `a^b mod m` は繰り返し二乗法](#069-ab-mod-m-は繰り返し二乗法)
+  - [075. `O(sqrt(N))` での素因数分解](#075-osqrtn-での素因数分解)
 
 # 問題：🌟 2
 
@@ -681,6 +682,55 @@ void solve() {
 
     if (k - 2 > 1 and n - 3 > 0)
         ans = (ans * binpower(k - 2, n - 3, MOD)) % MOD;
+
+    out(ans);
+}
+```
+
+</details>
+
+## 075. `O(sqrt(N))` での素因数分解
+
+- Problem
+  - [075 - Magic For Balls](https://atcoder.jp/contests/typical90/tasks/typical90_bw)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/075.jpg)
+- Sub Problem
+  - [ABC084 D - 2017 Like Number](https://atcoder.jp/contests/abc084/tasks/abc084_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/075.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/075.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+vector<long long> prime_factors(long long N) {
+    long long rem = N;
+    vector<long long> p;
+    for (long long i = 2; i * i <= N; i++) {
+        while (rem % i == 0) {
+            rem /= i;
+            p.push_back(i);
+        }
+    }
+    if (rem != 1LL) p.push_back(rem);
+    return p;
+}
+
+void solve() {
+    // in
+    ll rd(n);
+
+    // get prime divs
+    vll p = prime_factors(n);
+
+    ll cnt = p.size();
+
+    ll ans = 0;
+    while (cnt > 1) {
+        ans++;
+        cnt = (cnt + 1) / 2;
+    }
 
     out(ans);
 }
