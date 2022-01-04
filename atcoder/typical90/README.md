@@ -40,6 +40,7 @@ ref:
   - [069. `a^b mod m` は繰り返し二乗法](#069-ab-mod-m-は繰り返し二乗法)
   - [075. `O(sqrt(N))` での素因数分解](#075-osqrtn-での素因数分解)
   - [076. 円環を列にして２倍にする](#076-円環を列にして２倍にする)
+  - [079. 操作順序によらない](#079-操作順序によらない)
 
 # 問題：🌟 2
 
@@ -785,6 +786,71 @@ void solve() {
             sum -= a[left];
     }
     out("No");
+```
+
+</details>
+
+## 079. 操作順序によらない
+
+- Problem
+  - [079 - Two by Two](https://atcoder.jp/contests/typical90/tasks/typical90_ca)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/079.jpg)
+- Sub Problem
+  - [ABC125 D - Flipping Signs](https://atcoder.jp/contests/abc125/tasks/abc125_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/079.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/079.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(h, w);
+    vvi a(h + 2, vi(w + 2));
+    vvi b(h + 2, vi(w + 2));
+    for (int i = 1; i <= h; i++) {
+        for (int j = 1; j <= w; j++) {
+            cin >> a[i][j];
+        }
+    }
+    for (int i = 1; i <= h; i++) {
+        for (int j = 1; j <= w; j++) {
+            cin >> b[i][j];
+        }
+    }
+
+    // change
+    ll ans = 0;
+    for (int i = 1; i < h; i++) {
+        for (int j = 1; j < w; j++) {
+            if (a[i][j] == b[i][j]) continue;
+
+            int d = b[i][j] - a[i][j];
+            a[i][j] += d;
+            a[i + 1][j] += d;
+            a[i][j + 1] += d;
+            a[i + 1][j + 1] += d;
+
+            ans += abs(d);
+        }
+    }
+
+    // check
+    bool ok = true;
+    for (int i = 1; i <= h; i++) {
+        for (int j = 1; j <= w; j++) {
+            if (i == h or j == w) {
+                if (a[i][j] != b[i][j]) ok = false;
+            }
+        }
+    }
+
+    if (ok) {
+        out("Yes");
+        out(ans);
+    } else
+        out("No");
 ```
 
 </details>
