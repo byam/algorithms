@@ -39,6 +39,7 @@ ref:
   - [064. 段差を考えよう](#064-段差を考えよう)
   - [069. `a^b mod m` は繰り返し二乗法](#069-ab-mod-m-は繰り返し二乗法)
   - [075. `O(sqrt(N))` での素因数分解](#075-osqrtn-での素因数分解)
+  - [076. 円環を列にして２倍にする](#076-円環を列にして２倍にする)
 
 # 問題：🌟 2
 
@@ -734,6 +735,56 @@ void solve() {
 
     out(ans);
 }
+```
+
+</details>
+
+## 076. 円環を列にして２倍にする
+
+- Problem
+  - [076 - Cake Cut](https://atcoder.jp/contests/typical90/tasks/typical90_bx)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/076.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/076.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/076.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n);
+    vll rdv(a, n);
+    ll all = 0;
+    for (auto x : a) all += x;
+    if (all % 10) {
+        out("No");
+        return;
+    }
+
+    ll goal = all / 10;
+    int right = 0;
+    ll sum = 0;
+    for (int left = 0; left < 2 * n; ++left) {
+        while (right < 2 * n && right - left < n - 1 && sum < goal) {
+            /* 実際に right を 1 進める */
+            sum += a[right % n];
+            ++right;
+        }
+
+        /* break した状態で right は条件を満たす最大なので、何かする */
+        if (sum == goal) {
+            out("Yes");
+            return;
+        }
+
+        /* left をインクリメントする準備 */
+        if (right == left)
+            ++right;
+        else
+            sum -= a[left];
+    }
+    out("No");
 ```
 
 </details>
