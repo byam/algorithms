@@ -37,6 +37,7 @@ ref:
   - [050. 漸化式を立てて DP をしよう](#050-漸化式を立てて-dp-をしよう)
   - [052. 因数分解をしよう](#052-因数分解をしよう)
   - [064. 段差を考えよう](#064-段差を考えよう)
+  - [069. `a^b mod m` は繰り返し二乗法](#069-ab-mod-m-は繰り返し二乗法)
 
 # 問題：🌟 2
 
@@ -635,6 +636,54 @@ ref:
         sum += ato - mae;
         out(sum);
     }
+```
+
+</details>
+
+## 069. `a^b mod m` は繰り返し二乗法
+
+- Problem
+  - [069 - Colorful Blocks 2](https://atcoder.jp/contests/typical90/tasks/typical90_bq)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/069.jpg)
+- Sub Problem
+  - [ABC178 C - Ubiquity](https://atcoder.jp/contests/abc178/tasks/abc178_c)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/069.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/069.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+// 二乗法
+long long binpower(long long a, long long b, long long mod) {
+    long long ans = 1;
+    while (b != 0) {
+        if (b % 2 == 1) {
+            ans = (long long)(ans)*a % mod;
+        }
+        a = (long long)(a)*a % mod;
+        b /= 2;
+    }
+    return ans;
+}
+
+void solve() {
+    // in
+    ll rd(n, k);
+    ll ans = 1LL;
+
+    for (int i = 0; i < 3; i++) {
+        if (n - i > 0) {
+            ans = 1LL * ans * (k - i) % MOD;
+        }
+    }
+
+    if (k - 2 > 1 and n - 3 > 0)
+        ans = (ans * binpower(k - 2, n - 3, MOD)) % MOD;
+
+    out(ans);
+}
 ```
 
 </details>
