@@ -36,6 +36,7 @@ ref:
   - [048. 上界と下界を見積もる](#048-上界と下界を見積もる)
   - [050. 漸化式を立てて DP をしよう](#050-漸化式を立てて-dp-をしよう)
   - [052. 因数分解をしよう](#052-因数分解をしよう)
+  - [064. 段差を考えよう](#064-段差を考えよう)
 
 # 問題：🌟 2
 
@@ -582,6 +583,58 @@ ref:
     }
 
     out(ans);
+```
+
+</details>
+
+## 064. 段差を考えよう
+
+- Problem
+  - [064 - Uplift](https://atcoder.jp/contests/typical90/tasks/typical90_bl)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/064.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/064.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/064.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(n, q);
+    vll rdv(a, n);
+
+    // each diffs
+    vll b(n);
+    ll sum = 0;
+    for (int i = 0; i < n - 1; i++) {
+        b[i] = a[i + 1] - a[i];
+        sum += abs(b[i]);
+    }
+
+    // queries
+    for (int i = 0; i < q; i++) {
+        ll rd(l, r, v);
+        l--;
+        r--;
+
+        ll mae = abs(b[l - 1]) + abs(b[r]);
+
+        // b(l - 1) + v
+        if (l >= 1) {
+            b[l - 1] += v;
+        }
+
+        // b(r) - v
+        if (r <= n - 2) {
+            b[r] -= v;
+        }
+
+        // sum
+        ll ato = abs(b[l - 1]) + abs(b[r]);
+        sum += ato - mae;
+        out(sum);
+    }
 ```
 
 </details>
