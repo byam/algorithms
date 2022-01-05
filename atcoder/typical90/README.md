@@ -41,6 +41,8 @@ ref:
   - [075. `O(sqrt(N))` での素因数分解](#075-osqrtn-での素因数分解)
   - [076. 円環を列にして２倍にする](#076-円環を列にして２倍にする)
   - [079. 操作順序によらない](#079-操作順序によらない)
+  - [082. 部分問題に分解する/数列の和の公式](#082-部分問題に分解する数列の和の公式)
+  - [084. ランレングス圧縮 or 累積的に計算しよう](#084-ランレングス圧縮-or-累積的に計算しよう)
 
 # 問題：🌟 2
 
@@ -851,6 +853,62 @@ void solve() {
         out(ans);
     } else
         out("No");
+```
+
+</details>
+
+## 082. 部分問題に分解する/数列の和の公式
+
+- Problem
+  - [082 - Counting Numbers](https://atcoder.jp/contests/typical90/tasks/typical90_cd)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/082.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/082.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/082.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+```
+
+</details>
+
+## 084. ランレングス圧縮 or 累積的に計算しよう
+
+- Problem
+  - [084 - There are two types of characters](https://atcoder.jp/contests/typical90/tasks/typical90_cf)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/084.jpg)
+- Sub Problem
+  - [ABC182 D - Wandering](https://atcoder.jp/contests/abc182/tasks/abc182_d)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/084-01.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/084-01.cpp)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/084-02.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/084-02.cpp)
+
+<details>
+  <summary> Code: ランレングス圧縮 </summary>
+
+```cpp
+    // in
+    ll rd(n);
+    string rd(s);
+
+    ll ret = 0;
+    ll cnt = 0;
+    for (int i = 0; i < n; i++) {
+        cnt++;
+        // ランレングス圧縮
+        if (i == n - 1 or s[i] != s[i + 1]) {
+            // 余事情
+            ret += 1LL * cnt * (cnt + 1) / 2LL;
+            cnt = 0;
+        }
+    }
+
+    ll ans = n * (n + 1) / 2LL - ret;
+    out(ans);
 ```
 
 </details>
