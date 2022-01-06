@@ -46,6 +46,7 @@ ref:
 - [問題：🌟 4](#問題-4)
   - [001. 答えで二分探索](#001-答えで二分探索)
   - [012. 連結判定は Union-Find](#012-連結判定は-union-find)
+  - [026. 二部グラフ(bipartite graph)の性質を使おう](#026-二部グラフbipartite-graphの性質を使おう)
 
 # 問題：🌟 2
 
@@ -1083,6 +1084,66 @@ struct dsu {
                 out("No");
         }
     }
+```
+
+</details>
+
+## 026. 二部グラフ(bipartite graph)の性質を使おう
+
+- Problem
+  - [026 - Independent Set on a Tree](https://atcoder.jp/contests/typical90/tasks/typical90_z)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/026.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/026.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/026.cpp)
+- Sub Problem
+  - [ABC126 D - Even Relation](https://atcoder.jp/contests/abc126/tasks/abc126_d)
+
+<details>
+  <summary> SUMMARY </summary>
+
+```sh
+void dfs(vvi& G, vi& col, int e, int v, vi& red, vi& green) {
+    col[e] = v;
+
+    if (v == 1)
+        red.push_back(e + 1);
+    else
+        green.push_back(e + 1);
+
+    for (auto ne : G[e]) {
+        if (!col[ne]) dfs(G, col, ne, 3 - v, red, green);
+    }
+}
+
+void solve() {
+    // in
+    int rd(n);
+    vvi G(n);
+    for (int i = 0; i < n - 1; i++) {
+        int rd(a, b);
+        a--;
+        b--;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+
+    // coloring
+    vi col(n);
+    vi red, green;
+    dfs(G, col, 0, 1, red, green);
+
+    // print first n/2
+    vi ans;
+    if (red.size() >= n / 2) {
+        ans = red;
+    } else {
+        ans = green;
+    }
+    ans.resize(n / 2);
+    out(ans);
+}
+
 ```
 
 </details>
