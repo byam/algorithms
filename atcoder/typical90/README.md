@@ -45,6 +45,7 @@ ref:
   - [084. ランレングス圧縮 or 累積的に計算しよう](#084-ランレングス圧縮-or-累積的に計算しよう)
 - [問題：🌟 4](#問題-4)
   - [001. 答えで二分探索](#001-答えで二分探索)
+  - [012. 連結判定は Union-Find](#012-連結判定は-union-find)
 
 # 問題：🌟 2
 
@@ -927,7 +928,7 @@ void solve() {
   - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/001.cpp)
 
 <details>
-  <summary> Code: ランレングス圧縮 </summary>
+  <summary> Code </summary>
 
 ```cpp
 bool cut(vi& A, int L, int K, int m) {
@@ -962,6 +963,126 @@ void solve() {
     }
     out(l);
 }
+```
+
+</details>
+
+## 012. 連結判定は Union-Find
+
+- Problem
+  - [012 - Red Painting](https://atcoder.jp/contests/typical90/tasks/typical90_l)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/012.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/012.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/012.cpp)
+
+<details>
+  <summary> Union-Find (DSU) </summary>
+
+```cpp
+// Implement (union by size) + (path compression)
+// Reference:
+// Zvi Galil and Giuseppe F. Italiano,
+// Data structures and algorithms for disjoint set union problems
+struct dsu {
+   public:
+    dsu() : _n(0) {}
+    explicit dsu(int n) : _n(n), parent_or_size(n, -1) {}
+
+    int merge(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        int x = leader(a), y = leader(b);
+        if (x == y) return x;
+        if (-parent_or_size[x] < -parent_or_size[y]) std::swap(x, y);
+        parent_or_size[x] += parent_or_size[y];
+        parent_or_size[y] = x;
+        return x;
+    }
+
+    bool same(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        return leader(a) == leader(b);
+    }
+
+    int leader(int a) {
+        assert(0 <= a && a < _n);
+        if (parent_or_size[a] < 0) return a;
+        return parent_or_size[a] = leader(parent_or_size[a]);
+    }
+
+    int size(int a) {
+        assert(0 <= a && a < _n);
+        return -parent_or_size[leader(a)];
+    }
+
+    std::vector<std::vector<int>> groups() {
+        std::vector<int> leader_buf(_n), group_size(_n);
+        for (int i = 0; i < _n; i++) {
+            leader_buf[i] = leader(i);
+            group_size[leader_buf[i]]++;
+        }
+        std::vector<std::vector<int>> result(_n);
+        for (int i = 0; i < _n; i++) {
+            result[i].reserve(group_size[i]);
+        }
+        for (int i = 0; i < _n; i++) {
+            result[leader_buf[i]].push_back(i);
+        }
+        result.erase(std::remove_if(
+                         result.begin(), result.end(),
+                         [&](const std::vector<int>& v) { return v.empty(); }),
+                     result.end());
+        return result;
+    }
+
+   private:
+    int _n;
+    // root node: -1 * component size
+    // otherwise: parent
+    std::vector<int> parent_or_size;
+};
+
+```
+
+</details>
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+    // in
+    int rd(h, w, q);
+
+    vector g(h + 2, vb(w + 2));
+    dsu d(h * w);
+
+    for (int i = 0; i < q; i++) {
+        int rd(t);
+        if (t == 1) {
+            int rd(x, y);
+            g[x][y] = true;
+
+            // merge
+            int dx[4] = {-1, 0, 1, 0};
+            int dy[4] = {0, 1, 0, -1};
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                if (!g[nx][ny]) continue;
+                d.merge((x - 1) * w + (y - 1), (nx - 1) * w + (ny - 1));
+            }
+        }
+        if (t == 2) {
+            int rd(sx, sy, gx, gy);
+            if (g[sx][sy] and g[gx][gy] and
+                d.same((sx - 1) * w + (sy - 1), (gx - 1) * w + (gy - 1)))
+                out("Yes");
+            else
+                out("No");
+        }
+    }
 ```
 
 </details>
