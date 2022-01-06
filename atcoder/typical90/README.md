@@ -43,6 +43,8 @@ ref:
   - [079. 操作順序によらない](#079-操作順序によらない)
   - [082. 部分問題に分解する/数列の和の公式](#082-部分問題に分解する数列の和の公式)
   - [084. ランレングス圧縮 or 累積的に計算しよう](#084-ランレングス圧縮-or-累積的に計算しよう)
+- [問題：🌟 4](#問題-4)
+  - [001. 答えで二分探索](#001-答えで二分探索)
 
 # 問題：🌟 2
 
@@ -909,6 +911,57 @@ void solve() {
 
     ll ans = n * (n + 1) / 2LL - ret;
     out(ans);
+```
+
+</details>
+
+# 問題：🌟 4
+
+## 001. 答えで二分探索
+
+- Problem
+  - [001 - Yokan Party](https://atcoder.jp/contests/typical90/tasks/typical90_a)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/001.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/001.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/001.cpp)
+
+<details>
+  <summary> Code: ランレングス圧縮 </summary>
+
+```cpp
+bool cut(vi& A, int L, int K, int m) {
+    int cnt = 0;
+    int pre = 0;
+    for (auto x : A) {
+        if (x - pre >= m and L - x >= m) {
+            cnt++;
+            pre = x;
+        }
+    }
+    return K <= cnt;
+}
+
+void solve() {
+    // in
+    int N, L, K;
+    read(N, L, K);
+    vi A(N);
+    read(A);
+
+    // binary search for ans
+    int l = 0;
+    int r = L;
+
+    while (l < r - 1) {
+        int m = (l + r) / 2;
+        if (cut(A, L, K, m))
+            l = m;
+        else
+            r = m;
+    }
+    out(l);
+}
 ```
 
 </details>
