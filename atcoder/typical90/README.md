@@ -47,6 +47,7 @@ ref:
   - [001. 答えで二分探索](#001-答えで二分探索)
   - [012. 連結判定は Union-Find](#012-連結判定は-union-find)
   - [026. 二部グラフ(bipartite graph)の性質を使おう](#026-二部グラフbipartite-graphの性質を使おう)
+  - [028. 領域加算は二次元いもす法](#028-領域加算は二次元いもす法)
 
 # 問題：🌟 2
 
@@ -1144,6 +1145,98 @@ void solve() {
     out(ans);
 }
 
+```
+
+</details>
+
+## 028. 領域加算は二次元いもす法
+
+- Problem
+  - [028 - Cluttered Paper](https://atcoder.jp/contests/typical90/tasks/typical90_ab)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/028.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/028.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/028.cpp)
+- Sub Problem
+  - [ABC014 C - AtColor](https://atcoder.jp/contests/abc014/tasks/abc014_3)
+
+<details>
+  <summary> imos 1d </summary>
+
+```sh
+void imos1d(vi& G, vpii& a) {
+    // +/-
+    for (auto [l, r] : a) {
+        G[l]++;
+        G[r + 1]--;
+    }
+    // simulation
+    for (int i = 1; i < G.size(); i++) {
+        G[i] += G[i - 1];
+    }
+}
+```
+
+</details>
+
+<details>
+  <summary> imos 2d </summary>
+
+```sh
+void imos2d(vvi& G, vvi& a) {
+    // add +/- 1
+    for (auto b : a) {
+        int lx = b[0];
+        int ly = b[1];
+        int rx = b[2];
+        int ry = b[3];
+
+        G[lx][ly]++;
+        G[rx][ry]++;
+        G[lx][ry]--;
+        G[rx][ly]--;
+    }
+
+    // simulation
+    int h = G.size();
+    int w = G[0].size();
+    // 横
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < w - 1; j++) G[i][j + 1] += G[i][j];
+    // 縦
+    for (int i = 0; i < h - 1; i++)
+        for (int j = 0; j < w; j++) G[i + 1][j] += G[i][j];
+}
+```
+
+</details>
+
+<details>
+  <summary> Code </summary>
+
+```sh
+    // in
+    int rd(n);
+    vector a(n, vi(4));
+    int h = 0, w = 0;
+    for (int i = 0; i < n; i++) {
+        vi rdv(b, 4);
+        a[i] = b;
+        chmax(h, b[0]);
+        chmax(h, b[2]);
+        chmax(w, b[1]);
+        chmax(w, b[3]);
+    }
+
+    // imos 2D
+    vvi G(h + 1, vi(w + 1));
+    imos2d(G, a);
+
+    // ans
+    vi ans(n + 1);
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < w; j++) ans[G[i][j]]++;
+    for (int i = 1; i <= n; i++) out(ans[i]);
 ```
 
 </details>
