@@ -49,6 +49,7 @@ ref:
   - [026. 二部グラフ(bipartite graph)の性質を使おう](#026-二部グラフbipartite-graphの性質を使おう)
   - [028. 領域加算は二次元いもす法](#028-領域加算は二次元いもす法)
   - [034. 単調性を利用した尺取り法](#034-単調性を利用した尺取り法)
+  - [042. 9 の倍数の性質](#042-9-の倍数の性質)
 
 # 問題：🌟 2
 
@@ -1292,6 +1293,45 @@ void imos2d(vvi& G, vvi& a) {
         }
     }
     out(ans);
+```
+
+</details>
+
+## 042. 9 の倍数の性質
+
+- Problem
+  - [042 - Multiple of 9](https://atcoder.jp/contests/typical90/tasks/typical90_ap)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/042.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/042.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/042.cpp)
+- Sub Problem
+  - [ABC181 D - hachi](https://atcoder.jp/contests/abc181/tasks/abc181_d)
+
+<details>
+  <summary> code </summary>
+
+```cpp
+    // in
+    int rd(k);
+    if (k % 9) {
+        out(0);
+        return;
+    }
+
+    // dp[桁総和] = 通り数
+    vll dp(k + 1);
+    dp[0] = 1;
+    for (int i = 1; i <= k; i++) {
+        int R = min(i, 9);
+        for (int j = 1; j <= R; j++) {
+            // add j to each dp[i-j]
+            dp[i] += dp[i - j];
+            dp[i] %= MOD;
+        }
+    }
+
+    out(dp[k]);
 ```
 
 </details>
