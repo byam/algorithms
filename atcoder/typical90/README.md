@@ -48,6 +48,7 @@ ref:
   - [012. 連結判定は Union-Find](#012-連結判定は-union-find)
   - [026. 二部グラフ(bipartite graph)の性質を使おう](#026-二部グラフbipartite-graphの性質を使おう)
   - [028. 領域加算は二次元いもす法](#028-領域加算は二次元いもす法)
+  - [034. 単調性を利用した尺取り法](#034-単調性を利用した尺取り法)
 
 # 問題：🌟 2
 
@@ -1103,7 +1104,7 @@ struct dsu {
 <details>
   <summary> SUMMARY </summary>
 
-```sh
+```cpp
 void dfs(vvi& G, vi& col, int e, int v, vi& red, vi& green) {
     col[e] = v;
 
@@ -1163,7 +1164,7 @@ void solve() {
 <details>
   <summary> imos 1d </summary>
 
-```sh
+```cpp
 void imos1d(vi& G, vpii& a) {
     // +/-
     for (auto [l, r] : a) {
@@ -1182,7 +1183,7 @@ void imos1d(vi& G, vpii& a) {
 <details>
   <summary> imos 2d </summary>
 
-```sh
+```cpp
 void imos2d(vvi& G, vvi& a) {
     // add +/- 1
     for (auto b : a) {
@@ -1214,7 +1215,7 @@ void imos2d(vvi& G, vvi& a) {
 <details>
   <summary> Code </summary>
 
-```sh
+```cpp
     // in
     int rd(n);
     vector a(n, vi(4));
@@ -1237,6 +1238,60 @@ void imos2d(vvi& G, vvi& a) {
     for (int i = 0; i < h; i++)
         for (int j = 0; j < w; j++) ans[G[i][j]]++;
     for (int i = 1; i <= n; i++) out(ans[i]);
+```
+
+</details>
+
+## 034. 単調性を利用した尺取り法
+
+- Problem
+  - [034 - There are few types of elements](https://atcoder.jp/contests/typical90/tasks/typical90_ah)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/034.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/034.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/034.cpp)
+- Sub Problem
+  - [ABC130 D - Enough Array](https://atcoder.jp/contests/abc130/tasks/abc130_d)
+
+<details>
+  <summary> 尺取り法 </summary>
+
+```cpp
+    // in
+    int rd(n, k);
+    vi rdv(a, n);
+
+    /* 区間の左端 left で場合分け */
+    int right = 0;  // 毎回 right を使い回すようにする
+    map<int, int> m;
+    int ans = 0;
+    int sz = 0;
+    for (int left = 0; left < n; ++left) {
+        /* map に a[right] を加えても大丈夫なら right を動かす */
+        while (right < n && m.size() <= k) {
+            if (m.find(a[right]) == m.end() and m.size() == k) break;
+            m[a[right]]++;
+            ++right;
+            sz++;
+        }
+
+        /* break した状態で right は条件を満たす最大 */
+        chmax(ans, sz);
+
+        /* left をインクリメントする準備 */
+        if (right == left)
+            ++right;  // right が left に重なったら right も動かす
+        else {
+            // left のみがインクリメントされるので map から
+            // a[left] を引く
+            if (m[a[left]] == 1)
+                m.erase(a[left]);
+            else
+                m[a[left]]--;
+            sz--;
+        }
+    }
+    out(ans);
 ```
 
 </details>
