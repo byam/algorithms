@@ -50,6 +50,7 @@ ref:
   - [028. 領域加算は二次元いもす法](#028-領域加算は二次元いもす法)
   - [034. 単調性を利用した尺取り法](#034-単調性を利用した尺取り法)
   - [042. 9 の倍数の性質](#042-9-の倍数の性質)
+  - [043. 拡張 BFS・ダイクストラ](#043-拡張-bfsダイクストラ)
 
 # 問題：🌟 2
 
@@ -1332,6 +1333,75 @@ void imos2d(vvi& G, vvi& a) {
     }
 
     out(dp[k]);
+```
+
+</details>
+
+## 043. 拡張 BFS・ダイクストラ
+
+- Problem
+  - [043 - Maze Challenge with Lack of Sleep](https://atcoder.jp/contests/typical90/tasks/typical90_aq)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/043.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/043.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/043.cpp)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+struct state {
+    int x, y, dir;
+};
+
+void solve() {
+    // in
+    int rd(h, w, sx, sy, gx, gy);
+    sx--;
+    sy--;
+    gx--;
+    gy--;
+    vector<string> rdv(S, h);
+
+    // 拡張 BFS
+    vector dist(h, vector(w, vi(4)));
+    for (int i = 0; i < h; i++)
+        for (int j = 0; j < w; j++)
+            for (int k = 0; k < 4; k++) dist[i][j][k] = 1e9;
+
+    deque<state> dque;
+    for (int i = 0; i < 4; i++) {
+        dist[sx][sy][i] = 0;
+        dque.push_back({sx, sy, i});
+    }
+
+    while (!dque.empty()) {
+        state u = dque.front();
+        dque.pop_front();
+
+        // update 4 dir costs
+        for (int i = 0; i < 4; i++) {
+            int tx = u.x + dx[i];
+            int ty = u.y + dy[i];
+            int cost = dist[u.x][u.y][u.dir] + (u.dir == i ? 0 : 1);
+            if (0 <= tx and tx < h and 0 <= ty and ty < w and
+                S[tx][ty] != '#' and cost < dist[tx][ty][i]) {
+                dist[tx][ty][i] = cost;
+                if (u.dir == i)
+                    dque.push_front({tx, ty, i});
+                else
+                    dque.push_back({tx, ty, i});
+            }
+        }
+    }
+
+    // ans
+    int ans = 1e9;
+    for (int i = 0; i < 4; i++) {
+        chmin(ans, dist[gx][gy][i]);
+    }
+    out(ans);
+}
 ```
 
 </details>
