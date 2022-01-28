@@ -51,6 +51,7 @@ ref:
   - [034. 単調性を利用した尺取り法](#034-単調性を利用した尺取り法)
   - [042. 9 の倍数の性質](#042-9-の倍数の性質)
   - [043. 拡張 BFS・ダイクストラ](#043-拡張-bfsダイクストラ)
+  - [058. 周期性を考える](#058-周期性を考える)
 
 # 問題：🌟 2
 
@@ -1401,6 +1402,66 @@ void solve() {
         chmin(ans, dist[gx][gy][i]);
     }
     out(ans);
+}
+```
+
+</details>
+
+
+## 058. 周期性を考える
+
+- Problem
+  - [058 - Original Calculator](https://atcoder.jp/contests/typical90/tasks/typical90_bf)
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/problem/058.jpg)
+- Solution
+  - ![image](https://raw.githubusercontent.com/E869120/kyopro_educational_90/main/editorial/058.jpg)
+  - [cpp](https://github.com/E869120/kyopro_educational_90/blob/main/sol/058.cpp)
+- Sub Problem
+  - [ABC167 D - Teleporter](https://atcoder.jp/contests/abc167/tasks/abc167_d)
+
+<details>
+  <summary> Code </summary>
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+int digit_sum(int x) {
+    int ans = 0;
+    while (x > 0) {
+        ans += x % 10;
+        x /= 10;
+    }
+    return ans;
+}
+int main() {
+    const int mod = 100000;
+    int N;
+    long long K;
+    cin >> N >> K;
+    vector<int> nxt(mod);
+    for (int i = 0; i < mod; ++i) {
+        nxt[i] = (i + digit_sum(i)) % mod;
+    }
+    vector<int> time_stamp(mod, -1);
+    int pos = N, cnt = 0;
+    while (time_stamp[pos] == -1) {
+        time_stamp[pos] = cnt;
+        pos = nxt[pos];
+        ++cnt;
+    }
+    int cycle = cnt - time_stamp[pos];
+    if (K >= time_stamp[pos]) {
+        K = (K - time_stamp[pos]) % cycle + time_stamp[pos];
+    }
+    int answer = -1;
+    for (int i = 0; i < mod; ++i) {
+        if (time_stamp[i] == K) {
+            answer = i;
+        }
+    }
+    cout << answer << endl;
+    return 0;
 }
 ```
 
