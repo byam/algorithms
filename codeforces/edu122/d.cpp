@@ -211,10 +211,43 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int n = 8;
-    for (int i = 0; i < n; i++) {
-        if (n & (1 << i)) out(i);
+    ll rd(n, k);
+    vll rdv(b, n);
+    vll rdv(c, n);
+    vll a(n, 1);
+    ll ans = 0;
+
+    vll cost(1001, INF);
+    cost[1] = 0;
+    rep(i, 1, 1001) {
+        rep(j, 1, i + 1) {
+            ll v = i + i / j;
+            if (v <= 1000) {
+                cost[v] = min(cost[v], cost[i] + 1);
+            }
+        }
     }
+
+    ll acost = 0;
+    for (auto x : b) acost += cost[x];
+    if (acost <= k) {
+        ll acoin = 0;
+        for (auto x : c) acoin += x;
+        out(acoin);
+        return;
+    }
+
+    vvll dp(n + 1, vll(k + 1));
+    for (ll i = 0; i < n; i++) {
+        for (ll w = 0; w <= k; w++) {
+            if (w >= cost[b[i]])
+                dp[i + 1][w] = max(dp[i][w - cost[b[i]]] + c[i], dp[i][w]);
+            else
+                dp[i + 1][w] = dp[i][w];
+        }
+    }
+
+    out(dp[n][k]);
 }
 
 int main() {
@@ -224,7 +257,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

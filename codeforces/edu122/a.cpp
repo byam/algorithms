@@ -211,10 +211,17 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int n = 8;
-    for (int i = 0; i < n; i++) {
-        if (n & (1 << i)) out(i);
+    int rd(n);
+    if (n % 7 == 0) {
+        out(n);
+        return;
     }
+    int d = n % 7;
+    int x = n % 10;
+    if (x - d >= 0) n -= d;
+    else
+        n += 7 - d;
+    out(n);
 }
 
 int main() {
@@ -224,7 +231,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

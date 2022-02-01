@@ -211,10 +211,19 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int n = 8;
-    for (int i = 0; i < n; i++) {
-        if (n & (1 << i)) out(i);
+    string rd(s);
+    int n = s.size();
+    int zero = 0;
+    for (auto c : s) {
+        if (c == '0') zero++;
     }
+    int one = n - zero;
+
+    int ans = 0;
+    if (one > zero) swap(one, zero);
+    if (one != zero) ans = one;
+    if (one == zero) ans = one - 1;
+    out(ans);
 }
 
 int main() {
@@ -224,7 +233,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
