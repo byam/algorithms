@@ -16,7 +16,7 @@ using namespace std;
 #define srtv(v) sort((v).begin(), (v).end())
 #define all(v) (v).begin(), (v).end()
 
-// MAX / MIN
+// template
 template <class T>
 void chmin(T& a, T b) {
     if (a > b) {
@@ -28,17 +28,6 @@ void chmax(T& a, T b) {
     if (a < b) {
         a = b;
     }
-}
-
-template <class T>
-T maxi(vector<T>& nums) {
-    // return max value index left
-    return max_element(nums.begin(), nums.end()) - nums.begin();
-}
-template <class T>
-T mini(vector<T>& nums) {
-    // return min value index left
-    return min_element(nums.begin(), nums.end()) - nums.begin();
 }
 
 // out -> print
@@ -220,11 +209,22 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-void solve() {
-    // in
-    vi nums = {2, 10, -1, 10, -1};
-    out(maxi(nums));
-    out(mini(nums));
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right)
+        : val(x), left(left), right(right) {}
+};
+
+int maxDepth(TreeNode* root) {
+    if (root == NULL)
+        return 0;
+    else
+        return max(maxDepth(root->left), maxDepth(root->right)) + 1;
 }
 
 int main() {

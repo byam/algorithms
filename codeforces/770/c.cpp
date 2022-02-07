@@ -16,7 +16,7 @@ using namespace std;
 #define srtv(v) sort((v).begin(), (v).end())
 #define all(v) (v).begin(), (v).end()
 
-// MAX / MIN
+// template
 template <class T>
 void chmin(T& a, T b) {
     if (a > b) {
@@ -222,9 +222,43 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    vi nums = {2, 10, -1, 10, -1};
-    out(maxi(nums));
-    out(mini(nums));
+    int rd(n, k);
+    string ans = "YES";
+
+    if (k == 1) {
+        out(ans);
+        for (int i = 1; i <= n; i++) {
+            out(i);
+        }
+        return;
+    }
+
+    // must be even
+    if (n % 2 == 1) {
+        ans = "NO";
+        out(ans);
+        return;
+    }
+
+    out(ans);
+    int cnt = 0;
+    for (int i = 1; i <= n * k; i += 2) {
+        cout << i << " ";
+        cnt++;
+        if (cnt == k) {
+            cnt = 0;
+            cout << endl;
+        }
+    }
+    cnt = 0;
+    for (int i = 2; i <= n * k; i += 2) {
+        cout << i << " ";
+        cnt++;
+        if (cnt == k) {
+            cnt = 0;
+            cout << endl;
+        }
+    }
 }
 
 int main() {
@@ -234,7 +268,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
