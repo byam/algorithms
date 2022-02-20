@@ -1,240 +1,139 @@
 #include <bits/stdc++.h>
-
-#include <iostream>
-#include <map>
-#include <queue>
-#include <set>
-#include <vector>
-
-//#include <atcoder/all>
-// using namespace atcoder;
 using namespace std;
 
-// func
-#define rep(i, first, last) for (int i = (first); i < (last); i++)
-#define rrep(i, last, first) for (int i = (last); i >= (first); i--)
-#define srtv(v) sort((v).begin(), (v).end())
-#define all(v) (v).begin(), (v).end()
-
-// MAX / MIN
-template <class T>
-void chmin(T& a, T b) {
-    if (a > b) {
-        a = b;
+// 構造体
+struct Node {
+    int val;
+    Node* next;
+    Node(int x) {
+        this->val = x;
+        this->next = NULL;
     }
-}
-template <class T>
-void chmax(T& a, T b) {
-    if (a < b) {
-        a = b;
-    }
-}
+};
 
-template <class T>
-T maxi(vector<T>& nums) {
-    // return max value index left
-    return max_element(nums.begin(), nums.end()) - nums.begin();
-}
-template <class T>
-T mini(vector<T>& nums) {
-    // return min value index left
-    return min_element(nums.begin(), nums.end()) - nums.begin();
-}
+class MyLinkedList {
+   public:
+    // head アドレスメモ
+    Node* head;
+    int size = 0;
 
-// out -> print
-template <class T>
-void out(T x) {
-    cout << x << "\n";
-}
+    MyLinkedList() {}
 
-template <class T>
-void out(vector<T> x) {
-    int sz = x.size();
-    for (int i = 0; i < sz; i++) {
-        cout << x[i];
-        if (i < sz - 1) cout << " ";
-    }
+    int get(int index) {
+        // 例外
+        if (index >= size) return -1;
 
-    cout << "\n";
-}
-
-template <class T>
-void out(vector<pair<T, T>> p) {
-    for (auto [f, s] : p) {
-        cout << f << " " << s << endl;
-    }
-}
-
-template <class T>
-void out(map<T, T> m) {
-    for (auto [k, v] : m) {
-        cout << k << ": " << v << endl;
-    }
-}
-
-template <class T>
-void out(set<T> s) {
-    for (auto x : s) {
-        cout << x << " ";
-    }
-    cout << endl;
-}
-
-// パラメータパックが空になったら終了
-void outt() { cout << endl; }
-
-// ひとつ以上のパラメータを受け取るようにし、
-// 可変引数を先頭とそれ以外に分割する
-template <class Head, class... Tail>
-void outt(Head&& head, Tail&&... tail) {
-    std::cout << head << " ";
-
-    // パラメータパックtailをさらにheadとtailに分割する
-    outt(std::forward<Tail>(tail)...);
-}
-
-// in
-#define rd(...)  \
-    __VA_ARGS__; \
-    read(__VA_ARGS__)
-#define rdv(value, ...) \
-    value(__VA_ARGS__); \
-    cin >> value
-template <class T>
-auto& operator>>(istream& is, vector<T>& xs) {
-    for (auto& x : xs) is >> x;
-    return is;
-}
-template <class T>
-auto& operator<<(ostream& os, vector<T>& xs) {
-    int sz = xs.size();
-    rep(i, 0, sz) os << xs[i] << " \n"[i + 1 == sz];
-    return os;
-}
-template <class T, class Y>
-auto& operator<<(ostream& os, pair<T, Y>& xs) {
-    os << "{" << xs.first << ", " << xs.second << "}";
-    return os;
-}
-template <class T, class Y>
-auto& operator>>(istream& is, vector<pair<T, Y>>& xs) {
-    for (auto& [x1, x2] : xs) is >> x1 >> x2;
-    return is;
-}
-template <class... Args>
-auto& read(Args&... args) {
-    return (cin >> ... >> args);
-}
-
-// type
-typedef long long ll;
-typedef long double ld;
-typedef vector<int> vi;
-typedef vector<bool> vb;
-typedef vector<long long> vll;
-typedef pair<int, int> pii;
-typedef pair<long long, long long> pll;
-typedef priority_queue<int> pqi;                              // greater
-typedef priority_queue<int, vector<int>, greater<int>> pqli;  // less
-typedef priority_queue<long long, vector<long long>, greater<long long>> pqlll;
-typedef vector<pair<int, int>> vpii;
-typedef vector<vector<int>> vvi;
-typedef vector<vector<long long>> vvll;
-typedef vector<vector<int>> Graph;
-
-// get divisors: 10 => 1, 2, 5, 10
-set<ll> all_factors(ll n) {
-    // Vector to store half of the divisors
-    set<ll> v;
-    for (int i = 1; i <= sqrt(n); i++) {
-        if (n % i == 0) {
-            v.insert(i);
-            v.insert(n / i);
+        // index まで進む
+        auto cur = head;
+        for (int i = 0; i < index; i++) {
+            cur = cur->next;
         }
+        return cur->val;
     }
-    return v;
-}
 
-// get prime divisors: 12 => 2(2), 3(1)
-map<ll, ll> prime_factors_map(ll n) {
-    map<ll, ll> m;
-    ll k = sqrt(n);
-    for (int i = 2; i <= k; i++) {
-        while (n % i == 0) {
-            m[i]++;
-            n /= i;
+    void addAtHead(int val) {
+        // メンバーを作成
+        Node* node = new Node(val);
+        size++;
+
+        // 空なら
+        if (!head) {
+            head = node;
+            return;
         }
-    }
-    if (n > 1) m[n]++;
-    return m;
-}
 
-vector<long long> prime_factors(long long N) {
-    long long rem = N;
-    vector<long long> p;
-    for (long long i = 2; i * i <= N; i++) {
-        while (rem % i == 0) {
-            rem /= i;
-            p.push_back(i);
+        // 追加 & head 更新
+        node->next = head;
+        head = node;
+    }
+
+    void addAtTail(int val) {
+        // メンバーを作成
+        Node* node = new Node(val);
+        size++;
+
+        // 空なら
+        if (!head) {
+            head = node;
+            return;
         }
-    }
-    if (rem != 1LL) p.push_back(rem);
-    return p;
-}
 
-bool is_prime(long long N) {
-    bool res = true;
-    for (long long i = 2; i * i <= N; i++) {
-        if (N % i == 0) res = false;
-    }
-    return res;
-}
-
-// geometry
-#define PI 3.14159265358979323846264338327950288
-template <class T>
-T to_rad(T angle) {
-    return angle * PI / 180.;
-}
-
-// 二乗法
-long long binpower(long long a, long long b, long long mod) {
-    long long ans = 1;
-    while (b != 0) {
-        if (b % 2 == 1) {
-            ans = (long long)(ans)*a % mod;
+        // tail まで進む
+        auto cur = head;
+        if (cur) {
+            while (cur->next) cur = cur->next;
         }
-        a = (long long)(a)*a % mod;
-        b /= 2;
+
+        // list に追加
+        cur->next = node;
     }
-    return ans;
-}
 
-// const
-const ll MOD = 1000000007;
-const ll INF = 1e18;
-const int dx[4] = {1, 0, -1, 0};
-const int dy[4] = {0, 1, 0, -1};
+    void addAtIndex(int index, int val) {
+        // 例外
+        if (index >= size) return;
 
-/*-----------------------------------
-        Coding Starts Here
-------------------------------------*/
+        // メンバーを作成
+        Node* node = new Node(val);
+        size++;
+
+        // 頭なら
+        if (index == 0) {
+            node->next = head;
+            head = node;
+            return;
+        }
+
+        // index まで進む
+        auto cur = head;
+        for (int i = 0; i < index - 1; i++) {
+            cur = cur->next;
+        }
+        node->next = cur->next;
+        cur->next = node;
+    }
+
+    void deleteAtIndex(int index) {
+        if (size <= index) return;
+        size--;
+        if (index == 0) {
+            head = head->next;
+            return;
+        }
+
+        // index 直前まで進む
+        auto cur = head;
+        for (int i = 0; i < index - 1; i++) {
+            cur = cur->next;
+        }
+        cur->next = cur->next->next;
+    }
+};
 
 void solve() {
-    // in
-    vi nums = {2, 10, -1, 10, -1};
-    out(maxi(nums));
-    out(mini(nums));
+    /**
+     * Your MyLinkedList object will be instantiated and called as such:
+     * MyLinkedList* obj = new MyLinkedList();
+     * int param_1 = obj->get(index);
+     * obj->addAtHead(val);
+     * obj->addAtTail(val);
+     * obj->addAtIndex(index,val);
+     * obj->deleteAtIndex(index);
+     */
+    MyLinkedList* obj = new MyLinkedList();
+    obj->addAtHead(10);
+    cout << obj->get(0) << endl;
+    obj->addAtTail(3);
+    cout << obj->get(1) << endl;
+    cout << obj->get(2) << endl;
+    obj->addAtIndex(1, 20);
+    cout << obj->get(0) << endl;
+    cout << obj->get(1) << endl;
+    cout << obj->get(2) << endl;
+    obj->deleteAtIndex(1);
+    cout << obj->get(1) << endl;
 }
 
 int main() {
-    // make input and output more efficient
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-
-    int t;
-    t = 1;
-    // cin >> t;
-    while (t--) solve();
+    solve();
     return 0;
 }
