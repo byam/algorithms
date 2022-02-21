@@ -222,12 +222,11 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int rd(a, b);
-    int d = abs(a - b);
-    if (d == 9 or d == 1)
-        out("Yes");
-    else
-        out("No");
+    int rd(n);
+    vll rdv(a, n);
+    sort(all(a));
+    a.erase(unique(a.begin(), a.end()), a.end());
+    out(a.size());
 }
 
 int main() {

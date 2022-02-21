@@ -219,12 +219,51 @@ const int dy[4] = {0, 1, 0, -1};
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
+// Function to find subarrays with the given sum in an array
+bool findSubarrays(vi nums, int n, int target) {
+    for (int i = 0; i < n; i++) {
+        int sum_so_far = 0;
+
+        // consider all subarrays starting from `i` and ending at `j`
+        for (int j = i; j < n; j++) {
+            // sum of elements so far
+            sum_so_far += nums[j];
+
+            // if the sum so far is equal to the given sum
+            if (sum_so_far == target) return true;
+        }
+    }
+    return false;
+}
 
 void solve() {
     // in
-    int rd(a, b);
-    int d = abs(a - b);
-    if (d == 9 or d == 1)
+    int rd(n, x);
+
+    vi f(x + 1);
+    f[x] = 1;
+
+    vpii p(n);
+    for (int i = 0; i < n; i++) {
+        int rd(a, b);
+        p[i] = {a, b};
+    }
+
+    int cur = 1;
+    for (int i = n - 1; i >= 0; i--) {
+        int a = p[i].first;
+        int b = p[i].second;
+
+        for (int j = 0; j <= x; j++) {
+            if (f[j] == cur) {
+                if (j - a >= 0) f[j - a] = cur + 1;
+                if (j - b >= 0) f[j - b] = cur + 1;
+            }
+        }
+        cur++;
+    }
+
+    if (f[0] == n + 1)
         out("Yes");
     else
         out("No");

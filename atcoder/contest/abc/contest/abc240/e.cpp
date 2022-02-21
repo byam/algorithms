@@ -222,12 +222,6 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int rd(a, b);
-    int d = abs(a - b);
-    if (d == 9 or d == 1)
-        out("Yes");
-    else
-        out("No");
 }
 
 int main() {

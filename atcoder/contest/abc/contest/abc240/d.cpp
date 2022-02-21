@@ -222,12 +222,38 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
-    int rd(a, b);
-    int d = abs(a - b);
-    if (d == 9 or d == 1)
-        out("Yes");
-    else
-        out("No");
+    int rd(n);
+    vi rdv(a, n);
+    stack<pii> s;
+    int size = 0;
+    s.emplace(a[0], 1);
+    size++;
+    out(size);
+
+    for (int i = 1; i < n; i++) {
+        if (!s.size()) {
+            s.emplace(a[i], 1);
+            size++;
+        } else {
+            // add
+            auto cur = s.top();
+            if (cur.first == a[i]) {
+                s.pop();
+                s.emplace(cur.first, cur.second + 1);
+            } else {
+                s.emplace(a[i], 1);
+            }
+            size++;
+
+            // remove
+            cur = s.top();
+            if (cur.first > 1 and cur.first == cur.second) {
+                s.pop();
+                size -= cur.second;
+            }
+        }
+        out(size);
+    }
 }
 
 int main() {
