@@ -220,41 +220,60 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> con;
-vector<int> memo;
+bool check(vector<string> f) {
+    int n = f.size();
 
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            int s1 = 0;
+            int s2 = 0;
+            int s3 = 0;
+            int sz = 5;
+            for (int k = 0; k < 6; k++) {
+                if (j + sz < n and f[i][j + k] == '#') s1++;
+                if (i + sz < n and f[i + k][j] == '#') s2++;
+                if (j + sz < n and i + sz < n and f[i + k][j + k] == '#') s3++;
             }
+            if (s1 > 3 or s2 > 3 or s3 > 3) return true;
         }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
     }
-
-    return memo[a];
+    return false;
 }
 
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
+// Function to rotate the matrix by 180 degree
+void reverseColumns(vector<string>& arr) {
+    int C = arr.size();
+    int R = arr.size();
+    for (int i = 0; i < C; i++)
+        for (int j = 0, k = C - 1; j < k; j++, k--) swap(arr[j][i], arr[k][i]);
+}
 
-    return dp(amount);
+// Function for transpose of matrix
+void transpose(vector<string>& arr) {
+    int C = arr.size();
+    int R = arr.size();
+    for (int i = 0; i < R; i++)
+        for (int j = i; j < C; j++) swap(arr[i][j], arr[j][i]);
 }
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    vector<string> rdv(f, n);
+    vvi s(n, vi(n));
+    string ans = "No";
+
+    if (check(f)) ans = "Yes";
+
+    auto f1 = f;
+    transpose(f1);
+    if (check(f1)) ans = "Yes";
+
+    auto f2 = f;
+    reverseColumns(f2);
+    if (check(f2)) ans = "Yes";
+
+    out(ans);
 }
 
 int main() {

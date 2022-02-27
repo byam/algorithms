@@ -220,41 +220,47 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> con;
-vector<int> memo;
-
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
-            }
-        }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
-    }
-
-    return memo[a];
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
-
-    return dp(amount);
+bool check(vi a, vi b) {
+    // initial
+    if (a[0] == b[0] and a[1] == b[1] and a[2] == b[2]) return true;
+    if (a[0] == b[1] and a[1] == b[2] and a[2] == b[0]) return true;
+    if (a[0] == b[2] and a[1] == b[0] and a[2] == b[1]) return true;
+    return false;
 }
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    vi rdv(a, n);
+    vi rdv(b, n);
+    string ans = "Yes";
+
+    // check count
+    map<int, int> ma, mb;
+    for (auto x : a) ma[x]++;
+    for (auto x : b) mb[x]++;
+    for (auto [k, v] : ma)
+        if (mb[k] != v) ans = "No";
+    for (auto [k, v] : mb)
+        if (ma[k] != v) ans = "No";
+
+    for (int i = 0; i < n - 3; i++) {
+        for (int j = 0; j < n; j++) {
+            if (b[i] == a[j]) {
+                a[j] = 0;
+                break;
+            }
+        }
+    }
+
+    vi ca, cb;
+    for (int i = 0; i < n; i++)
+        if (a[i] > 0) ca.push_back(a[i]);
+
+    for (int i = n - 3; i < n; i++) cb.push_back(b[i]);
+    if (!check(ca, cb)) ans = "No";
+
+    out(ans);
 }
 
 int main() {

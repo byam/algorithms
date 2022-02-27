@@ -220,41 +220,32 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> con;
-vector<int> memo;
-
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
-            }
-        }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
-    }
-
-    return memo[a];
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
-
-    return dp(amount);
-}
-
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n, m);
+    vi rdv(a, n);
+    vi rdv(b, m);
+
+    sort(all(a));
+    sort(all(b));
+
+    priority_queue<int, vector<int>, greater<int>> pq;
+    for (auto x : a) pq.push(x);
+    string ans = "Yes";
+    for (auto x : b) {
+        bool found = false;
+        while (!pq.empty()) {
+            auto cur = pq.top();
+            pq.pop();
+            if (cur == x) {
+                found = true;
+                break;
+            }
+        }
+        if (!found) ans = "No";
+    }
+
+    out(ans);
 }
 
 int main() {

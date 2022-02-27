@@ -219,42 +219,87 @@ const int dy[4] = {0, 1, 0, -1};
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
+// Implement (union by size) + (path compression)
+// Reference:
+// Zvi Galil and Giuseppe F. Italiano,
+// Data structures and algorithms for disjoint set union problems
+struct dsu {
+   public:
+    dsu() : _n(0) {}
+    explicit dsu(int n) : _n(n), parent_or_size(n, -1) {}
 
-vector<int> con;
-vector<int> memo;
-
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
-            }
-        }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
+    int merge(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        int x = leader(a), y = leader(b);
+        if (x == y) return x;
+        if (-parent_or_size[x] < -parent_or_size[y]) std::swap(x, y);
+        parent_or_size[x] += parent_or_size[y];
+        parent_or_size[y] = x;
+        return x;
     }
 
-    return memo[a];
-}
+    bool same(int a, int b) {
+        assert(0 <= a && a < _n);
+        assert(0 <= b && b < _n);
+        return leader(a) == leader(b);
+    }
 
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
+    int leader(int a) {
+        assert(0 <= a && a < _n);
+        if (parent_or_size[a] < 0) return a;
+        return parent_or_size[a] = leader(parent_or_size[a]);
+    }
 
-    return dp(amount);
-}
+    int size(int a) {
+        assert(0 <= a && a < _n);
+        return -parent_or_size[leader(a)];
+    }
+
+    std::vector<std::vector<int>> groups() {
+        std::vector<int> leader_buf(_n), group_size(_n);
+        for (int i = 0; i < _n; i++) {
+            leader_buf[i] = leader(i);
+            group_size[leader_buf[i]]++;
+        }
+        std::vector<std::vector<int>> result(_n);
+        for (int i = 0; i < _n; i++) {
+            result[i].reserve(group_size[i]);
+        }
+        for (int i = 0; i < _n; i++) {
+            result[leader_buf[i]].push_back(i);
+        }
+        result.erase(std::remove_if(
+                         result.begin(), result.end(),
+                         [&](const std::vector<int>& v) { return v.empty(); }),
+                     result.end());
+        return result;
+    }
+
+   private:
+    int _n;
+    // root node: -1 * component size
+    // otherwise: parent
+    std::vector<int> parent_or_size;
+};
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    vi rdv(a, n);
+
+    dsu d(n);
+
+    for (int i = 0; i < n - 1; i++) {
+        int j = i + 1;
+        while (j < n and a[j] < a[i]) {
+            d.merge(i, j);
+            j++;
+        }
+        i = j;
+    }
+
+    out(d.groups().size());
 }
 
 int main() {
@@ -264,7 +309,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

@@ -219,42 +219,130 @@ const int dy[4] = {0, 1, 0, -1};
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
+class BST {
+    struct node {
+        int data;
+        node* left;
+        node* right;
+    };
 
-vector<int> con;
-vector<int> memo;
+    node* root;
 
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
-            }
+    node* makeEmpty(node* t) {
+        if (t == NULL) return NULL;
+        {
+            makeEmpty(t->left);
+            makeEmpty(t->right);
+            delete t;
         }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
+        return NULL;
     }
 
-    return memo[a];
-}
+    node* insert(int x, node* t) {
+        if (t == NULL) {
+            t = new node;
+            t->data = x;
+            t->left = t->right = NULL;
+        } else if (x < t->data)
+            t->left = insert(x, t->left);
+        else if (x > t->data)
+            t->right = insert(x, t->right);
+        return t;
+    }
 
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
+    node* findMin(node* t) {
+        if (t == NULL)
+            return NULL;
+        else if (t->left == NULL)
+            return t;
+        else
+            return findMin(t->left);
+    }
 
-    return dp(amount);
-}
+    node* findMax(node* t) {
+        if (t == NULL)
+            return NULL;
+        else if (t->right == NULL)
+            return t;
+        else
+            return findMax(t->right);
+    }
+
+    node* remove(int x, node* t) {
+        node* temp;
+        if (t == NULL)
+            return NULL;
+        else if (x < t->data)
+            t->left = remove(x, t->left);
+        else if (x > t->data)
+            t->right = remove(x, t->right);
+        else if (t->left && t->right) {
+            temp = findMin(t->right);
+            t->data = temp->data;
+            t->right = remove(t->data, t->right);
+        } else {
+            temp = t;
+            if (t->left == NULL)
+                t = t->right;
+            else if (t->right == NULL)
+                t = t->left;
+            delete temp;
+        }
+
+        return t;
+    }
+
+    void inorder(node* t) {
+        if (t == NULL) return;
+        inorder(t->left);
+        cout << t->data << " ";
+        inorder(t->right);
+    }
+
+    node* find(node* t, int x) {
+        if (t == NULL)
+            return NULL;
+        else if (x < t->data)
+            return find(t->left, x);
+        else if (x > t->data)
+            return find(t->right, x);
+        else
+            return t;
+    }
+
+   public:
+    BST() { root = NULL; }
+
+    ~BST() { root = makeEmpty(root); }
+
+    void insert(int x) { root = insert(x, root); }
+
+    void remove(int x) { root = remove(x, root); }
+
+    void display() {
+        inorder(root);
+        cout << endl;
+    }
+
+    void search(int x) { root = find(root, x); }
+};
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    BST t;
+    t.insert(20);
+    t.insert(10);
+    t.insert(30);
+    t.insert(20);
+    t.display();
+    t.find(t, 15);
+    t.display();
+    // t.remove(20);
+    // t.display();
+    // t.remove(25);
+    // t.display();
+    // t.remove(30);
+    // t.display();
 }
 
 int main() {

@@ -220,41 +220,34 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> con;
-vector<int> memo;
-
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
-            }
-        }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
-    }
-
-    return memo[a];
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
-
-    return dp(amount);
-}
-
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    vi rdv(a, n);
+    sort(all(a));
+    priority_queue<pii, vector<pii>, greater<pii>> q;
+
+    int cnt = 1;
+    for (int i = 0; i < n - 1; i++) {
+        if (a[i] == a[i + 1])
+            cnt++;
+        else {
+            q.emplace(cnt, a[i]);
+            cnt = 1;
+        }
+    }
+
+    vi ans;
+    q.emplace(cnt, a[n - 1]);
+    int uq = q.size();
+    for (int i = 1; i <= n; i++)
+    {
+        if (i <= uq) ans.push_back(uq);
+        else
+            ans.push_back(i);
+    }
+
+    out(ans);
 }
 
 int main() {
@@ -264,7 +257,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

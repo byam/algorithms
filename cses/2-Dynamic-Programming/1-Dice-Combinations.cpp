@@ -219,42 +219,37 @@ const int dy[4] = {0, 1, 0, -1};
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
+/**
+ * @brief Framework DP
+ * 1. function: dp[i] num of construct i
+ * 2. relation:
+ * 3. base: dp[0] = 0;
+ *
+ */
 
-vector<int> con;
-vector<int> memo;
-
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
+vll memo;
+ll mod = 1e9 + 7;
+ll dp(int i) {
+    if (i == 0) return 1;
+    if (memo[i] == -1) {
+        ll res = 0;
+        for (int d = 1; d <= 6; d++) {
+            if (i - d >= 0) {
+                res += dp(i - d);
+                res %= mod;
             }
         }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
+
+        memo[i] = res;
     }
-
-    return memo[a];
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
-
-    return dp(amount);
+    return memo[i];
 }
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    memo.resize(n + 1, -1);
+    out(dp(n));
 }
 
 int main() {

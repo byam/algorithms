@@ -220,41 +220,38 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-vector<int> con;
-vector<int> memo;
+map<int, int> m;
+int cal(int x) {
+    int cnt = 0;
+    int base = 0;
+    while (x > 0) {
+        int k = base + x % 10;
 
-int dp(int a) {
-    // base
-    if (a == 0) return 0;
-
-    if (memo[a] == 0) {
-        int res = INT_MAX;
-        for (auto c : con) {
-            if (a >= c and dp(a - c) != -1) {
-                res = min(res, dp(a - c) + 1);
+        for (int i = 1; i < 10; i++) {
+            if (x % 10 + i < 10 and m.find(base + i) != m.end()) {
+                cnt += m[base + i];
             }
         }
-        if (res == INT_MAX)
-            memo[a] = -1;
-        else
-            memo[a] = res;
+
+        m[k]++;
+        x /= 10;
+        base += 10;
     }
-
-    return memo[a];
-}
-
-int coinChange(vector<int>& coins, int amount) {
-    // make global
-    con = coins;
-    memo.resize(amount + 1);
-
-    return dp(amount);
+    return cnt;
 }
 
 void solve() {
     // in
-    vi nums = {1, 2, 5};
-    out(coinChange(nums, 11));
+    int rd(n);
+    vi rdv(a, n);
+    int ans = 0;
+    sort(all(a));
+    for (auto x : a) {
+        ans += cal(x);
+        // out(m);
+    }
+
+    out(ans);
 }
 
 int main() {
