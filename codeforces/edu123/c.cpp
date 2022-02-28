@@ -222,6 +222,61 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
+    int rd(n, x);
+    vi rdv(nums, n);
+
+    // before:
+    vector<int> a(n);
+    a[0] = nums[0];
+    for (int i = 1; i < n; i++) {
+        a[i] = max(nums[i], a[i - 1] + nums[i]);
+    }
+    auto it = max_element(a.begin(), a.end());
+
+    map<int, int> m;
+    m[0] = max(0, *it);
+
+    // after
+    for (int i = 0; i < n; i++) {
+        nums[i] += x;
+    }
+
+    vector<int> maxend(n);
+    maxend[0] = nums[0];
+
+    for (int i = 1; i < n; i++) {
+        maxend[i] = max(nums[i], maxend[i - 1] + nums[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (nums[i] < 0) continue;
+        int sum = 0;
+        int cnt = 0;
+        while (nums[i] >= 0 and i < n) {
+            cnt++;
+            sum += nums[i];
+            i++;
+            chmax(m[cnt], sum);
+        }
+    }
+
+    auto idx = max_element(maxend.begin(), maxend.end()) - maxend.begin();
+    int cnt = 0;
+    for (int i = idx; i > 0; i--) {
+        if (maxend[i] < 0) break;
+        cnt++;
+    }
+    m[cnt] = maxend[idx];
+
+    out(m);
+    out(nums);
+    out(maxend);
+    int cur = 0;
+    for (int i = 0; i <= n; i++) {
+        chmax(cur, m[i]);
+        cout << cur << " ";
+    }
+    cout << endl;
 }
 
 int main() {
@@ -231,7 +286,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

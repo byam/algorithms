@@ -222,6 +222,18 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
+    string rd(s);
+    map<char, bool> m;
+    string ans = "YES";
+    for (auto c : s) {
+        if (islower(c))
+            m[c] = true;
+        else {
+            c = tolower(c);
+            if (m[c] != true) ans = "NO";
+        }
+    }
+    out(ans);
 }
 
 int main() {
@@ -231,7 +243,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

@@ -222,6 +222,28 @@ const int dy[4] = {0, 1, 0, -1};
 
 void solve() {
     // in
+    int rd(n);
+
+    vi org(n);
+    for (int i = n - 1; i >= 0; i--) {
+        org[n - 1 - i] = i + 1;
+    }
+
+    auto ans = org;
+    bool skip = false;
+    out(ans);
+    for (int i = 0; i < n - 1; i++) {
+        swap(ans[i], ans[i + 1]);
+        if ((n - 1) / 2 == ans[i]) {
+            skip = true;
+            continue;
+        }
+        out(ans);
+    }
+    if (skip) {
+        swap(org[1], org[2]);
+        out(org);
+    }
 }
 
 int main() {
@@ -231,7 +253,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }
