@@ -219,37 +219,68 @@ const int dy[4] = {0, 1, 0, -1};
 /*-----------------------------------
         Coding Starts Here
 ------------------------------------*/
-/**
- * @brief Framework DP
- * 1. function: dp[i] num of construct i
- * 2. relation:
- * 3. base: dp[0] = 0;
- *
- */
 
-vll memo;
-ll mod = 1e9 + 7;
-ll dp(int i) {
-    if (i == 0) return 1;
-    if (memo[i] == -1) {
-        ll res = 0;
-        for (int d = 1; d <= 6; d++) {
-            if (i - d >= 0) {
-                res += dp(i - d);
-                res %= mod;
-            }
+int p2sum(ll x) {
+    set<ll> v;
+    ll n = x;
+    while (x > 0) {
+        if (x == 1) {
+            v.insert(x);
+            break;
         }
 
-        memo[i] = res;
+        ll cur = 2;
+        while (x >= cur * 2) {
+            cur *= 2;
+        }
+        v.insert(cur);
+        x -= cur;
     }
-    return memo[i];
+
+    // if (n == 96) out(v);
+
+    return v.size();
 }
 
 void solve() {
     // in
-    int rd(n);
-    memo.resize(n + 1, -1);
-    out(dp(n));
+    ll rd(n);
+    ll ans = n;
+    // p2sum(96);
+
+    // all facts
+    vll f;
+    ll fv = 1LL;
+    for (int i = 2;; i++) {
+        fv *= 1LL * i;
+        if (fv > n) break;
+        f.push_back(fv);
+    }
+    // out(f);
+
+    // bit search
+    int N = f.size();
+    for (int bit = 0; bit < (1 << N); ++bit) {
+        // どれを選ぶか
+        ll sum = 0;
+        ll f_cnt = 0;
+        for (int i = 0; i < N; ++i) {
+            if (bit & (1 << i)) {
+                sum += f[i];
+                f_cnt++;
+            }
+        }
+
+        // check to 2^n
+        if (sum > n) continue;
+
+        int p_cnt = p2sum(n - sum);
+        // if (sum == 144) outt("sum", bit, sum, f_cnt, p_cnt);
+
+        ans = min(ans, f_cnt + p_cnt);
+    }
+
+    out(ans);
 }
 
 int main() {
@@ -259,7 +290,7 @@ int main() {
 
     int t;
     t = 1;
-    // cin >> t;
+    cin >> t;
     while (t--) solve();
     return 0;
 }

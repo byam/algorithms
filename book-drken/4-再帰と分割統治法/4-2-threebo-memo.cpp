@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<int> memo;
+vector<int> dp;
 
 int threebo(int n) {
     // base case
@@ -9,21 +9,21 @@ int threebo(int n) {
     if (n == 2) return 1;
 
     // check memo
-    if (memo[n - 1] != -1) return memo[n - 1];
+    if (dp[n - 1] != -1) return dp[n - 1];
 
     // recursive
     int ans = threebo(n - 1) + threebo(n - 2) + threebo(n - 3);
     printf("threebo(%d - 1) + threebo(%d - 2) + threebo(%d - 3) = %d\n", n, n,
            n, ans);
 
-    return memo[n - 1] = ans;
+    return dp[n - 1] = ans;
 }
 
 int main() {
     int N;
     cin >> N;
 
-    memo.assign(N, -1);
+    dp.assign(N, -1);
 
     cout << threebo(N) << endl;
 
