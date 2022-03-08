@@ -220,52 +220,13 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-deque<int> dq;
-
-void add(int x) {
-    dq.push_back(x);
-
-    while (dq.size() > 1) {
-        int b1 = dq.back();
-        dq.pop_back();
-        int b2 = dq.back();
-        dq.pop_back();
-
-        int g = gcd(b1, b2);
-        if (g < 2) {
-            dq.push_back(b2);
-            dq.push_back(b1);
-            break;
-        }
-
-        int lcm = b1 / g * b2;
-        dq.push_back(lcm);
-    }
-}
-
-vector<int> replaceNonCoprimes(vector<int>& nums) {
-    int n = nums.size();
-    if (n == 1) return nums;
-    int l = 0;
-    int r = n - 1;
-
-    for (int i = 0; i < n; i++) {
-        add(nums[i]);
-    }
-
-    vector<int> ans;
-    while (!dq.empty()) {
-        ans.push_back(dq.front());
-        dq.pop_front();
-    }
-
-    return ans;
-}
-
 void solve() {
     // in
-    vi nums = {287, 41, 49, 287, 899, 23, 23, 20677, 5, 825};
-    out(replaceNonCoprimes(nums));
+    string rd(s);
+    int rd(Q);
+    for (int i = 0; i < Q; i++) {
+        ll rd(t, k);
+    }
 }
 
 int main() {

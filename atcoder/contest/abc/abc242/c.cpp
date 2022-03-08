@@ -220,52 +220,31 @@ const int dy[4] = {0, 1, 0, -1};
         Coding Starts Here
 ------------------------------------*/
 
-deque<int> dq;
+int mod = 998244353;
 
-void add(int x) {
-    dq.push_back(x);
+int memo[1000105][10] = {-1};
 
-    while (dq.size() > 1) {
-        int b1 = dq.back();
-        dq.pop_back();
-        int b2 = dq.back();
-        dq.pop_back();
+int dp(int i, int x) {
+    if (i == 0 or x <= 0 or x > 9) return 0;
+    if (i == 1) return 1;
 
-        int g = gcd(b1, b2);
-        if (g < 2) {
-            dq.push_back(b2);
-            dq.push_back(b1);
-            break;
-        }
-
-        int lcm = b1 / g * b2;
-        dq.push_back(lcm);
+    if (memo[i][x] == -1) {
+        int res = dp(i - 1, x) + dp(i - 1, x - 1) + dp(i - 1, x + 1);
+        res %= mod;
+        memo[i][x] = res;
     }
-}
-
-vector<int> replaceNonCoprimes(vector<int>& nums) {
-    int n = nums.size();
-    if (n == 1) return nums;
-    int l = 0;
-    int r = n - 1;
-
-    for (int i = 0; i < n; i++) {
-        add(nums[i]);
-    }
-
-    vector<int> ans;
-    while (!dq.empty()) {
-        ans.push_back(dq.front());
-        dq.pop_front();
-    }
-
-    return ans;
+    return memo[i][x];
 }
 
 void solve() {
     // in
-    vi nums = {287, 41, 49, 287, 899, 23, 23, 20677, 5, 825};
-    out(replaceNonCoprimes(nums));
+    int rd(n);
+    int ans = 0;
+
+    for (int i = 1; i <= 9; i++) {
+        (ans += dp(n, i)) %= mod;
+    }
+    out(ans);
 }
 
 int main() {
